@@ -119,7 +119,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hkl-Is-RaU">
+                            <searchBar contentMode="redraw" fixedFrame="YES" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hkl-Is-RaU">
                                 <rect key="frame" x="0.0" y="88" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -131,16 +131,6 @@
                                 <rect key="frame" x="0.0" y="132" width="414" height="681"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="4d7-FC-hHE">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4d7-FC-hHE" id="8U9-cP-f8X">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="WTq-EY-Ros" id="1p8-D5-zTQ"/>
                                     <outlet property="delegate" destination="WTq-EY-Ros" id="ClK-yU-tzV"/>
@@ -149,13 +139,23 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mSc-tC-XgP"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="oIa-Rb-lFT" appends="YES" id="gSP-qZ-LBq"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="SXh-UM-ks6"/>
                     <connections>
+                        <outlet property="searchBar" destination="hkl-Is-RaU" id="dDt-OL-mOp"/>
                         <outlet property="tableView" destination="DMJ-tN-jF8" id="V93-B8-Ott"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oAM-uS-ucj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="oIa-Rb-lFT">
+                    <connections>
+                        <action selector="OneTabAny:" destination="WTq-EY-Ros" id="dNc-M1-hPZ"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1340.5797101449277" y="-676.33928571428567"/>
         </scene>

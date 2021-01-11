@@ -25,7 +25,7 @@ class Network {
             let decoder = JSONDecoder()
             var decodWeather: WeatherData?
                 do {
-                    decodWeather = try? decoder.decode(WeatherData.self, from: data!)
+                    decodWeather = try decoder.decode(WeatherData.self, from: data!)
                 } catch  {
                     print(error.localizedDescription)
                 }
