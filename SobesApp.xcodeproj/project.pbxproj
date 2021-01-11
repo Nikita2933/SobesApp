@@ -14,6 +14,8 @@
 		11D7EF7825AAEB580057695D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11D7EF7725AAEB580057695D /* Assets.xcassets */; };
 		11D7EF7B25AAEB580057695D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11D7EF7925AAEB580057695D /* LaunchScreen.storyboard */; };
 		11D7EF8525AB20850057695D /* WeatherVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D7EF8425AB20850057695D /* WeatherVC.swift */; };
+		11D7EF9125AB2B7D0057695D /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D7EF9025AB2B7D0057695D /* Network.swift */; };
+		11D7EF9525AB7DC00057695D /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D7EF9425AB7DC00057695D /* ModelData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		11D7EF7A25AAEB580057695D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		11D7EF7C25AAEB580057695D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11D7EF8425AB20850057695D /* WeatherVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherVC.swift; sourceTree = "<group>"; };
+		11D7EF9025AB2B7D0057695D /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		11D7EF9425AB7DC00057695D /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,8 @@
 		11D7EF6A25AAEB560057695D /* SobesApp */ = {
 			isa = PBXGroup;
 			children = (
+				11D7EF9425AB7DC00057695D /* ModelData.swift */,
+				11D7EF9025AB2B7D0057695D /* Network.swift */,
 				11D7EF6B25AAEB560057695D /* AppDelegate.swift */,
 				11D7EF6D25AAEB560057695D /* SceneDelegate.swift */,
 				11D7EF8425AB20850057695D /* WeatherVC.swift */,
@@ -141,7 +147,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				11D7EF6C25AAEB560057695D /* AppDelegate.swift in Sources */,
+				11D7EF9125AB2B7D0057695D /* Network.swift in Sources */,
 				11D7EF7625AAEB560057695D /* SobesApp.xcdatamodeld in Sources */,
+				11D7EF9525AB7DC00057695D /* ModelData.swift in Sources */,
 				11D7EF6E25AAEB560057695D /* SceneDelegate.swift in Sources */,
 				11D7EF8525AB20850057695D /* WeatherVC.swift in Sources */,
 			);
