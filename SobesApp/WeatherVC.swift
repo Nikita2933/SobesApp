@@ -9,16 +9,25 @@ import UIKit
 
 class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
    
-    var weather: WeatherData!
-
-    var testBool: Bool = false
-
-
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        Network.shared.getWeather(city: "Moskva", units: .met) { (weatherData) in
-            if weatherData != nil {
-                self.weather = weatherData
+    @IBOutlet weak var tableView: UITableView!
+    
+    
+    var DataReady: Bool = false
+    var weather: [WeatherData] = [WeatherData]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
             }
+        }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        Network.shared.getWeather(city: searchBar.text!, units: .met) { (weatherData) in
+            if weatherData != nil {
+                self.weather.insert(weatherData!, at: 0)
+                self.DataReady = true
+            }
+            
         }
     }
     override func viewDidLoad() {
@@ -34,19 +43,21 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
 
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+            if !DataReady {
+                return 0
+            } else {
+                return weather.count
+            }
+            
     }
-
     
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            if testBool {
-                cell.textLabel?.text = weather.name
+            if DataReady{
+                cell.textLabel?.text = weather[indexPath.row].name
             }
-     
         return cell
     }
-    
 
     /*
     // Override to support conditional editing of the table view.

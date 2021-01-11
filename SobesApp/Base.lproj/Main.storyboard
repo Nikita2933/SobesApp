@@ -151,6 +151,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="SXh-UM-ks6"/>
+                    <connections>
+                        <outlet property="tableView" destination="DMJ-tN-jF8" id="V93-B8-Ott"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oAM-uS-ucj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
