@@ -10,42 +10,43 @@ import CoreData
 
 class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate  {
     
-    @IBOutlet weak var searchBar: UISearchBar!
 
     @IBOutlet weak var tableView: UITableView!
     
     var weather: [WeatherCoreData] = []
+    
+    let searchController = UISearchController()
 
-
-      
     @IBAction func OneTabAny(_ sender: UITapGestureRecognizer) {
-        searchBar.resignFirstResponder()
         tableView.resignFirstResponder()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        CoreDataLoad()
-        
+        weatherDataLoad()
         tableView.rowHeight = 80
         tableView.register(CustomViewCell.self, forCellReuseIdentifier: "Cell")
         let xib = UINib(nibName: "CustomViewCell", bundle: nil)
         tableView.register(xib, forCellReuseIdentifier: "Cell")
+        let searchBar = searchController.searchBar
+        searchBar.placeholder = "Press new City"
+        searchBar.sizeToFit()
+        searchBar.delegate = self
+        tableView.tableHeaderView = searchBar
     }
     
     //MARK: - SearchBar setting
 
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        searchBar.text = ""
-    }
-    
+//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+//        searchBar.text = ""
+//    }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         Network.shared.getWeather(city: searchBar.text!, units: .met) { (weatherData) in
             if weatherData != nil {
-                self.CoreDataSave(save: weatherData!)
+                self.weatherDataSave(save: weatherData!)
             }
         }
+        searchBar.resignFirstResponder()
         searchBar.text = ""
 
     }
@@ -70,15 +71,20 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         if editingStyle == .delete {
             let appDelegate = CoreDataManager.shared
             let context = appDelegate.persistentContainer.viewContext
-            context.delete(weather[indexPath.row])
-            CoreDataLoad()
+            do {
+                context.delete(weather[indexPath.row])
+                try context.save()
+                weatherDataLoad()
+            } catch let error as NSError {
+                print(error)
+            }
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
         }    
     }
     
     //MARK: - CoreData (WeatherEntity)
-    func CoreDataSave(save: WeatherData)  {
+    func weatherDataSave(save: WeatherData)  {
         DispatchQueue.main.async {
             let appDelegate = CoreDataManager.shared
             let context = appDelegate.persistentContainer.viewContext
@@ -89,7 +95,7 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             entity.temp = save.main.temp
             do {
                 try context.save()
-                self.CoreDataLoad()
+                self.weatherDataLoad()
                 self.tableView.reloadData()
             } catch  {
                 print(error)
@@ -97,7 +103,7 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         }
     }
     
-    func CoreDataLoad(){
+    func weatherDataLoad(){
         let appDelegate = CoreDataManager.shared
         let context = appDelegate.persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<WeatherCoreData> = WeatherCoreData.fetchRequest()
