@@ -7,10 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11426AF125ACB85B00C3FFD6 /* CustomViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11426AF025ACB85B00C3FFD6 /* CustomViewCell.xib */; };
+		11426AF625ACBC8E00C3FFD6 /* CustomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11426AF525ACBC8E00C3FFD6 /* CustomViewCell.swift */; };
+		1148A03725ADA16B0065676D /* WeatherCoreData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1148A03525ADA16B0065676D /* WeatherCoreData+CoreDataClass.swift */; };
+		1148A03825ADA16B0065676D /* WeatherCoreData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1148A03625ADA16B0065676D /* WeatherCoreData+CoreDataProperties.swift */; };
+		1148A03F25ADC2BF0065676D /* SobesApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1148A03D25ADC2BF0065676D /* SobesApp.xcdatamodeld */; };
+		1148A04225ADE53B0065676D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1148A04125ADE53B0065676D /* CoreDataManager.swift */; };
 		11D7EF6C25AAEB560057695D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D7EF6B25AAEB560057695D /* AppDelegate.swift */; };
 		11D7EF6E25AAEB560057695D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D7EF6D25AAEB560057695D /* SceneDelegate.swift */; };
 		11D7EF7325AAEB560057695D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11D7EF7125AAEB560057695D /* Main.storyboard */; };
-		11D7EF7625AAEB560057695D /* SobesApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 11D7EF7425AAEB560057695D /* SobesApp.xcdatamodeld */; };
 		11D7EF7825AAEB580057695D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11D7EF7725AAEB580057695D /* Assets.xcassets */; };
 		11D7EF7B25AAEB580057695D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11D7EF7925AAEB580057695D /* LaunchScreen.storyboard */; };
 		11D7EF8525AB20850057695D /* WeatherVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D7EF8425AB20850057695D /* WeatherVC.swift */; };
@@ -19,11 +24,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11426AF025ACB85B00C3FFD6 /* CustomViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomViewCell.xib; sourceTree = "<group>"; };
+		11426AF525ACBC8E00C3FFD6 /* CustomViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewCell.swift; sourceTree = "<group>"; };
+		1148A03525ADA16B0065676D /* WeatherCoreData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherCoreData+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1148A03625ADA16B0065676D /* WeatherCoreData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherCoreData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1148A03E25ADC2BF0065676D /* SobesApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SobesApp.xcdatamodel; sourceTree = "<group>"; };
+		1148A04125ADE53B0065676D /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		11D7EF6825AAEB560057695D /* SobesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SobesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11D7EF6B25AAEB560057695D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11D7EF6D25AAEB560057695D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		11D7EF7225AAEB560057695D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		11D7EF7525AAEB560057695D /* SobesApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SobesApp.xcdatamodel; sourceTree = "<group>"; };
 		11D7EF7725AAEB580057695D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		11D7EF7A25AAEB580057695D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		11D7EF7C25AAEB580057695D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -43,6 +53,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11426AF325ACB86200C3FFD6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				11427CE025AD951300D03299 /* CoreData */,
+				11426AF025ACB85B00C3FFD6 /* CustomViewCell.xib */,
+				11426AF525ACBC8E00C3FFD6 /* CustomViewCell.swift */,
+				11D7EF9425AB7DC00057695D /* ModelData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		11427CE025AD951300D03299 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				1148A03525ADA16B0065676D /* WeatherCoreData+CoreDataClass.swift */,
+				1148A03625ADA16B0065676D /* WeatherCoreData+CoreDataProperties.swift */,
+				1148A04125ADE53B0065676D /* CoreDataManager.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		11D7EF5F25AAEB560057695D = {
 			isa = PBXGroup;
 			children = (
@@ -62,7 +93,7 @@
 		11D7EF6A25AAEB560057695D /* SobesApp */ = {
 			isa = PBXGroup;
 			children = (
-				11D7EF9425AB7DC00057695D /* ModelData.swift */,
+				11426AF325ACB86200C3FFD6 /* Model */,
 				11D7EF9025AB2B7D0057695D /* Network.swift */,
 				11D7EF6B25AAEB560057695D /* AppDelegate.swift */,
 				11D7EF6D25AAEB560057695D /* SceneDelegate.swift */,
@@ -71,7 +102,7 @@
 				11D7EF7725AAEB580057695D /* Assets.xcassets */,
 				11D7EF7925AAEB580057695D /* LaunchScreen.storyboard */,
 				11D7EF7C25AAEB580057695D /* Info.plist */,
-				11D7EF7425AAEB560057695D /* SobesApp.xcdatamodeld */,
+				1148A03D25ADC2BF0065676D /* SobesApp.xcdatamodeld */,
 			);
 			path = SobesApp;
 			sourceTree = "<group>";
@@ -134,6 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11D7EF7B25AAEB580057695D /* LaunchScreen.storyboard in Resources */,
+				11426AF125ACB85B00C3FFD6 /* CustomViewCell.xib in Resources */,
 				11D7EF7825AAEB580057695D /* Assets.xcassets in Resources */,
 				11D7EF7325AAEB560057695D /* Main.storyboard in Resources */,
 			);
@@ -147,11 +179,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				11D7EF6C25AAEB560057695D /* AppDelegate.swift in Sources */,
+				1148A03F25ADC2BF0065676D /* SobesApp.xcdatamodeld in Sources */,
+				1148A03825ADA16B0065676D /* WeatherCoreData+CoreDataProperties.swift in Sources */,
 				11D7EF9125AB2B7D0057695D /* Network.swift in Sources */,
-				11D7EF7625AAEB560057695D /* SobesApp.xcdatamodeld in Sources */,
+				11426AF625ACBC8E00C3FFD6 /* CustomViewCell.swift in Sources */,
 				11D7EF9525AB7DC00057695D /* ModelData.swift in Sources */,
 				11D7EF6E25AAEB560057695D /* SceneDelegate.swift in Sources */,
 				11D7EF8525AB20850057695D /* WeatherVC.swift in Sources */,
+				1148A04225ADE53B0065676D /* CoreDataManager.swift in Sources */,
+				1148A03725ADA16B0065676D /* WeatherCoreData+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,7 +216,7 @@
 		11D7EF7D25AAEB580057695D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -241,7 +277,7 @@
 		11D7EF7E25AAEB580057695D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -355,12 +391,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		11D7EF7425AAEB560057695D /* SobesApp.xcdatamodeld */ = {
+		1148A03D25ADC2BF0065676D /* SobesApp.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				11D7EF7525AAEB560057695D /* SobesApp.xcdatamodel */,
+				1148A03E25ADC2BF0065676D /* SobesApp.xcdatamodel */,
 			);
-			currentVersion = 11D7EF7525AAEB560057695D /* SobesApp.xcdatamodel */;
+			currentVersion = 1148A03E25ADC2BF0065676D /* SobesApp.xcdatamodel */;
 			path = SobesApp.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

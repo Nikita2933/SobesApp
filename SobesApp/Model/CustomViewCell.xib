@@ -52,7 +52,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CityName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="erj-Cm-u9D">
-                        <rect key="frame" x="10" y="16" width="107" height="38"/>
+                        <rect key="frame" x="20" y="16" width="107" height="38"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -62,9 +62,9 @@
                     <constraint firstAttribute="bottom" secondItem="h7E-ce-8yi" secondAttribute="bottom" constant="13" id="3M2-y3-hC6"/>
                     <constraint firstItem="Ssm-0Y-D4S" firstAttribute="leading" secondItem="sOh-xJ-zHj" secondAttribute="trailing" constant="22" id="3fq-LZ-Nw1"/>
                     <constraint firstAttribute="bottom" secondItem="erj-Cm-u9D" secondAttribute="bottom" constant="25" id="92p-Su-BbD"/>
-                    <constraint firstItem="h7E-ce-8yi" firstAttribute="leading" secondItem="erj-Cm-u9D" secondAttribute="trailing" constant="18" id="H7y-2j-5h2"/>
-                    <constraint firstItem="sOh-xJ-zHj" firstAttribute="leading" secondItem="erj-Cm-u9D" secondAttribute="trailing" constant="43" id="NQR-h3-5e5"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="erj-Cm-u9D" secondAttribute="trailing" constant="277" id="OFK-Ok-Ak3"/>
+                    <constraint firstItem="h7E-ce-8yi" firstAttribute="leading" secondItem="erj-Cm-u9D" secondAttribute="trailing" constant="8" id="H7y-2j-5h2"/>
+                    <constraint firstItem="sOh-xJ-zHj" firstAttribute="leading" secondItem="erj-Cm-u9D" secondAttribute="trailing" constant="33" id="NQR-h3-5e5"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="erj-Cm-u9D" secondAttribute="trailing" constant="267" id="OFK-Ok-Ak3"/>
                     <constraint firstItem="sOh-xJ-zHj" firstAttribute="top" secondItem="2ot-lQ-jYG" secondAttribute="bottom" constant="-2" id="QOw-WZ-tDc"/>
                     <constraint firstItem="cW7-j1-mAa" firstAttribute="top" secondItem="Ssm-0Y-D4S" secondAttribute="bottom" constant="-1" id="TiP-js-wQM"/>
                     <constraint firstItem="2ot-lQ-jYG" firstAttribute="top" secondItem="yOP-gJ-B47" secondAttribute="top" constant="6" id="W7Q-xW-eWa"/>
@@ -72,10 +72,10 @@
                     <constraint firstItem="erj-Cm-u9D" firstAttribute="top" secondItem="yOP-gJ-B47" secondAttribute="top" constant="16" id="ZWC-dl-ZWJ"/>
                     <constraint firstAttribute="bottom" secondItem="cW7-j1-mAa" secondAttribute="bottom" constant="13" id="aCl-DV-V7U"/>
                     <constraint firstItem="cW7-j1-mAa" firstAttribute="leading" secondItem="h7E-ce-8yi" secondAttribute="trailing" constant="20" id="bUk-ad-qKX"/>
-                    <constraint firstItem="2ot-lQ-jYG" firstAttribute="leading" secondItem="erj-Cm-u9D" secondAttribute="trailing" constant="42" id="eoI-zF-oYo"/>
+                    <constraint firstItem="2ot-lQ-jYG" firstAttribute="leading" secondItem="erj-Cm-u9D" secondAttribute="trailing" constant="32" id="eoI-zF-oYo"/>
                     <constraint firstItem="Ssm-0Y-D4S" firstAttribute="top" secondItem="Ouu-Ny-ffM" secondAttribute="bottom" constant="-2" id="nOo-yf-100"/>
                     <constraint firstItem="Ouu-Ny-ffM" firstAttribute="leading" secondItem="2ot-lQ-jYG" secondAttribute="trailing" constant="21" id="p85-oT-8H5"/>
-                    <constraint firstItem="erj-Cm-u9D" firstAttribute="leading" secondItem="yOP-gJ-B47" secondAttribute="leading" constant="10" id="yxT-Lu-lh4"/>
+                    <constraint firstItem="erj-Cm-u9D" firstAttribute="leading" secondItem="yOP-gJ-B47" secondAttribute="leading" constant="20" id="yxT-Lu-lh4"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

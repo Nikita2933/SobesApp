@@ -6,25 +6,18 @@
 //
 
 import UIKit
+import CoreData
 
 class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate  {
+    
     @IBOutlet weak var searchBar: UISearchBar!
-    
-    
-   
-    @IBOutlet weak var tableView: UITableView!
 
-    var DataReady: Bool = false
+    @IBOutlet weak var tableView: UITableView!
     
-    var cityNames: [String] = []
-    
-    var weather: [WeatherData] = [WeatherData]() {
-        didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
+    var weather: [WeatherCoreData] = []
+
+
+      
     @IBAction func OneTabAny(_ sender: UITapGestureRecognizer) {
         searchBar.resignFirstResponder()
         tableView.resignFirstResponder()
@@ -32,20 +25,16 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        CoreDataLoad()
+        
         tableView.rowHeight = 80
         tableView.register(CustomViewCell.self, forCellReuseIdentifier: "Cell")
         let xib = UINib(nibName: "CustomViewCell", bundle: nil)
         tableView.register(xib, forCellReuseIdentifier: "Cell")
-        //MARK: - load CityData
-//        let path = Bundle.main.path(forResource: "CityData", ofType: "plist")
-//        let nameDicts = NSArray(contentsOfFile: path!)
-//        let cityData = nameDicts as! [[String: Any]]
-//       // let testPlistkey
-//        print(testPlistkey.first)
     }
     
     //MARK: - SearchBar setting
-    
+
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         searchBar.text = ""
@@ -54,87 +43,69 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         Network.shared.getWeather(city: searchBar.text!, units: .met) { (weatherData) in
             if weatherData != nil {
-                self.weather.insert(weatherData!, at: 0)
-                self.DataReady = true
+                self.CoreDataSave(save: weatherData!)
             }
-            
         }
         searchBar.text = ""
+
     }
-
-    
-    
-
     // MARK: - Table view data source
-
-        func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
+    
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-            if !DataReady {
-                return 0
-            } else {
-                return weather.count
-            }
-            
+            weather.count
     }
     
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomViewCell
-            if DataReady{
-                let weatherMain = weather[indexPath.row].main
-                cell.cityNameText.text = weather[indexPath.row].name
-                cell.tempText.text = String(weatherMain.temp!)
-                cell.pressureText.text = String(weatherMain.pressure!)
-                cell.fellsText.text = String(weatherMain.feels_like!)
-            }
-        return cell
-    }
-
-    
-    // Override to support conditional editing of the table view.
-     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+                let weatherMain = weather[indexPath.row]
+                cell.cityNameText.text = weatherMain.cityName
+                cell.tempText.text = String(weatherMain.temp)
+                cell.pressureText.text = String(weatherMain.pressure)
+                cell.fellsText.text = String(weatherMain.feels)
+                return cell
     }
     
-
      func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            weather.remove(at: indexPath.row)
+            let appDelegate = CoreDataManager.shared
+            let context = appDelegate.persistentContainer.viewContext
+            context.delete(weather[indexPath.row])
+            CoreDataLoad()
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
         }    
     }
     
-
-    
-    // Override to support rearranging the table view.
-     func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        
-        
+    //MARK: - CoreData (WeatherEntity)
+    func CoreDataSave(save: WeatherData)  {
+        DispatchQueue.main.async {
+            let appDelegate = CoreDataManager.shared
+            let context = appDelegate.persistentContainer.viewContext
+            let entity = WeatherCoreData(context: context)
+            entity.cityName = save.name
+            entity.feels = save.main.feels_like
+            entity.pressure = Int64(save.main.pressure)
+            entity.temp = save.main.temp
+            do {
+                try context.save()
+                self.CoreDataLoad()
+                self.tableView.reloadData()
+            } catch  {
+                print(error)
+            }
+        }
     }
     
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+    func CoreDataLoad(){
+        let appDelegate = CoreDataManager.shared
+        let context = appDelegate.persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<WeatherCoreData> = WeatherCoreData.fetchRequest()
+        do {
+            let result = try context.fetch(fetchRequest)
+            weather = result
+        } catch let error as NSError {
+            print(error)
+        }
     }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

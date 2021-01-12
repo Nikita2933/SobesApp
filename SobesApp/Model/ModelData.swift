@@ -1,9 +1,11 @@
 
 // Weather struct Json
+
+
 struct Main: Codable {
-    var temp: Double?
-    var feels_like: Double?
-    var pressure: Int?
+    var temp: Double = 0
+    var feels_like: Double = 0
+    var pressure: Int = 0
 }
 
 struct WeatherData: Codable {
@@ -20,3 +22,4 @@ enum units: String {
 struct CityData: Decodable {
     var City: String = ""
 }
+
