@@ -8,38 +8,48 @@
 import UIKit
 import CoreData
 
-class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate  {
+class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchControllerDelegate  {
     
-
+    var searchController: UISearchController!
+    var resultsController: testSeachBar?
+    
+    static let shared: WeatherVC = WeatherVC()
+    
     @IBOutlet weak var tableView: UITableView!
     
-    var weather: [WeatherCoreData] = []
-    
-    let searchController = UISearchController()
+    private var weather: [WeatherCoreData] = []
 
     @IBAction func OneTabAny(_ sender: UITapGestureRecognizer) {
         tableView.resignFirstResponder()
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         weatherDataLoad()
-        tableView.rowHeight = 80
+        resultsController = storyboard!.instantiateViewController(withIdentifier: "testSeachBar") as? testSeachBar
+        searchController = UISearchController(searchResultsController: resultsController)
+        searchSetting()
+        
         tableView.register(CustomViewCell.self, forCellReuseIdentifier: "Cell")
         let xib = UINib(nibName: "CustomViewCell", bundle: nil)
         tableView.register(xib, forCellReuseIdentifier: "Cell")
+        navigationItem.title = "Weather app"
+        tableView.rowHeight = 80
+    }
+    //MARK: - SearchBar setting
+    
+    func searchSetting(){
+        searchController.searchResultsUpdater = resultsController
+        searchController.searchBar.delegate = self
+        searchController.delegate = self
         let searchBar = searchController.searchBar
         searchBar.placeholder = "Press new City"
         searchBar.sizeToFit()
-        searchBar.delegate = self
+        searchBar.delegate = resultsController
+        definesPresentationContext = true
         tableView.tableHeaderView = searchBar
     }
     
-    //MARK: - SearchBar setting
 
-//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-//        searchBar.text = ""
-//    }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         Network.shared.getWeather(city: searchBar.text!, units: .met) { (weatherData) in
             if weatherData != nil {

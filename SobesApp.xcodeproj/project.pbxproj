@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,8 @@
 		1148A03825ADA16B0065676D /* WeatherCoreData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1148A03625ADA16B0065676D /* WeatherCoreData+CoreDataProperties.swift */; };
 		1148A03F25ADC2BF0065676D /* SobesApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1148A03D25ADC2BF0065676D /* SobesApp.xcdatamodeld */; };
 		1148A04225ADE53B0065676D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1148A04125ADE53B0065676D /* CoreDataManager.swift */; };
+		116A706625AE40560003BFF5 /* IIDadata in Frameworks */ = {isa = PBXBuildFile; productRef = 116A706525AE40560003BFF5 /* IIDadata */; };
+		116A706D25AE42480003BFF5 /* testSeachBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116A706C25AE42480003BFF5 /* testSeachBar.swift */; };
 		11D7EF6C25AAEB560057695D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D7EF6B25AAEB560057695D /* AppDelegate.swift */; };
 		11D7EF6E25AAEB560057695D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D7EF6D25AAEB560057695D /* SceneDelegate.swift */; };
 		11D7EF7325AAEB560057695D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11D7EF7125AAEB560057695D /* Main.storyboard */; };
@@ -30,6 +32,7 @@
 		1148A03625ADA16B0065676D /* WeatherCoreData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherCoreData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1148A03E25ADC2BF0065676D /* SobesApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SobesApp.xcdatamodel; sourceTree = "<group>"; };
 		1148A04125ADE53B0065676D /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		116A706C25AE42480003BFF5 /* testSeachBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testSeachBar.swift; sourceTree = "<group>"; };
 		11D7EF6825AAEB560057695D /* SobesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SobesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11D7EF6B25AAEB560057695D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11D7EF6D25AAEB560057695D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				116A706625AE40560003BFF5 /* IIDadata in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,6 +102,7 @@
 				11D7EF6B25AAEB560057695D /* AppDelegate.swift */,
 				11D7EF6D25AAEB560057695D /* SceneDelegate.swift */,
 				11D7EF8425AB20850057695D /* WeatherVC.swift */,
+				116A706C25AE42480003BFF5 /* testSeachBar.swift */,
 				11D7EF7125AAEB560057695D /* Main.storyboard */,
 				11D7EF7725AAEB580057695D /* Assets.xcassets */,
 				11D7EF7925AAEB580057695D /* LaunchScreen.storyboard */,
@@ -123,6 +128,9 @@
 			dependencies = (
 			);
 			name = SobesApp;
+			packageProductDependencies = (
+				116A706525AE40560003BFF5 /* IIDadata */,
+			);
 			productName = SobesApp;
 			productReference = 11D7EF6825AAEB560057695D /* SobesApp.app */;
 			productType = "com.apple.product-type.application";
@@ -150,6 +158,9 @@
 				Base,
 			);
 			mainGroup = 11D7EF5F25AAEB560057695D;
+			packageReferences = (
+				116A706425AE40560003BFF5 /* XCRemoteSwiftPackageReference "IIDadata" */,
+			);
 			productRefGroup = 11D7EF6925AAEB560057695D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -183,6 +194,7 @@
 				1148A03825ADA16B0065676D /* WeatherCoreData+CoreDataProperties.swift in Sources */,
 				11D7EF9125AB2B7D0057695D /* Network.swift in Sources */,
 				11426AF625ACBC8E00C3FFD6 /* CustomViewCell.swift in Sources */,
+				116A706D25AE42480003BFF5 /* testSeachBar.swift in Sources */,
 				11D7EF9525AB7DC00057695D /* ModelData.swift in Sources */,
 				11D7EF6E25AAEB560057695D /* SceneDelegate.swift in Sources */,
 				11D7EF8525AB20850057695D /* WeatherVC.swift in Sources */,
@@ -389,6 +401,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		116A706425AE40560003BFF5 /* XCRemoteSwiftPackageReference "IIDadata" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/illabo/IIDadata.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		116A706525AE40560003BFF5 /* IIDadata */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 116A706425AE40560003BFF5 /* XCRemoteSwiftPackageReference "IIDadata" */;
+			productName = IIDadata;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		1148A03D25ADC2BF0065676D /* SobesApp.xcdatamodeld */ = {

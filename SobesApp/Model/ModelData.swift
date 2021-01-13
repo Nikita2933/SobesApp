@@ -22,4 +22,3 @@ enum units: String {
 struct CityData: Decodable {
     var City: String = ""
 }
-

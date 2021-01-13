@@ -11,13 +11,18 @@
         <!--ToDoList-->
         <scene sceneID="K7H-mM-Sdd">
             <objects>
-                <tableViewController id="m6r-ea-H0I" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="testSeachBar" useStoryboardIdentifierAsRestorationIdentifier="YES" id="m6r-ea-H0I" customClass="testSeachBar" customModule="SobesApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="CXA-Wd-lNU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="c0S-t9-ggH">
+                            <rect key="frame" x="0.0" y="99.5" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="hty-tt-kbV">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="hty-tt-kbV">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hty-tt-kbV" id="Wbv-6n-cd9">
@@ -32,10 +37,13 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="ToDoList" image="ellipsis.rectangle" catalog="system" id="K0k-Al-kuq"/>
+                    <connections>
+                        <outlet property="tableView" destination="CXA-Wd-lNU" id="Eet-9O-Fnj"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aev-yg-eQc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-330" y="579"/>
+            <point key="canvasLocation" x="1341" y="26"/>
         </scene>
         <!--Calculate-->
         <scene sceneID="XWi-QP-qzI">
@@ -85,7 +93,6 @@
                         <segue destination="xbs-sD-pPM" kind="relationship" relationship="viewControllers" id="N6S-Dd-Op3"/>
                         <segue destination="r67-Cn-6du" kind="relationship" relationship="viewControllers" id="gJG-WC-KNr"/>
                         <segue destination="v5k-J7-DBE" kind="relationship" relationship="viewControllers" id="Aq6-Lx-rt3"/>
-                        <segue destination="m6r-ea-H0I" kind="relationship" relationship="viewControllers" id="dTF-8Y-zZ2"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4sN-iW-X5M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -122,6 +129,11 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DMJ-tN-jF8">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="Kd8-Of-JHc">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                </view>
                                 <connections>
                                     <outlet property="dataSource" destination="WTq-EY-Ros" id="1p8-D5-zTQ"/>
                                     <outlet property="delegate" destination="WTq-EY-Ros" id="ClK-yU-tzV"/>
@@ -154,6 +166,21 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1340.5797101449277" y="-677.00892857142856"/>
+        </scene>
+        <!--Test Search Bar-->
+        <scene sceneID="Bau-co-B4p">
+            <objects>
+                <viewController id="IPs-Ou-ocB" customClass="TestSearchBar" customModule="SobesApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OVZ-JZ-RRu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="YKB-2F-Mpt"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wrc-s2-2QJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2158" y="-676"/>
         </scene>
     </scenes>
     <resources>
