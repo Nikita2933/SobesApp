@@ -36,29 +36,28 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         tableView.rowHeight = 80
     }
     //MARK: - SearchBar setting
-    
     func searchSetting(){
         searchController.searchResultsUpdater = resultsController
-        searchController.searchBar.delegate = self
         searchController.delegate = self
         let searchBar = searchController.searchBar
         searchBar.placeholder = "Press new City"
         searchBar.sizeToFit()
-        searchBar.delegate = resultsController
+        searchBar.delegate = self
         definesPresentationContext = true
-        tableView.tableHeaderView = searchBar
+        navigationItem.searchController = searchController
     }
-    
-
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        Network.shared.getWeather(city: searchBar.text!, units: .met) { (weatherData) in
-            if weatherData != nil {
-                self.weatherDataSave(save: weatherData!)
+            Network.shared.getWeather(city: searchBar.text!, units: .met) { (weatherData) in
+                if weatherData != nil {
+                    self.weatherDataSave(save: weatherData!)
+                }
             }
-        }
-        searchBar.resignFirstResponder()
+        dismiss(animated: false, completion: nil)
         searchBar.text = ""
+        
 
+        
+        
     }
     // MARK: - Table view data source
     
@@ -66,7 +65,6 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         // #warning Incomplete implementation, return the number of rows
             weather.count
     }
-    
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomViewCell
                 let weatherMain = weather[indexPath.row]
@@ -76,7 +74,6 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                 cell.fellsText.text = String(weatherMain.feels)
                 return cell
     }
-    
      func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let appDelegate = CoreDataManager.shared
@@ -92,7 +89,6 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         } else if editingStyle == .insert {
         }    
     }
-    
     //MARK: - CoreData (WeatherEntity)
     func weatherDataSave(save: WeatherData)  {
         DispatchQueue.main.async {
@@ -112,7 +108,6 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             }
         }
     }
-    
     func weatherDataLoad(){
         let appDelegate = CoreDataManager.shared
         let context = appDelegate.persistentContainer.viewContext
