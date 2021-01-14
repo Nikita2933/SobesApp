@@ -10,7 +10,6 @@ import CoreData
 
 var weather: [WeatherCoreData] {
     let request: NSFetchRequest<WeatherCoreData> = WeatherCoreData.fetchRequest()
-//    MARK: Тут можно обновлять добавленные города
     let weather = try? CoreDataManager.shared.persistentContainer.viewContext.fetch(request)
     
     if weather != nil {
@@ -18,8 +17,6 @@ var weather: [WeatherCoreData] {
     }
     return []
 }
-
-
 
 class CoreDataManager {
     
@@ -51,7 +48,7 @@ class CoreDataManager {
         })
         return container
     }()
-
+    
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {

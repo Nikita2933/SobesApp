@@ -12,6 +12,7 @@ class testSeachBar: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     @IBOutlet var tableView: UITableView!
     
+    weak var weatherVCDelegate: WeatherVCDelegate?
     private var dadata: DadataSuggestions?
     var timer = Timer()
     private var suggestions: [String] = [] {
@@ -19,19 +20,13 @@ class testSeachBar: UIViewController, UITableViewDataSource, UITableViewDelegate
             tableView.reloadData()
         }
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     }
     
     // MARK: table View
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        weatherVCDelegate?.testFunc(s: suggestions[indexPath.row])
+        dismiss(animated: true, completion: nil)
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         suggestions.count

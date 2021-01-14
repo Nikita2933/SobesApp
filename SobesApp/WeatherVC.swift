@@ -8,30 +8,32 @@
 import UIKit
 import CoreData
 
-class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchControllerDelegate  {
-    
+class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchControllerDelegate, WeatherVCDelegate  {
+
+    @IBOutlet weak var tableView: UITableView!
+
     var searchController: UISearchController!
     var resultsController: testSeachBar?
     
-    @IBOutlet weak var tableView: UITableView!
-
-    @IBAction func OneTabAny(_ sender: UITapGestureRecognizer) {
-        tableView.resignFirstResponder()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
+
         resultsController = storyboard!.instantiateViewController(withIdentifier: "testSeachBar") as? testSeachBar
         searchController = UISearchController(searchResultsController: resultsController)
-        searchSetting()
-        
+        resultsController?.weatherVCDelegate = self
         tableView.register(CustomViewCell.self, forCellReuseIdentifier: "Cell")
         let xib = UINib(nibName: "CustomViewCell", bundle: nil)
         tableView.register(xib, forCellReuseIdentifier: "Cell")
         navigationItem.title = "Weather app"
         tableView.rowHeight = 80
+        searchSetting()
+        
     }
-    //MARK: - SearchBar setting
+    @IBAction func OneTabAny(_ sender: UITapGestureRecognizer) {
+        tableView.resignFirstResponder()
+    }
+    
+    //MARK: - SearchBar
     func searchSetting(){
         searchController.searchResultsUpdater = resultsController
         searchController.delegate = self
@@ -44,20 +46,24 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-            Network.shared.getWeather(city: searchBar.text!, units: .met) { (WeatherData) in
-                DispatchQueue.main.async {
-                self.tableView.reloadData()
-                }
-            }
+        testFunc(s: searchBar.text!)
         dismiss(animated: true, completion: nil)
         searchBar.text = ""
+    }
+
+    //Mark: - WeatherVCDelegate
+    func testFunc(s: String) {
+        Network.shared.getWeather(city: s, units: .met) { (WeatherData) in
+            DispatchQueue.main.async {
+            self.tableView.reloadData()
+            }
+        }
     }
         
     // MARK: - Table view data source
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             weather.count
     }
-    
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomViewCell
                 let weatherMain = weather[indexPath.row]
@@ -69,16 +75,17 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     }
     
         func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-            if editingStyle == .delete {
-                let context = CoreDataManager.shared.persistentContainer.viewContext
-                    do {
-                        context.delete(weather[indexPath.row])
-                        try context.save()
-                        } catch let error as NSError {
-                                print(error)
-                    }
-                        tableView.deleteRows(at: [indexPath], with: .fade)
-                        } else if editingStyle == .insert {
-                        }
+        if editingStyle == .delete {
+            let context = CoreDataManager.shared.persistentContainer.viewContext
+            do {
+                context.delete(weather[indexPath.row])
+                try context.save()
+            } catch let error as NSError {
+                print(error)
             }
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+             
+        }
+    }
 }

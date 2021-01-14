@@ -22,3 +22,7 @@ enum units: String {
 struct CityData: Decodable {
     var City: String = ""
 }
+
+protocol WeatherVCDelegate: class {
+    func testFunc(s: String)
+}
