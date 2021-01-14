@@ -121,7 +121,7 @@
         <!--WeatherVC-->
         <scene sceneID="tbG-0x-qdD">
             <objects>
-                <viewController id="WTq-EY-Ros" customClass="WeatherVC" customModule="SobesApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WeatherVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WTq-EY-Ros" customClass="WeatherVC" customModule="SobesApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DGd-Ci-bqc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

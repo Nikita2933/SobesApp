@@ -16,15 +16,13 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     static let shared: WeatherVC = WeatherVC()
     
     @IBOutlet weak var tableView: UITableView!
-    
-    private var weather: [WeatherCoreData] = []
 
     @IBAction func OneTabAny(_ sender: UITapGestureRecognizer) {
         tableView.resignFirstResponder()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        weatherDataLoad()
         resultsController = storyboard!.instantiateViewController(withIdentifier: "testSeachBar") as? testSeachBar
         searchController = UISearchController(searchResultsController: resultsController)
         searchSetting()
@@ -34,6 +32,7 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         tableView.register(xib, forCellReuseIdentifier: "Cell")
         navigationItem.title = "Weather app"
         tableView.rowHeight = 80
+        tableView.delegate = self
     }
     //MARK: - SearchBar setting
     func searchSetting(){
@@ -46,21 +45,20 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         definesPresentationContext = true
         navigationItem.searchController = searchController
     }
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-            Network.shared.getWeather(city: searchBar.text!, units: .met) { (weatherData) in
-                if weatherData != nil {
-                    self.weatherDataSave(save: weatherData!)
-                }
+            Network.shared.getWeather(city: searchBar.text!, units: .met)
+            self.tableView.reloadData()
+            self.dismiss(animated: false, completion: nil)
+            searchBar.text = ""
             }
-        dismiss(animated: false, completion: nil)
-        searchBar.text = ""
         
-
-        
-        
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        DispatchQueue.main.async {
+//            self.tableView.reloadData()
+//        }
     }
     // MARK: - Table view data source
-    
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
             weather.count
@@ -76,47 +74,15 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     }
      func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let appDelegate = CoreDataManager.shared
-            let context = appDelegate.persistentContainer.viewContext
+            let context = CoreDataManager.shared.persistentContainer.viewContext
             do {
                 context.delete(weather[indexPath.row])
                 try context.save()
-                weatherDataLoad()
             } catch let error as NSError {
                 print(error)
             }
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
         }    
-    }
-    //MARK: - CoreData (WeatherEntity)
-    func weatherDataSave(save: WeatherData)  {
-        DispatchQueue.main.async {
-            let appDelegate = CoreDataManager.shared
-            let context = appDelegate.persistentContainer.viewContext
-            let entity = WeatherCoreData(context: context)
-            entity.cityName = save.name
-            entity.feels = save.main.feels_like
-            entity.pressure = Int64(save.main.pressure)
-            entity.temp = save.main.temp
-            do {
-                try context.save()
-                self.weatherDataLoad()
-                self.tableView.reloadData()
-            } catch  {
-                print(error)
-            }
-        }
-    }
-    func weatherDataLoad(){
-        let appDelegate = CoreDataManager.shared
-        let context = appDelegate.persistentContainer.viewContext
-        let fetchRequest: NSFetchRequest<WeatherCoreData> = WeatherCoreData.fetchRequest()
-        do {
-            let result = try context.fetch(fetchRequest)
-            weather = result
-        } catch let error as NSError {
-            print(error)
-        }
     }
 }

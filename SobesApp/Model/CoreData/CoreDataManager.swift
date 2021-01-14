@@ -8,6 +8,19 @@
 import Foundation
 import CoreData
 
+var weather: [WeatherCoreData] {
+    let request: NSFetchRequest<WeatherCoreData> = WeatherCoreData.fetchRequest()
+//    MARK: Тут можно обновлять добавленные города
+    let weather = try? CoreDataManager.shared.persistentContainer.viewContext.fetch(request)
+    
+    if weather != nil {
+        return weather!
+    }
+    return []
+}
+
+
+
 class CoreDataManager {
     
     static let shared: CoreDataManager = CoreDataManager()

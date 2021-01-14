@@ -11,6 +11,8 @@ import IIDadata
 class testSeachBar: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
     
     @IBOutlet var tableView: UITableView!
+    
+    static let shared: testSeachBar = testSeachBar()
     private var dadata: DadataSuggestions?
     var timer = Timer()
     private var suggestions: [String] = [] {
@@ -27,11 +29,18 @@ class testSeachBar: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     // MARK: table View
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        DispatchQueue.main.async {
+            Network.shared.getWeather(city: self.suggestions[indexPath.row], units: .met)
+            
+            self.dismiss(animated: true) {
+                WeatherVC.shared.tableView(tableView, didSelectRowAt: indexPath)
+            }
+        }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         suggestions.count
     }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
@@ -41,6 +50,7 @@ class testSeachBar: UIViewController, UITableViewDataSource, UITableViewDelegate
         
         
     }
+    
     func updateSearchResults(for searchController: UISearchController) {
         if searchController.searchBar.text != nil  {
             let text = searchController.searchBar.text!
