@@ -13,14 +13,12 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     var searchController: UISearchController!
     var resultsController: testSeachBar?
     
-    static let shared: WeatherVC = WeatherVC()
-    
     @IBOutlet weak var tableView: UITableView!
 
     @IBAction func OneTabAny(_ sender: UITapGestureRecognizer) {
         tableView.resignFirstResponder()
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         resultsController = storyboard!.instantiateViewController(withIdentifier: "testSeachBar") as? testSeachBar
@@ -32,7 +30,6 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         tableView.register(xib, forCellReuseIdentifier: "Cell")
         navigationItem.title = "Weather app"
         tableView.rowHeight = 80
-        tableView.delegate = self
     }
     //MARK: - SearchBar setting
     func searchSetting(){
@@ -47,22 +44,20 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-            Network.shared.getWeather(city: searchBar.text!, units: .met)
-            self.tableView.reloadData()
-            self.dismiss(animated: false, completion: nil)
-            searchBar.text = ""
+            Network.shared.getWeather(city: searchBar.text!, units: .met) { (WeatherData) in
+                DispatchQueue.main.async {
+                self.tableView.reloadData()
+                }
             }
-        
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        DispatchQueue.main.async {
-//            self.tableView.reloadData()
-//        }
+        dismiss(animated: true, completion: nil)
+        searchBar.text = ""
     }
+        
     // MARK: - Table view data source
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
             weather.count
     }
+    
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomViewCell
                 let weatherMain = weather[indexPath.row]
@@ -72,17 +67,18 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                 cell.fellsText.text = String(weatherMain.feels)
                 return cell
     }
-     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            let context = CoreDataManager.shared.persistentContainer.viewContext
-            do {
-                context.delete(weather[indexPath.row])
-                try context.save()
-            } catch let error as NSError {
-                print(error)
+    
+        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+            if editingStyle == .delete {
+                let context = CoreDataManager.shared.persistentContainer.viewContext
+                    do {
+                        context.delete(weather[indexPath.row])
+                        try context.save()
+                        } catch let error as NSError {
+                                print(error)
+                    }
+                        tableView.deleteRows(at: [indexPath], with: .fade)
+                        } else if editingStyle == .insert {
+                        }
             }
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-        }    
-    }
 }

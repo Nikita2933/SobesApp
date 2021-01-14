@@ -5,7 +5,7 @@ class Network {
     
     static let shared: Network = Network()
     
-    func getWeather(city: String, units: units){
+    func getWeather(city: String, units: units, result: @escaping ((WeatherData?) -> () )){
         var urlComponent = URLComponents()
         urlComponent.scheme = "https"
         urlComponent.host = "api.openweathermap.org"
@@ -31,6 +31,7 @@ class Network {
                 WeatherCoreData.addNew(save: decodWeather!)
                 CoreDataManager.shared.saveContext()
             }
+            result(decodWeather)
             
         }.resume()
     }
