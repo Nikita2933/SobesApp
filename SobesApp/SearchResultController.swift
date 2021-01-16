@@ -8,13 +8,13 @@
 import UIKit
 import IIDadata
 
-class testSeachBar: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
+class SearchResultController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
     
     @IBOutlet var tableView: UITableView!
     
     weak var weatherVCDelegate: WeatherVCDelegate?
     private var dadata: DadataSuggestions?
-    var timer = Timer()
+    private var timer = Timer()
     private var suggestions: [String] = [] {
         didSet{
             tableView.reloadData()
@@ -25,7 +25,7 @@ class testSeachBar: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     // MARK: table View
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        weatherVCDelegate?.testFunc(s: suggestions[indexPath.row])
+        weatherVCDelegate?.TabSearchBar(s: suggestions[indexPath.row])
         dismiss(animated: true, completion: nil)
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -45,7 +45,7 @@ class testSeachBar: UIViewController, UITableViewDataSource, UITableViewDelegate
         if searchController.searchBar.text != nil  {
             let text = searchController.searchBar.text!
             timer.invalidate()
-            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { [self] (timer) in
+            timer = Timer.scheduledTimer(withTimeInterval: 0.7, repeats: false, block: { [self] (timer) in
                 try? dadata = DadataSuggestions()
                 dadata!.suggestAddress(text){[weak self] response in
                     DispatchQueue.main.async {

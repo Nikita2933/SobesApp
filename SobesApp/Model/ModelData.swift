@@ -24,5 +24,5 @@ struct CityData: Decodable {
 }
 
 protocol WeatherVCDelegate: class {
-    func testFunc(s: String)
+    func TabSearchBar(s: String)
 }

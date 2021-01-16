@@ -10,7 +10,8 @@ import Foundation
 import CoreData
 
 @objc(WeatherCoreData)
-public class WeatherCoreData: NSManagedObject {
+public class WeatherCoreData: NSManagedObject{
+    weak var delegate: WeatherVCDelegate?
     
     class func addNew (save: WeatherData) -> WeatherCoreData {
         let entity = WeatherCoreData(context: CoreDataManager.shared.persistentContainer.viewContext)
@@ -21,5 +22,17 @@ public class WeatherCoreData: NSManagedObject {
         return entity
     }
     
+    class func reloadData(result: () -> ()) {
+       let context = CoreDataManager.shared.persistentContainer.viewContext
+       let request: NSFetchRequest<WeatherCoreData> = WeatherCoreData.fetchRequest()
+       let curWeather = try? context.fetch(request)
+       if curWeather != nil {
+           for oneWeather in curWeather! {
+            context.delete(oneWeather)
+            Network.shared.getWeather(city: oneWeather.cityName!, units: .met) { (_) in
+            }
+           }
+       }
+   }
 }
 

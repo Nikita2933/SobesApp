@@ -32,7 +32,6 @@ class Network {
                 CoreDataManager.shared.saveContext()
             }
             result(decodWeather)
-            
         }.resume()
     }
 }

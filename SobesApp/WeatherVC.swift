@@ -13,12 +13,11 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     @IBOutlet weak var tableView: UITableView!
 
     var searchController: UISearchController!
-    var resultsController: testSeachBar?
+    var resultsController: SearchResultController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        resultsController = storyboard!.instantiateViewController(withIdentifier: "testSeachBar") as? testSeachBar
+        resultsController = storyboard!.instantiateViewController(withIdentifier: "SearchResultController") as? SearchResultController
         searchController = UISearchController(searchResultsController: resultsController)
         resultsController?.weatherVCDelegate = self
         tableView.register(CustomViewCell.self, forCellReuseIdentifier: "Cell")
@@ -27,12 +26,18 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         navigationItem.title = "Weather app"
         tableView.rowHeight = 80
         searchSetting()
-        
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        WeatherCoreData.reloadData {
+            self.tableView.reloadData()
+        }
+    }
+    
     @IBAction func OneTabAny(_ sender: UITapGestureRecognizer) {
         tableView.resignFirstResponder()
     }
-    
     //MARK: - SearchBar
     func searchSetting(){
         searchController.searchResultsUpdater = resultsController
@@ -46,13 +51,13 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        testFunc(s: searchBar.text!)
+        TabSearchBar(s: searchBar.text!)
         dismiss(animated: true, completion: nil)
-        searchBar.text = ""
+            searchBar.text = ""
     }
 
     //Mark: - WeatherVCDelegate
-    func testFunc(s: String) {
+    func TabSearchBar(s: String) {
         Network.shared.getWeather(city: s, units: .met) { (WeatherData) in
             DispatchQueue.main.async {
             self.tableView.reloadData()
