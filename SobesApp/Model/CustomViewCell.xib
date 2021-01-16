@@ -3,6 +3,8 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -60,6 +62,8 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" systemColor="systemFillColor"/>
+                <color key="tintColor" name="AccentColor"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="h7E-ce-8yi" secondAttribute="bottom" constant="10" id="3M2-y3-hC6"/>
                     <constraint firstItem="Ssm-0Y-D4S" firstAttribute="leading" secondItem="sOh-xJ-zHj" secondAttribute="trailing" constant="22" id="3fq-LZ-Nw1"/>
@@ -89,4 +93,12 @@
             <point key="canvasLocation" x="-126.08695652173914" y="20.424107142857142"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemFillColor">
+            <color red="0.47058823529411764" green="0.47058823529411764" blue="0.50196078431372548" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

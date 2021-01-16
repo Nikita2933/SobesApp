@@ -22,7 +22,6 @@ class SearchResultController: UIViewController, UITableViewDataSource, UITableVi
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     }
-    
     // MARK: table View
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         weatherVCDelegate?.TabSearchBar(s: suggestions[indexPath.row])
@@ -37,10 +36,7 @@ class SearchResultController: UIViewController, UITableViewDataSource, UITableVi
         cell.textLabel?.text = suggestions[indexPath.row]
         cell.selectionStyle = .none
         return cell
-        
-        
     }
-    
     func updateSearchResults(for searchController: UISearchController) {
         if searchController.searchBar.text != nil  {
             let text = searchController.searchBar.text!
@@ -51,7 +47,6 @@ class SearchResultController: UIViewController, UITableViewDataSource, UITableVi
                     DispatchQueue.main.async {
                         switch response{
                         case .success(let dadataData):
-                            print(dadataData)
                             if let dsr = dadataData.suggestions?.compactMap({ $0.data?.city }) {
                                 self?.suggestions = dsr
                             }
@@ -63,7 +58,6 @@ class SearchResultController: UIViewController, UITableViewDataSource, UITableVi
                 }
             })
         }
-        
     }
 }
 

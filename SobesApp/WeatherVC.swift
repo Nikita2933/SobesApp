@@ -9,11 +9,12 @@ import UIKit
 import CoreData
 
 class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchControllerDelegate, WeatherVCDelegate  {
+    
 
     @IBOutlet weak var tableView: UITableView!
 
     var searchController: UISearchController!
-    var resultsController: SearchResultController?
+    weak var resultsController: SearchResultController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +28,6 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         tableView.rowHeight = 80
         searchSetting()
     }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         WeatherCoreData.reloadData {
@@ -39,7 +39,7 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         tableView.resignFirstResponder()
     }
     //MARK: - SearchBar
-    func searchSetting(){
+    private func searchSetting(){
         searchController.searchResultsUpdater = resultsController
         searchController.delegate = self
         let searchBar = searchController.searchBar
@@ -56,20 +56,32 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             searchBar.text = ""
     }
 
+
     //Mark: - WeatherVCDelegate
     func TabSearchBar(s: String) {
-        Network.shared.getWeather(city: s, units: .met) { (WeatherData) in
-            DispatchQueue.main.async {
-            self.tableView.reloadData()
+        let request: NSFetchRequest<WeatherCoreData> = WeatherCoreData.fetchRequest()
+        guard let weatherBool = try? CoreDataManager.shared.persistentContainer.viewContext.fetch(request) else {return}
+            if weatherBool.contains(where: {$0.cityName == s}) {
+                let message = "This city has been added, choose new city"
+                let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: nil))
+                present(alert, animated: true)
+            } else {
+                Network.shared.getWeather(city: s, units: .met) { (WeatherData) in
+                    DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
         }
+        searchController.searchBar.text = ""
     }
         
     // MARK: - Table view data source
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             weather.count
+            
     }
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomViewCell
                 let weatherMain = weather[indexPath.row]
                 cell.cityNameText.text = weatherMain.cityName
@@ -79,7 +91,7 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                 return cell
     }
     
-        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let context = CoreDataManager.shared.persistentContainer.viewContext
             do {
@@ -91,6 +103,12 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
              
+        }
+    }
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        WeatherCoreData.reloadData {
+            self.tableView.reloadData()
         }
     }
 }
