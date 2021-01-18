@@ -83,12 +83,12 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomViewCell
-                let weatherMain = weather[indexPath.row]
-                cell.cityNameText.text = weatherMain.cityName
-                cell.tempText.text = String(weatherMain.temp)
-                cell.pressureText.text = String(weatherMain.pressure)
-                cell.fellsText.text = String(weatherMain.feels)
-                return cell
+        let weatherMain = weather[indexPath.row]
+        cell.cityNameText.text = weatherMain.cityName
+        cell.tempText.text = String(weatherMain.temp)
+        cell.pressureText.text = String(weatherMain.pressure)
+        cell.fellsText.text = String(weatherMain.feels)
+        return cell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

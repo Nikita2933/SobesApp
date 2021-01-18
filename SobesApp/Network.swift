@@ -34,4 +34,36 @@ class Network {
             result(decodWeather)
         }.resume()
     }
+    
+    
+    func getCurrency(result: @escaping (() -> ())){
+        
+        var request = URLRequest(url: URL(string: "https://www.cbr-xml-daily.ru/daily_json.js")!,timeoutInterval: Double.infinity)
+        
+        request.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+          guard let data = data else {
+            print(String(describing: error))
+            return
+          }
+            let decoder = JSONDecoder()
+            var decodCurrency: Currency?
+                do {
+                    decodCurrency = try decoder.decode(Currency.self, from: data)
+                } catch  {
+                    print(error.localizedDescription)
+                }
+            if decodCurrency != nil {
+                var value: [Valute] = []
+                let keys = decodCurrency!.Valute.keys.sorted()
+                for key in keys {
+                    value.append((decodCurrency?.Valute[key])!)
+                }
+                if !value.isEmpty {
+                    CurrencyTest.addNew(saved: value)
+                }
+            }
+        }.resume()
+    }
 }

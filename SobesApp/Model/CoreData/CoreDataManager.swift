@@ -18,6 +18,17 @@ var weather: [WeatherCoreData] {
     return []
 }
 
+var currency: [CurrencyTest] {
+    let request: NSFetchRequest<CurrencyTest> = CurrencyTest.fetchRequest()
+    let currency = try? CoreDataManager.shared.persistentContainer.viewContext.fetch(request)
+    
+    if currency != nil {
+        return currency!
+    }
+    return []
+}
+
+
 class CoreDataManager {
     
     static let shared: CoreDataManager = CoreDataManager()

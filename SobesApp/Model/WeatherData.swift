@@ -19,10 +19,6 @@ enum units: String {
     case imp = "imperial"
 }
  
-struct CityData: Decodable {
-    var City: String = ""
-}
-
 protocol WeatherVCDelegate: class {
     func TabSearchBar(s: String)
 }
