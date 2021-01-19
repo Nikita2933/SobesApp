@@ -7,61 +7,79 @@
 
 import UIKit
 
-class ConverterVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
+class ConverterVC: UIViewController, UITextFieldDelegate{
     
-    @IBOutlet weak var SecondView: UIView!
-    @IBOutlet weak var topTextField: UITextField!
-    @IBOutlet weak var bottomTextField: UITextField!
-    @IBOutlet weak var picker: UIPickerView!
-    @IBOutlet weak var button: UIButton!
-    @IBOutlet weak var buttonAnimation: UIButton!
-    
+    @IBOutlet weak var blue: UIView!
+    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet var stackTextField: [UITextField]!
+    @IBOutlet var ArrView: [UIView]!
     override func viewDidLoad() {
         super.viewDidLoad()
-        picker.dataSource = self
-        picker.delegate = self
+        registerNotification()
         
-        // Do any additional setup after loading the view.
-    }
-    @IBAction func deleteButton(_ sender: UIButton) {
-        CurrencyTest.deleteAllData()
-        CoreDataManager.shared.saveContext()
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
-    @IBAction func Cancel(_ sender: Any) {
-        SecondView.isHidden = true
     }
     @IBAction func oneTabToView(_ sender: Any) {
-        topTextField.resignFirstResponder()
-        bottomTextField.resignFirstResponder()
-        UIView.transition(with: SecondView, duration: 0.4, options: .beginFromCurrentState) {
-            self.SecondView.isHidden = true
-        }
-    }
-    @IBAction func tapPickerSV(_ sender: Any) {
-        
-    }
-    @IBAction func TestTab(_ sender: UIButton) {
-        UIView.transition(with: SecondView, duration: 0.4, options: .beginFromCurrentState) {
-            self.SecondView.isHidden = false
+        for textField in stackTextField {
+            textField.resignFirstResponder()
         }
     }
     
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        1
+    @IBAction func removeView(_ sender: UIButton) {
+        for view in ArrView.reversed() {
+            if view.isHidden == false {
+                UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 10.0, options: .overrideInheritedDuration) {
+                    view.isHidden = true
+                    view.alpha = 0
+                }
+                return
+            }
+        }
     }
+    @IBAction func addView(_ sender: Any) {
+        for view in ArrView {
+            if  view.isHidden == true {
+                UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 10.0, options: .overrideInheritedDuration) {
+                    view.isHidden = false
+                    view.alpha = 1
+                }
+                return
+            }
+        }
+    }
+        //MARK: KeyboardSetting
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return currency.count
+    func registerNotification(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: UIApplication.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: UIApplication.keyboardWillHideNotification, object: nil)
     }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return currency[row].name
-        
+    @objc func keyboardShow(notification: Notification) {
+        let userInfo = notification.userInfo
+        let kbFrameSize = (userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        if view.frame.origin.y == 0  {
+            for textField in stackTextField {
+                if textField.isEditing == true {
+                    print(textField.superview!.frame.origin.y)
+                    if textField.superview!.frame.origin.y > (kbFrameSize.height + tabBarController!.tabBar.frame.height / 2) {
+                        self.view.center.y -= kbFrameSize.height - tabBarController!.tabBar.frame.height
+                    }
+                }
+            }
+        }
     }
+    @objc func keyboardHide()  {
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 10.0, options: .overrideInheritedDuration) {
+            if self.view.frame.origin.y != 0 {
+                self.view.frame.origin.y = 0
+                }
+        }
+    }
+
+
+    //MARK: textFieldDelegate
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.resignFirstResponder()
+    }
+
     
 
     /*
