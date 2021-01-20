@@ -19,6 +19,7 @@
 		116A706D25AE42480003BFF5 /* SearchResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116A706C25AE42480003BFF5 /* SearchResultController.swift */; };
 		117178CA25B5D55200F52F6F /* CurrencyTest+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117178C825B5D55200F52F6F /* CurrencyTest+CoreDataClass.swift */; };
 		117178CB25B5D55200F52F6F /* CurrencyTest+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117178C925B5D55200F52F6F /* CurrencyTest+CoreDataProperties.swift */; };
+		11C35F2625B76C0600A21C46 /* CurrencyTableViewPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C35F2525B76C0600A21C46 /* CurrencyTableViewPopover.swift */; };
 		11D7EF6C25AAEB560057695D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D7EF6B25AAEB560057695D /* AppDelegate.swift */; };
 		11D7EF6E25AAEB560057695D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D7EF6D25AAEB560057695D /* SceneDelegate.swift */; };
 		11D7EF7325AAEB560057695D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11D7EF7125AAEB560057695D /* Main.storyboard */; };
@@ -41,6 +42,7 @@
 		116A706C25AE42480003BFF5 /* SearchResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultController.swift; sourceTree = "<group>"; };
 		117178C825B5D55200F52F6F /* CurrencyTest+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrencyTest+CoreDataClass.swift"; sourceTree = "<group>"; };
 		117178C925B5D55200F52F6F /* CurrencyTest+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrencyTest+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		11C35F2525B76C0600A21C46 /* CurrencyTableViewPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTableViewPopover.swift; sourceTree = "<group>"; };
 		11D7EF6825AAEB560057695D /* SobesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SobesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11D7EF6B25AAEB560057695D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11D7EF6D25AAEB560057695D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +99,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		11C35F2825B76C1100A21C46 /* CurrencyConverter */ = {
+			isa = PBXGroup;
+			children = (
+				1148F28025B3499100C3E8D6 /* ConverterVC.swift */,
+				11C35F2525B76C0600A21C46 /* CurrencyTableViewPopover.swift */,
+			);
+			path = CurrencyConverter;
+			sourceTree = "<group>";
+		};
 		11D7EF5F25AAEB560057695D = {
 			isa = PBXGroup;
 			children = (
@@ -121,8 +132,8 @@
 				11D7EF6B25AAEB560057695D /* AppDelegate.swift */,
 				11D7EF6D25AAEB560057695D /* SceneDelegate.swift */,
 				11D7EF8425AB20850057695D /* WeatherVC.swift */,
-				1148F28025B3499100C3E8D6 /* ConverterVC.swift */,
 				116A706C25AE42480003BFF5 /* SearchResultController.swift */,
+				11C35F2825B76C1100A21C46 /* CurrencyConverter */,
 				11D7EF7125AAEB560057695D /* Main.storyboard */,
 				11D7EF7725AAEB580057695D /* Assets.xcassets */,
 				11D7EF7925AAEB580057695D /* LaunchScreen.storyboard */,
@@ -211,6 +222,7 @@
 			files = (
 				11D7EF6C25AAEB560057695D /* AppDelegate.swift in Sources */,
 				1148A03F25ADC2BF0065676D /* SobesApp.xcdatamodeld in Sources */,
+				11C35F2625B76C0600A21C46 /* CurrencyTableViewPopover.swift in Sources */,
 				117178CA25B5D55200F52F6F /* CurrencyTest+CoreDataClass.swift in Sources */,
 				1148A03825ADA16B0065676D /* WeatherCoreData+CoreDataProperties.swift in Sources */,
 				11D7EF9125AB2B7D0057695D /* Network.swift in Sources */,

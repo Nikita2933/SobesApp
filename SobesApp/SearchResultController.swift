@@ -20,8 +20,6 @@ class SearchResultController: UIViewController, UITableViewDataSource, UITableVi
             tableView.reloadData()
         }
     }
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-    }
     // MARK: table View
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         weatherVCDelegate?.TabSearchBar(s: suggestions[indexPath.row])
