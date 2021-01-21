@@ -36,7 +36,7 @@ class Network {
     }
     
     
-    func getCurrency(result: @escaping (() -> ())){
+    func getCurrency(reload:() -> ()){
         
         var request = URLRequest(url: URL(string: "https://www.cbr-xml-daily.ru/daily_json.js")!,timeoutInterval: Double.infinity)
         

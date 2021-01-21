@@ -95,18 +95,15 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
-                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RCq-x9-Jex" userLabel="1">
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RCq-x9-Jex" userLabel="1">
                                                 <rect key="frame" x="48" y="60" width="97" height="34"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="97" id="FWp-nT-MBk"/>
-                                                </constraints>
                                                 <state key="normal" title=" USD" image="target" catalog="system"/>
                                                 <connections>
                                                     <action selector="testTableButton:" destination="2Y2-9v-hCW" eventType="touchUpInside" id="gJS-Ln-pqz"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lVJ-u4-aej">
-                                                <rect key="frame" x="48" y="73.5" width="317" height="20.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lVJ-u4-aej">
+                                                <rect key="frame" x="48" y="30" width="317" height="28"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -114,14 +111,14 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.29224126327712852" green="0.35361120743120128" blue="0.50392648963730569" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="WRd-rs-L5I" firstAttribute="leading" secondItem="lVJ-u4-aej" secondAttribute="trailing" constant="-220.5" id="1Pj-rK-s1l"/>
-                                            <constraint firstItem="RCq-x9-Jex" firstAttribute="leading" secondItem="PkG-eI-apv" secondAttribute="leading" constant="48" id="JFc-6R-yiZ"/>
-                                            <constraint firstItem="RCq-x9-Jex" firstAttribute="bottom" secondItem="WRd-rs-L5I" secondAttribute="bottom" id="OOB-fR-iO8"/>
-                                            <constraint firstItem="lVJ-u4-aej" firstAttribute="bottom" secondItem="WRd-rs-L5I" secondAttribute="bottom" id="Rl5-DH-rb3"/>
+                                            <constraint firstItem="lVJ-u4-aej" firstAttribute="width" secondItem="PkG-eI-apv" secondAttribute="width" multiplier="0.7657" id="20b-gp-MJl"/>
+                                            <constraint firstItem="RCq-x9-Jex" firstAttribute="centerY" secondItem="WRd-rs-L5I" secondAttribute="centerY" id="3DA-Hd-Qeo"/>
+                                            <constraint firstItem="RCq-x9-Jex" firstAttribute="width" secondItem="PkG-eI-apv" secondAttribute="width" multiplier="0.2343" id="EiA-eH-1ll"/>
+                                            <constraint firstItem="lVJ-u4-aej" firstAttribute="centerY" secondItem="PkG-eI-apv" secondAttribute="centerY" constant="-33" id="GR4-vf-bZf"/>
+                                            <constraint firstItem="WRd-rs-L5I" firstAttribute="leading" secondItem="RCq-x9-Jex" secondAttribute="trailing" constant="-0.5" id="W5M-pX-al3"/>
                                             <constraint firstItem="WRd-rs-L5I" firstAttribute="centerY" secondItem="PkG-eI-apv" secondAttribute="centerY" id="axv-zI-RJV"/>
                                             <constraint firstItem="WRd-rs-L5I" firstAttribute="centerX" secondItem="PkG-eI-apv" secondAttribute="centerX" id="jth-5s-PZq"/>
-                                            <constraint firstItem="RCq-x9-Jex" firstAttribute="top" secondItem="WRd-rs-L5I" secondAttribute="top" id="tbl-5c-53n"/>
-                                            <constraint firstItem="lVJ-u4-aej" firstAttribute="width" secondItem="WRd-rs-L5I" secondAttribute="width" multiplier="2.536" id="thU-D3-pIA"/>
+                                            <constraint firstItem="lVJ-u4-aej" firstAttribute="centerX" secondItem="PkG-eI-apv" secondAttribute="centerX" id="lSW-uS-KWF"/>
                                             <constraint firstItem="WRd-rs-L5I" firstAttribute="width" secondItem="PkG-eI-apv" secondAttribute="width" multiplier="0.301932" id="uEN-69-ZT1"/>
                                         </constraints>
                                     </view>
@@ -152,7 +149,7 @@
                                                     <action selector="removeView:" destination="2Y2-9v-hCW" eventType="touchUpInside" id="REr-za-k2V"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cbZ-ky-puN" userLabel="2">
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cbZ-ky-puN" userLabel="2">
                                                 <rect key="frame" x="46" y="60" width="97" height="34"/>
                                                 <state key="normal" title=" USD" image="target" catalog="system"/>
                                                 <connections>
@@ -186,7 +183,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
-                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zua-Id-8D6" userLabel="3">
+                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zua-Id-8D6" userLabel="3">
                                                 <rect key="frame" x="47" y="60" width="97" height="34"/>
                                                 <state key="normal" title=" USD" image="target" catalog="system"/>
                                                 <connections>
@@ -214,7 +211,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
-                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zcF-hO-Jxg" userLabel="4">
+                                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zcF-hO-Jxg" userLabel="4">
                                                 <rect key="frame" x="48" y="60" width="97" height="34"/>
                                                 <state key="normal" title=" USD" image="target" catalog="system"/>
                                                 <connections>
@@ -242,7 +239,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
-                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZMT-Az-1mH" userLabel="5">
+                                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZMT-Az-1mH" userLabel="5">
                                                 <rect key="frame" x="48" y="60" width="97" height="34"/>
                                                 <state key="normal" title=" USD" image="target" catalog="system"/>
                                                 <connections>

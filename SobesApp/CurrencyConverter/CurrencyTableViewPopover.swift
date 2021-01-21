@@ -8,19 +8,20 @@
 import UIKit
 
 protocol PopoverContentControllerDelegate: class {
-    func popoverContent(didselectItem name:String)
+    func popoverContent(didselectItem name:String, tag: Int)
 }
 
 class CurrencyTableViewPopover: UITableViewController {
     
     var delegate: PopoverContentControllerDelegate?
+    var tag = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        if currency == [] {
+            Network.shared.getCurrency {
+                self.tableView.reloadData()
+            }
+        }
     }
 
     // MARK: - Table view data source
@@ -38,15 +39,13 @@ class CurrencyTableViewPopover: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
         cell.textLabel?.text = currency[indexPath.row].charCode
 
         return cell
     }
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.delegate?.popoverContent(didselectItem: currency[indexPath.row].charCode!)
-         
+        dismiss(animated: true, completion: nil)
+        self.delegate?.popoverContent(didselectItem: currency[indexPath.row].charCode!, tag: tag)
     }
 
     /*

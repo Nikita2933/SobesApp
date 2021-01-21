@@ -24,6 +24,9 @@ var currency: [CurrencyTest] {
     
     if currency != nil {
         return currency!
+    } else if currency!.isEmpty {
+        Network.shared.getCurrency {
+        }
     }
     return []
 }
