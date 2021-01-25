@@ -47,6 +47,7 @@ class SearchResultController: UIViewController, UITableViewDataSource, UITableVi
                         case .success(let dadataData):
                             if let dsr = dadataData.suggestions?.compactMap({ $0.data?.city }) {
                                 self?.suggestions = dsr
+                                print(dsr)
                             }
                         case .failure(let error):
                             print(error)

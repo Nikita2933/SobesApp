@@ -13,3 +13,8 @@ struct Valute: Codable {
     let Name: String
     let Value, Previous: Double
 }
+
+protocol PopoverContentControllerDelegate: class {
+    func popoverContent(charCode: String, value: Double, name: String)
+}
+

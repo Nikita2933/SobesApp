@@ -43,13 +43,17 @@ public class CurrencyTest: NSManagedObject {
         fetchRequest.returnsObjectsAsFaults = false
         do {
             let results = try context.fetch(fetchRequest)
-                for managedObject in results
+            for managedObject in results
             {
-            let managedObjectData:NSManagedObject = managedObject as! NSManagedObject
-            context.delete(managedObjectData)
+                let managedObjectData:NSManagedObject = managedObject as! NSManagedObject
+                context.delete(managedObjectData)
+            }
+        } catch let error as NSError {
+            print(error)
         }
-    } catch let error as NSError {
-        print(error)
     }
+    
+    class func getCurrent(charName: String) -> CurrencyTest {
+        currency.filter{$0.charCode == charName}.first!
     }
 }
