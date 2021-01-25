@@ -8,7 +8,7 @@
 import UIKit
 
 protocol PopoverContentControllerDelegate: class {
-    func popoverContent(didselectItem name:String, tag: Int)
+    func popoverContent(charCode: String, value: Double, name: String, tag: Int)
 }
 
 class CurrencyTableViewPopover: UITableViewController {
@@ -19,7 +19,10 @@ class CurrencyTableViewPopover: UITableViewController {
         super.viewDidLoad()
         if currency == [] {
             Network.shared.getCurrency {
-                self.tableView.reloadData()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                
             }
         }
     }
@@ -39,13 +42,14 @@ class CurrencyTableViewPopover: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = currency[indexPath.row].charCode
+        cell.textLabel?.text = currency[indexPath.row].charCode! + ": " + currency[indexPath.row].name!
 
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dismiss(animated: true, completion: nil)
-        self.delegate?.popoverContent(didselectItem: currency[indexPath.row].charCode!, tag: tag)
+        let data = currency[indexPath.row]
+        self.delegate?.popoverContent(charCode: data.charCode!, value: data.value, name: data.name!, tag: tag)
     }
 
     /*

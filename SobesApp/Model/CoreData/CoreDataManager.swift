@@ -23,7 +23,7 @@ var currency: [CurrencyTest] {
     let currency = try? CoreDataManager.shared.persistentContainer.viewContext.fetch(request)
     
     if currency != nil {
-        return currency!
+        return currency!.sorted {$0.name! < $1.name! }
     } else if currency!.isEmpty {
         Network.shared.getCurrency {
         }

@@ -1,6 +1,5 @@
 
-// Weather struct Json
-
+//MARK: Weather struct Json
 
 struct Main: Codable {
     var temp: Double = 0

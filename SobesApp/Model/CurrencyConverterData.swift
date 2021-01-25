@@ -1,10 +1,6 @@
-//
-//  File.swift
-//  SobesApp
-//
-//  Created by Никита on 16.01.2021.
-//
 
+
+//MARK: Currency Json Model
 
 struct Currency: Codable {
     let Valute: [String: Valute]
