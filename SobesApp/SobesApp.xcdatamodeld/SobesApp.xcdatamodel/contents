@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CurrencyCoreData" representedClassName="CurrencyCoreData" syncable="YES">
+        <attribute name="charCode" optional="YES" attributeType="String"/>
+        <relationship name="currency" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CurrencyTest"/>
+    </entity>
     <entity name="CurrencyTest" representedClassName="CurrencyTest" syncable="YES">
         <attribute name="charCode" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="String"/>
@@ -16,7 +20,8 @@
         <attribute name="temp" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
     <elements>
+        <element name="CurrencyCoreData" positionX="-590.34765625" positionY="-18.4375" width="128" height="73"/>
         <element name="CurrencyTest" positionX="-36" positionY="36" width="128" height="148"/>
-        <element name="WeatherCoreData" positionX="-63" positionY="-18" width="128" height="103"/>
+        <element name="WeatherCoreData" positionX="-203.8359375" positionY="-224.33984375" width="128" height="103"/>
     </elements>
 </model>

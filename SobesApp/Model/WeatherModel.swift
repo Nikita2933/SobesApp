@@ -18,6 +18,4 @@ enum units: String {
     case imp = "imperial"
 }
  
-protocol WeatherVCDelegate: class {
-    func TabSearchBar(s: String)
-}
+

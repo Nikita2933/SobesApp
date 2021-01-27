@@ -8,6 +8,10 @@
 import UIKit
 import CoreData
 
+protocol WeatherVCDelegate: class {
+    func TabSearchBar(s: String)
+}
+
 class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchControllerDelegate, WeatherVCDelegate  {
     
 
@@ -42,8 +46,11 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     private func searchSetting(){
         searchController.searchResultsUpdater = resultsController
         searchController.delegate = self
+        searchController.searchBar.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         let searchBar = searchController.searchBar
         searchBar.placeholder = "Press new City"
+        searchBar.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        searchBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         searchBar.sizeToFit()
         searchBar.delegate = self
         definesPresentationContext = true

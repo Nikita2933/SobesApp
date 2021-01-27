@@ -21,6 +21,8 @@
 		117178CB25B5D55200F52F6F /* CurrencyTest+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117178C925B5D55200F52F6F /* CurrencyTest+CoreDataProperties.swift */; };
 		119CC91725BEB0ED00A7E523 /* CustomViewCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119CC91625BEB0ED00A7E523 /* CustomViewCurrency.swift */; };
 		119CC91A25BEB10D00A7E523 /* CustomViewCurrency.xib in Resources */ = {isa = PBXBuildFile; fileRef = 119CC91925BEB10D00A7E523 /* CustomViewCurrency.xib */; };
+		11B8554225C00C88004A033F /* CurrencyCoreData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B8554025C00C88004A033F /* CurrencyCoreData+CoreDataClass.swift */; };
+		11B8554325C00C88004A033F /* CurrencyCoreData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B8554125C00C88004A033F /* CurrencyCoreData+CoreDataProperties.swift */; };
 		11C35F2625B76C0600A21C46 /* CurrencyTableViewPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C35F2525B76C0600A21C46 /* CurrencyTableViewPopover.swift */; };
 		11D7EF6C25AAEB560057695D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D7EF6B25AAEB560057695D /* AppDelegate.swift */; };
 		11D7EF6E25AAEB560057695D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D7EF6D25AAEB560057695D /* SceneDelegate.swift */; };
@@ -46,6 +48,8 @@
 		117178C925B5D55200F52F6F /* CurrencyTest+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrencyTest+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		119CC91625BEB0ED00A7E523 /* CustomViewCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewCurrency.swift; sourceTree = "<group>"; };
 		119CC91925BEB10D00A7E523 /* CustomViewCurrency.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomViewCurrency.xib; sourceTree = "<group>"; };
+		11B8554025C00C88004A033F /* CurrencyCoreData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrencyCoreData+CoreDataClass.swift"; sourceTree = "<group>"; };
+		11B8554125C00C88004A033F /* CurrencyCoreData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrencyCoreData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		11C35F2525B76C0600A21C46 /* CurrencyTableViewPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTableViewPopover.swift; sourceTree = "<group>"; };
 		11D7EF6825AAEB560057695D /* SobesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SobesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11D7EF6B25AAEB560057695D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -86,11 +90,13 @@
 		11427CE025AD951300D03299 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				1148A04125ADE53B0065676D /* CoreDataManager.swift */,
 				1148A03525ADA16B0065676D /* WeatherCoreData+CoreDataClass.swift */,
 				1148A03625ADA16B0065676D /* WeatherCoreData+CoreDataProperties.swift */,
-				1148A04125ADE53B0065676D /* CoreDataManager.swift */,
 				117178C825B5D55200F52F6F /* CurrencyTest+CoreDataClass.swift */,
 				117178C925B5D55200F52F6F /* CurrencyTest+CoreDataProperties.swift */,
+				11B8554125C00C88004A033F /* CurrencyCoreData+CoreDataProperties.swift */,
+				11B8554025C00C88004A033F /* CurrencyCoreData+CoreDataClass.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -245,9 +251,11 @@
 				11426AF625ACBC8E00C3FFD6 /* CustomViewCell.swift in Sources */,
 				116A706D25AE42480003BFF5 /* SearchResultController.swift in Sources */,
 				117178CB25B5D55200F52F6F /* CurrencyTest+CoreDataProperties.swift in Sources */,
+				11B8554325C00C88004A033F /* CurrencyCoreData+CoreDataProperties.swift in Sources */,
 				11D7EF9525AB7DC00057695D /* WeatherModel.swift in Sources */,
 				11D7EF6E25AAEB560057695D /* SceneDelegate.swift in Sources */,
 				11D7EF8525AB20850057695D /* WeatherVC.swift in Sources */,
+				11B8554225C00C88004A033F /* CurrencyCoreData+CoreDataClass.swift in Sources */,
 				1148F28125B3499100C3E8D6 /* ConverterVC.swift in Sources */,
 				1148F28525B34B5C00C3E8D6 /* CurrencyConverterModel.swift in Sources */,
 				1148A04225ADE53B0065676D /* CoreDataManager.swift in Sources */,

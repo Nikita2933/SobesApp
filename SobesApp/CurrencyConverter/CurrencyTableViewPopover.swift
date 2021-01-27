@@ -7,10 +7,14 @@
 
 import UIKit
 
+protocol PopoverContentControllerDelegate: class {
+    func popoverContent(charCode: String, value: Double, name: String, tag: Int)
+}
+
 class CurrencyTableViewPopover: UITableViewController {
     
     var delegate: PopoverContentControllerDelegate?
-    var name: String = ""
+    var tag = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,11 +48,9 @@ class CurrencyTableViewPopover: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let data = currency[indexPath.row]
-        self.name = data.name!
-        self.delegate?.popoverContent(charCode: data.charCode!, value: data.value, name: data.name!)
+        self.delegate?.popoverContent(charCode: data.charCode!, value: data.value, name: data.name!, tag: tag)
         dismiss(animated: true, completion: nil)
     }
-
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

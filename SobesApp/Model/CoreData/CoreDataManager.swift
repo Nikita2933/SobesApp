@@ -24,10 +24,7 @@ var currency: [CurrencyTest] {
     
     if currency != nil {
         return currency!.sorted {$0.name! < $1.name! }
-    } else if currency!.isEmpty {
-        Network.shared.getCurrency {
-        }
-    }
+    } 
     return []
 }
 

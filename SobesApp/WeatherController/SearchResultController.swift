@@ -35,6 +35,7 @@ class SearchResultController: UIViewController, UITableViewDataSource, UITableVi
         cell.selectionStyle = .none
         return cell
     }
+    
     func updateSearchResults(for searchController: UISearchController) {
         if searchController.searchBar.text != nil  {
             let text = searchController.searchBar.text!

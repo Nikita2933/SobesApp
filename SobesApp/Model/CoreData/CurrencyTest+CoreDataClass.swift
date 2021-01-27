@@ -52,8 +52,5 @@ public class CurrencyTest: NSManagedObject {
             print(error)
         }
     }
-    
-    class func getCurrent(charName: String) -> CurrencyTest {
-        currency.filter{$0.charCode == charName}.first!
-    }
+
 }

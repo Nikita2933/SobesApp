@@ -22,7 +22,6 @@ class CustomViewCurrency: UIView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        fatalError("init(coder:) has not been implemented")
     }
     
     func addParametr(labelName: String, curse: Double, currentValue: String ) {
@@ -32,11 +31,14 @@ class CustomViewCurrency: UIView {
 
     }
     
-    func setParametr(charCode: String) {
-        let result = CurrencyTest.getCurrent(charName: charCode)
-        self.labelName.text = result.name
-        self.curse = result.value
-        self.currentValue.setTitle(result.charCode, for: .normal)
+    func setParametr(charCode: String) { //MARK: убрать в CoreData
+        DispatchQueue.main.async {
+            if let result = currency.filter({$0.charCode == charCode}).first {
+                self.labelName.text = result.name
+                self.curse = result.value
+                self.currentValue.setTitle(result.charCode, for: .normal)
+            } 
+        }
     }
     
     private func commonInitializer() {

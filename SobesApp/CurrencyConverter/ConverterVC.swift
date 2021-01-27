@@ -11,40 +11,67 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
 
     @IBOutlet weak var stackView: UIStackView!
     var staticSize: CGFloat!
-    let testView = CustomViewCurrency()
-    let secondTestView = CustomViewCurrency()
+    let viewCellOne = CustomViewCurrency()
+    let viewCellTwo = CustomViewCurrency()
+    let viewCellThree = CustomViewCurrency()
+    let viewCellFour = CustomViewCurrency()
+    var arrView: [CustomViewCurrency] = []
+    var tagButton = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
         registerNotification()
         staticSize = view.frame.size.height
-        testView.setParametr(charCode: "RUB")
-        secondTestView.setParametr(charCode: "EUR")
-        stackView.addArrangedSubview(testView)
-        stackView.addArrangedSubview(secondTestView)
-        testView.currentValue.addTarget(self, action: #selector(testTableButton(_:)), for: .allTouchEvents)
-        secondTestView.currentValue.addTarget(self, action: #selector(testTableButton(_:)), for: .allTouchEvents)
+        viewCellThree.isHidden = true
+        viewCellFour.isHidden = true
+        arrView.append(viewCellOne)
+        arrView.append(viewCellTwo)
+        arrView.append(viewCellThree)
+        arrView.append(viewCellFour)
+        viewCellOne.setParametr(charCode: "RUB")
+        viewCellTwo.setParametr(charCode: "BYN")
+        viewCellThree.setParametr(charCode: "USD")
+        viewCellFour.setParametr(charCode: "EUR")
+        for view in arrView {
+            view.currentValue.addTarget(self, action: #selector(testTableButton(_:)), for: .allTouchEvents)
+            view.currentValue.tag = tagButton
+            stackView.addArrangedSubview(view)
+            tagButton += 1
+        }
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //MARK: Обновлять курсы валют при запуске
     }
     
-    @IBAction func oneTabToView(_ sender: Any) {
-        testView.textField.resignFirstResponder()
-        secondTestView.textField.resignFirstResponder()
+    @IBAction func oneTabToView(_ sender: UIGestureRecognizer) {
+        for view in arrView {
+            view.textField.resignFirstResponder()
+        }
     }
     
     @IBAction func removeView(_ sender: UIButton) {
-        if stackView.arrangedSubviews.count > 2 {
-            let view = stackView.arrangedSubviews.last!
-            stackView.removeArrangedSubview(view)
-            view.removeFromSuperview()
+        for view in arrView.sorted(by: {$0.currentValue.tag > $1.currentValue.tag }) {
+            if view.isHidden == false {
+                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 2, initialSpringVelocity: 0, options: .layoutSubviews) {
+                    view.isHidden = true
+                    view.alpha = 0
+                }
+                break
+            }
         }
     }
     
-    @IBAction func addView(_ sender: Any) {
-        if stackView.arrangedSubviews.count < 4 {
-            let testView = CustomViewCurrency()
-            stackView.addArrangedSubview(testView)
+    @IBAction func addView(_ sender: UIButton) {
+        for view in arrView {
+            if view.isHidden == true {
+                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 2, initialSpringVelocity: 0, options: .layoutSubviews) {
+                    view.isHidden = false
+                    view.alpha = 1
+                }
+                break
+            }
         }
-
     }
     
     //MARK: KeyboardSetting
@@ -82,17 +109,22 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
         tableCurrency.modalPresentationStyle = .popover
         let popoverController = tableCurrency.popoverPresentationController
         popoverController?.delegate = self
+        tableCurrency.tag = sender.tag
         tableCurrency.delegate = self
         popoverController?.sourceView = sender
         popoverController?.sourceRect = CGRect(x: sender.bounds.midX,
                                                y: sender.bounds.midY,
                                                width: 0, height: 0)
-        tableCurrency.preferredContentSize = CGSize(width: 150, height: 400)
+        tableCurrency.preferredContentSize = CGSize(width: 400, height: 400)
         self.present(tableCurrency, animated: true, completion: nil)
     }
     
-    func popoverContent(charCode: String, value: Double, name: String) {
-        testView.addParametr(labelName: name, curse: value, currentValue: charCode)
+    func popoverContent(charCode: String, value: Double, name: String, tag: Int) {
+        for view in arrView {
+            if view.currentValue.tag == tag {
+                view.addParametr(labelName: name, curse: value, currentValue: charCode)
+            }
+        }
     }
 
 }
