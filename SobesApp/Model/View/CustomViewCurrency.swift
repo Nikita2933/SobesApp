@@ -7,10 +7,11 @@
 
 import UIKit
 
-class CustomViewCurrency: UIView {
+class CustomViewCurrency: UIView, UITextFieldDelegate {
+    
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var currentValue: UIButton!
-    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var classField: UITextField!
     @IBOutlet var contentView: UIView!
     var curse = Double()
     var count = Int()
@@ -18,13 +19,20 @@ class CustomViewCurrency: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInitializer()
+        classField.text = "0.0"
+        classField.delegate = self
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+
     
-    func addParametr(labelName: String, curse: Double, currentValue: String ) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
+    }
+    
+    func addParametr(labelName: String, curse: Double, currentValue: String ) { //
         self.labelName.text = labelName
         self.curse = curse
         self.currentValue.setTitle(currentValue, for: .normal)
@@ -40,6 +48,8 @@ class CustomViewCurrency: UIView {
             } 
         }
     }
+    
+
     
     private func commonInitializer() {
         Bundle.main.loadNibNamed("CustomViewCurrency", owner:self, options: nil)

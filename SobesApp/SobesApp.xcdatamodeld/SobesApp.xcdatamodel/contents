@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="CurrencyCoreData" representedClassName="CurrencyCoreData" syncable="YES">
-        <attribute name="charCode" optional="YES" attributeType="String"/>
-        <relationship name="currency" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CurrencyTest"/>
-    </entity>
     <entity name="CurrencyTest" representedClassName="CurrencyTest" syncable="YES">
         <attribute name="charCode" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="String"/>
@@ -13,6 +9,14 @@
         <attribute name="previous" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="value" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
+    <entity name="CurrencyUserData" representedClassName="CurrencyUserData" syncable="YES">
+        <attribute name="classField" optional="YES" attributeType="String"/>
+        <attribute name="count" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="currentValue" optional="YES" attributeType="String"/>
+        <attribute name="curse" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="labelName" optional="YES" attributeType="String"/>
+        <attribute name="tag" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
     <entity name="WeatherCoreData" representedClassName="WeatherCoreData" syncable="YES">
         <attribute name="cityName" optional="YES" attributeType="String"/>
         <attribute name="feels" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -20,8 +24,8 @@
         <attribute name="temp" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="CurrencyCoreData" positionX="-590.34765625" positionY="-18.4375" width="128" height="73"/>
         <element name="CurrencyTest" positionX="-36" positionY="36" width="128" height="148"/>
+        <element name="CurrencyUserData" positionX="-387" positionY="-72" width="128" height="133"/>
         <element name="WeatherCoreData" positionX="-203.8359375" positionY="-224.33984375" width="128" height="103"/>
     </elements>
 </model>

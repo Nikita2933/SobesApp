@@ -4,53 +4,53 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomViewCurrency" customModule="SobesApp" customModuleProvider="target">
             <connections>
+                <outlet property="classField" destination="27a-aC-31h" id="acU-aB-UYH"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="Ajk-6P-A9Z"/>
                 <outlet property="currentValue" destination="Ewt-uE-sn9" id="K8N-3l-2R9"/>
                 <outlet property="labelName" destination="S0h-hX-ZBF" id="G9l-60-lY0"/>
-                <outlet property="textField" destination="27a-aC-31h" id="acU-aB-UYH"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
+        <view contentMode="scaleToFill" semanticContentAttribute="playback" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="414" height="314"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ewt-uE-sn9">
                     <rect key="frame" x="20" y="161" width="85" height="36"/>
                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                    <color key="tintColor" red="0.46462563451370564" green="0.41151035753047249" blue="0.22798770661761025" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="tintColor" red="0.21451771259999999" green="0.21455428000000001" blue="0.21450972560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <state key="normal" title="RUR" image="cube.box.fill" catalog="system">
-                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="titleColor" red="0.21451771259999999" green="0.21455428000000001" blue="0.21450972560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S0h-hX-ZBF">
-                    <rect key="frame" x="55" y="114" width="339" height="23"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="right" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="27a-aC-31h">
-                    <rect key="frame" x="150" y="145" width="244" height="69"/>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="textColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" borderStyle="line" textAlignment="right" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="27a-aC-31h">
+                    <rect key="frame" x="150" y="153.5" width="244" height="52.5"/>
+                    <color key="backgroundColor" red="0.21451771259999999" green="0.21455428000000001" blue="0.21450972560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="tintColor" red="0.21451771259999999" green="0.21455428000000001" blue="0.21450972560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="textColor" red="0.21451771259999999" green="0.21455428000000001" blue="0.21450972560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="36"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" keyboardType="decimalPad" keyboardAppearance="alert"/>
                 </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Российский Рубль" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S0h-hX-ZBF">
+                    <rect key="frame" x="158" y="206" width="125" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.21451771259999999" green="0.21455428000000001" blue="0.21450972560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="highlightedColor" red="0.21451771259999999" green="0.21455428000000001" blue="0.21450972560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" red="0.73038943527512701" green="0.64689245560272957" blue="0.35839566290911495" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.39303479489999998" green="0.63997242720000003" blue="0.67147817799999998" alpha="0.93715218320000004" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Ewt-uE-sn9" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="7Fw-3Z-EDp"/>
-                <constraint firstItem="S0h-hX-ZBF" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" constant="17.5" id="R6K-el-ii1"/>
                 <constraint firstItem="27a-aC-31h" firstAttribute="leading" secondItem="Ewt-uE-sn9" secondAttribute="trailing" constant="45" id="SHA-5d-2D6"/>
+                <constraint firstItem="S0h-hX-ZBF" firstAttribute="top" secondItem="27a-aC-31h" secondAttribute="bottom" id="Wqx-dm-Kf8"/>
                 <constraint firstItem="27a-aC-31h" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" constant="0.5" id="jv4-dw-vFd"/>
-                <constraint firstItem="27a-aC-31h" firstAttribute="top" secondItem="S0h-hX-ZBF" secondAttribute="bottom" constant="8" symbolic="YES" id="mWg-s8-MlE"/>
+                <constraint firstItem="27a-aC-31h" firstAttribute="leading" secondItem="S0h-hX-ZBF" secondAttribute="trailing" constant="-133" id="piC-XU-q8y"/>
                 <constraint firstItem="27a-aC-31h" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" constant="65" id="yCe-la-1R6"/>
                 <constraint firstItem="27a-aC-31h" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.589372" id="yYR-B0-hVp"/>
             </constraints>
@@ -60,8 +60,5 @@
     </objects>
     <resources>
         <image name="cube.box.fill" catalog="system" width="128" height="124"/>
-        <systemColor name="secondarySystemGroupedBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

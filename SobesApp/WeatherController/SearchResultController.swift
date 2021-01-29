@@ -20,11 +20,16 @@ class SearchResultController: UIViewController, UITableViewDataSource, UITableVi
             tableView.reloadData()
         }
     }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = #colorLiteral(red: 0.2145177126, green: 0.21455428, blue: 0.2145097256, alpha: 1)
+    }
     // MARK: table View
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         weatherVCDelegate?.TabSearchBar(s: suggestions[indexPath.row])
         dismiss(animated: true, completion: nil)
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         suggestions.count
     }

@@ -24,19 +24,30 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
         staticSize = view.frame.size.height
         viewCellThree.isHidden = true
         viewCellFour.isHidden = true
-        arrView.append(viewCellOne)
-        arrView.append(viewCellTwo)
-        arrView.append(viewCellThree)
-        arrView.append(viewCellFour)
-        viewCellOne.setParametr(charCode: "RUB")
-        viewCellTwo.setParametr(charCode: "BYN")
-        viewCellThree.setParametr(charCode: "USD")
-        viewCellFour.setParametr(charCode: "EUR")
+        viewsSetting()
         for view in arrView {
             view.currentValue.addTarget(self, action: #selector(testTableButton(_:)), for: .allTouchEvents)
+            view.classField.addTarget(self, action: #selector(calculateValue(_:)), for: .editingChanged)
             view.currentValue.tag = tagButton
             stackView.addArrangedSubview(view)
             tagButton += 1
+        }
+    }
+    
+    func viewsSetting() {
+         let test = CurrencyUserData.getArrData()
+        if !test.isEmpty {
+            arrView = test
+            print(arrView)
+        } else {
+            arrView.append(viewCellOne)
+            arrView.append(viewCellTwo)
+            arrView.append(viewCellThree)
+            arrView.append(viewCellFour)
+            viewCellOne.setParametr(charCode: "RUB")
+            viewCellTwo.setParametr(charCode: "BYN")
+            viewCellThree.setParametr(charCode: "USD")
+            viewCellFour.setParametr(charCode: "EUR")
         }
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -44,15 +55,17 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
         //MARK: Обновлять курсы валют при запуске
     }
     
+    //MARK: tapGesture
     @IBAction func oneTabToView(_ sender: UIGestureRecognizer) {
         for view in arrView {
-            view.textField.resignFirstResponder()
+            view.classField.resignFirstResponder()
         }
     }
     
+    
     @IBAction func removeView(_ sender: UIButton) {
         for view in arrView.sorted(by: {$0.currentValue.tag > $1.currentValue.tag }) {
-            if view.isHidden == false {
+            if view.isHidden == false && view.currentValue.tag > 2 {
                 UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 2, initialSpringVelocity: 0, options: .layoutSubviews) {
                     view.isHidden = true
                     view.alpha = 0
@@ -74,11 +87,18 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
         }
     }
     
+    @objc func exitSave()  {
+        CurrencyUserData.deleteData()
+        CurrencyUserData.addNew(arrData: arrView)
+    }
+    
     //MARK: KeyboardSetting
     
     private func registerNotification(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: UIApplication.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: UIApplication.keyboardWillHideNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(exitSave), name: UIApplication.willResignActiveNotification, object: nil)
     }
     
     @objc func keyboardShow(notification: Notification) {
@@ -115,7 +135,7 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
         popoverController?.sourceRect = CGRect(x: sender.bounds.midX,
                                                y: sender.bounds.midY,
                                                width: 0, height: 0)
-        tableCurrency.preferredContentSize = CGSize(width: 400, height: 400)
+        tableCurrency.preferredContentSize = CGSize(width: 280, height: 400)
         self.present(tableCurrency, animated: true, completion: nil)
     }
     
@@ -123,10 +143,40 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
         for view in arrView {
             if view.currentValue.tag == tag {
                 view.addParametr(labelName: name, curse: value, currentValue: charCode)
+                addNewValute(fieldClass: view, arr: arrView)
             }
         }
     }
-
+    
+    //MARK: calculateCurrency
+    @objc func calculateValue(_ textField: UITextField) {
+        let textFieldView = textField.superview!
+        let selectedClass = textFieldView.superview as! CustomViewCurrency
+        textFieldChange(fieldClass: selectedClass , arr: arrView)
+        
+        if textField.text == "" {
+            textField.text = String(0)
+        }
+    }
+    
+    func textFieldChange(fieldClass: CustomViewCurrency, arr: [CustomViewCurrency]){
+        for views in arr {
+            if fieldClass != views {
+                let fieldInt = Double(fieldClass.classField.text!) ?? 0.0
+                views.classField.text = String(format: "%.2f", fieldInt * (fieldClass.curse  / views.curse))
+            }
+        }
+    }
+    
+    func addNewValute(fieldClass: CustomViewCurrency, arr: [CustomViewCurrency]){
+        for views in arr {
+            if fieldClass != views {
+                let viewsInt = Double(views.classField.text!) ?? 0.0
+                fieldClass.classField.text = String(format: "%.2f", viewsInt * (views.curse / fieldClass.curse))
+                
+            }
+        }
+    }
 }
 
 

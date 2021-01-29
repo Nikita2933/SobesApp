@@ -16,14 +16,14 @@ public class CurrencyTest: NSManagedObject {
         let context =  CoreDataManager.shared.persistentContainer.viewContext
         let entity = CurrencyTest(context: CoreDataManager.shared.persistentContainer.viewContext)
         for save in saved {
-            let test = NSEntityDescription.insertNewObject(forEntityName: "CurrencyTest", into: context)
-            test.setValue(save.Name, forKey: "name")
-            test.setValue(save.CharCode, forKey: "charCode")
-            test.setValue(save.ID, forKey: "id")
-            test.setValue(save.Nominal, forKey: "nominal")
-            test.setValue(save.NumCode, forKey: "numCode")
-            test.setValue(save.Previous, forKey: "previous")
-            test.setValue(save.Value, forKey: "value")
+            let currency = NSEntityDescription.insertNewObject(forEntityName: "CurrencyTest", into: context)
+            currency.setValue(save.Name, forKey: "name")
+            currency.setValue(save.CharCode, forKey: "charCode")
+            currency.setValue(save.ID, forKey: "id")
+            currency.setValue(save.Nominal, forKey: "nominal")
+            currency.setValue(save.NumCode, forKey: "numCode")
+            currency.setValue(save.Previous, forKey: "previous")
+            currency.setValue(save.Value, forKey: "value")
         }
         entity.name = "Российский Рубль"
         entity.charCode = "RUB"
@@ -37,6 +37,7 @@ public class CurrencyTest: NSManagedObject {
             print(error)
         }
     }
+    
     class func deleteAllData() {
         let context =  CoreDataManager.shared.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CurrencyTest")

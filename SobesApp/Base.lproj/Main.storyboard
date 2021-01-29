@@ -4,9 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Image references" minToolsVersion="12.0"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -17,11 +15,11 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="CXA-Wd-lNU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.4646256345" green="0.41151035749999998" blue="0.22798770660000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.21859306100000001" green="0.44299674030000002" blue="0.47009110450000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="c0S-t9-ggH">
                             <rect key="frame" x="0.0" y="99.5" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.7303894353" green="0.64689245559999997" blue="0.35839566290000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.39303479488985821" green="0.63997242721703462" blue="0.67147817802588838" alpha="0.93715218321917804" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="hty-tt-kbV">
@@ -31,7 +29,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.7303894353" green="0.64689245559999997" blue="0.35839566290000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.39303479488985821" green="0.63997242721703462" blue="0.67147817802588838" alpha="0.93715218321917804" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -54,7 +52,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="5GO-Jb-bSt">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.21451771259999999" green="0.21455428000000001" blue="0.21450972560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell" id="HZ9-BO-a5s">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
@@ -63,6 +61,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.39303479489999998" green="0.63997242720000003" blue="0.67147817799999998" alpha="0.93715218320000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.21451771259999999" green="0.21455428000000001" blue="0.21450972560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -83,53 +83,49 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dqX-aq-T74">
-                                <rect key="frame" x="329" y="63" width="40" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="8jg-fP-m6Z"/>
-                                </constraints>
+                            <stackView contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="eVJ-FE-eZK">
+                                <rect key="frame" x="0.0" y="95" width="414" height="718"/>
+                                <color key="backgroundColor" red="0.21451771259999999" green="0.21455428000000001" blue="0.21450972560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <gestureRecognizers/>
+                            </stackView>
+                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dqX-aq-T74">
+                                <rect key="frame" x="313.5" y="63" width="25" height="24"/>
+                                <color key="tintColor" red="0.21451771259999999" green="0.21455428000000001" blue="0.21450972560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal">
-                                    <imageReference key="image" image="pencil.circle.fill" catalog="system" symbolScale="large"/>
+                                    <imageReference key="image" image="minus.circle" catalog="system" symbolScale="large"/>
                                 </state>
                                 <connections>
                                     <action selector="removeView:" destination="2Y2-9v-hCW" eventType="touchUpInside" id="Zch-zW-aOf"/>
                                 </connections>
                             </button>
-                            <stackView contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="eVJ-FE-eZK">
-                                <rect key="frame" x="0.0" y="95" width="414" height="718"/>
-                                <color key="backgroundColor" red="1" green="0.8444383405" blue="0.67659307840000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <gestureRecognizers/>
-                            </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OIW-zs-7Dg">
-                                <rect key="frame" x="374" y="63" width="40" height="24"/>
-                                <state key="normal">
-                                    <imageReference key="image" image="plus.circle.fill" catalog="system" symbolScale="large" renderingMode="original"/>
-                                </state>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OIW-zs-7Dg">
+                                <rect key="frame" x="346" y="63" width="55" height="24"/>
+                                <color key="tintColor" red="0.21451771259999999" green="0.21455428000000001" blue="0.21450972560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="addView:" destination="2Y2-9v-hCW" eventType="touchUpInside" id="VDW-DR-uNj"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ePl-wk-EYO"/>
-                        <color key="backgroundColor" red="0.4646256345" green="0.41151035749999998" blue="0.22798770660000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.43854743239999999" green="0.71212548019999999" blue="0.74512189630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="eVJ-FE-eZK" firstAttribute="top" secondItem="ePl-wk-EYO" secondAttribute="top" constant="51" id="04o-j4-Dk3"/>
-                            <constraint firstItem="dqX-aq-T74" firstAttribute="leading" secondItem="ePl-wk-EYO" secondAttribute="leading" constant="329" id="B9k-Zq-0vE"/>
-                            <constraint firstItem="OIW-zs-7Dg" firstAttribute="trailing" secondItem="ePl-wk-EYO" secondAttribute="trailing" id="BTe-Gz-vkx"/>
+                            <constraint firstItem="dqX-aq-T74" firstAttribute="top" secondItem="ePl-wk-EYO" secondAttribute="top" constant="19" id="Afw-gi-Ij9"/>
+                            <constraint firstItem="ePl-wk-EYO" firstAttribute="trailing" secondItem="dqX-aq-T74" secondAttribute="trailing" constant="75.5" id="KTN-a2-OZZ"/>
                             <constraint firstItem="ePl-wk-EYO" firstAttribute="bottom" secondItem="eVJ-FE-eZK" secondAttribute="bottom" id="VZp-9M-asr"/>
-                            <constraint firstItem="OIW-zs-7Dg" firstAttribute="leading" secondItem="dqX-aq-T74" secondAttribute="trailing" constant="5" id="d2I-4z-d8F"/>
-                            <constraint firstItem="dqX-aq-T74" firstAttribute="baseline" secondItem="OIW-zs-7Dg" secondAttribute="baseline" id="gsM-xp-Tma"/>
+                            <constraint firstItem="ePl-wk-EYO" firstAttribute="trailing" secondItem="OIW-zs-7Dg" secondAttribute="trailing" constant="13" id="Z75-9g-9sq"/>
+                            <constraint firstItem="OIW-zs-7Dg" firstAttribute="leading" secondItem="dqX-aq-T74" secondAttribute="trailing" constant="7.5" id="ZVY-4d-3Q9"/>
+                            <constraint firstItem="OIW-zs-7Dg" firstAttribute="top" secondItem="ePl-wk-EYO" secondAttribute="top" constant="19" id="dF8-ov-ANf"/>
                             <constraint firstItem="eVJ-FE-eZK" firstAttribute="leading" secondItem="ePl-wk-EYO" secondAttribute="leading" id="ic3-ZE-cG5"/>
                             <constraint firstItem="ePl-wk-EYO" firstAttribute="trailing" secondItem="eVJ-FE-eZK" secondAttribute="trailing" id="irZ-Hn-rCp"/>
-                            <constraint firstItem="dqX-aq-T74" firstAttribute="top" secondItem="ePl-wk-EYO" secondAttribute="top" constant="19" id="vp5-Xx-ffG"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="pta-cc-TAr" appends="YES" id="eDN-Jh-Uyv"/>
                         </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="CurrencyConverter" image="square.split.1x2.fill" catalog="system" id="aLt-1M-X9d">
-                        <color key="badgeColor" red="0.7303894353" green="0.64689245559999997" blue="0.35839566290000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="badgeColor" red="0.43854743239999999" green="0.71212548019999999" blue="0.74512189630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBarItem>
                     <connections>
                         <outlet property="stackView" destination="eVJ-FE-eZK" id="qKY-VK-ubj"/>
@@ -151,9 +147,8 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="Foy-IL-SqG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.4646256345" green="0.41151035749999998" blue="0.22798770660000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="tintColor" systemColor="placeholderTextColor"/>
-                        <color key="selectedImageTintColor" red="0.4646256345" green="0.41151035749999998" blue="0.22798770660000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.43854743239999999" green="0.71212548019999999" blue="0.74512189630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" red="0.21451771259999999" green="0.21455428000000001" blue="0.21450972560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="xbs-sD-pPM" kind="relationship" relationship="viewControllers" id="N6S-Dd-Op3"/>
@@ -169,14 +164,14 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xbs-sD-pPM" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Weather" image="icloud.circle.fill" catalog="system" id="FKy-Cl-qWX">
-                        <color key="badgeColor" red="0.4646256345" green="0.41151035749999998" blue="0.22798770660000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="badgeColor" red="0.43854743239999999" green="0.71212548019999999" blue="0.74512189630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yaJ-hn-BkI">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.4646256345" green="0.41151035749999998" blue="0.22798770660000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="barTintColor" red="0.4646256345" green="0.41151035749999998" blue="0.22798770660000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.43854743239999999" green="0.71212548019999999" blue="0.74512189630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.43854743239999999" green="0.71212548019999999" blue="0.74512189630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -197,12 +192,12 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DMJ-tN-jF8">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
-                                <color key="backgroundColor" red="0.4646256345" green="0.41151035749999998" blue="0.22798770660000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="separatorColor" name="AccentColor"/>
+                                <color key="backgroundColor" red="0.21451771259999999" green="0.21455428000000001" blue="0.21450972560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="separatorColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="Kd8-Of-JHc">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" red="0.4646256345" green="0.41151035749999998" blue="0.22798770660000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.21451771259999999" green="0.21455428000000001" blue="0.21450972560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </view>
                                 <connections>
                                     <outlet property="dataSource" destination="WTq-EY-Ros" id="1p8-D5-zTQ"/>
@@ -211,7 +206,7 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mSc-tC-XgP"/>
-                        <color key="backgroundColor" red="0.4646256345" green="0.41151035749999998" blue="0.22798770660000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.43854743239999999" green="0.71212548019999999" blue="0.74512189630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="DMJ-tN-jF8" firstAttribute="top" secondItem="mSc-tC-XgP" secondAttribute="top" id="Vlb-vt-EAT"/>
@@ -240,17 +235,7 @@
     </scenes>
     <resources>
         <image name="icloud.circle.fill" catalog="system" width="128" height="121"/>
-        <image name="pencil.circle.fill" catalog="system" width="128" height="121"/>
-        <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="minus.circle" catalog="system" width="128" height="121"/>
         <image name="square.split.1x2.fill" catalog="system" width="128" height="114"/>
-        <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <systemColor name="placeholderTextColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>
