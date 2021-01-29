@@ -29,15 +29,15 @@
                     </state>
                 </button>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" borderStyle="line" textAlignment="right" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="27a-aC-31h">
-                    <rect key="frame" x="150" y="153.5" width="244" height="52.5"/>
+                    <rect key="frame" x="150" y="153" width="244" height="53"/>
                     <color key="backgroundColor" red="0.21451771259999999" green="0.21455428000000001" blue="0.21450972560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="tintColor" red="0.21451771259999999" green="0.21455428000000001" blue="0.21450972560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="textColor" red="0.21451771259999999" green="0.21455428000000001" blue="0.21450972560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="36"/>
                     <textInputTraits key="textInputTraits" keyboardType="decimalPad" keyboardAppearance="alert"/>
                 </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Российский Рубль" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S0h-hX-ZBF">
-                    <rect key="frame" x="158" y="206" width="125" height="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Российский Рубль" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S0h-hX-ZBF">
+                    <rect key="frame" x="150" y="208" width="125" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.21451771259999999" green="0.21455428000000001" blue="0.21450972560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="highlightedColor" red="0.21451771259999999" green="0.21455428000000001" blue="0.21450972560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -47,10 +47,11 @@
             <color key="backgroundColor" red="0.39303479489999998" green="0.63997242720000003" blue="0.67147817799999998" alpha="0.93715218320000004" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Ewt-uE-sn9" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="7Fw-3Z-EDp"/>
+                <constraint firstItem="S0h-hX-ZBF" firstAttribute="top" secondItem="27a-aC-31h" secondAttribute="bottom" constant="2" id="HNe-EH-MWL"/>
+                <constraint firstItem="S0h-hX-ZBF" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" constant="5.5" id="IfJ-VD-cYM"/>
                 <constraint firstItem="27a-aC-31h" firstAttribute="leading" secondItem="Ewt-uE-sn9" secondAttribute="trailing" constant="45" id="SHA-5d-2D6"/>
-                <constraint firstItem="S0h-hX-ZBF" firstAttribute="top" secondItem="27a-aC-31h" secondAttribute="bottom" id="Wqx-dm-Kf8"/>
+                <constraint firstItem="S0h-hX-ZBF" firstAttribute="leading" secondItem="Ewt-uE-sn9" secondAttribute="trailing" constant="45" id="WTL-vi-zcs"/>
                 <constraint firstItem="27a-aC-31h" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" constant="0.5" id="jv4-dw-vFd"/>
-                <constraint firstItem="27a-aC-31h" firstAttribute="leading" secondItem="S0h-hX-ZBF" secondAttribute="trailing" constant="-133" id="piC-XU-q8y"/>
                 <constraint firstItem="27a-aC-31h" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" constant="65" id="yCe-la-1R6"/>
                 <constraint firstItem="27a-aC-31h" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.589372" id="yYR-B0-hVp"/>
             </constraints>

@@ -81,11 +81,11 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         }
         searchController.searchBar.text = ""
     }
-        
+    
     // MARK: - Table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            weather.count
-            
+        weather.count
+        
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomViewCell
@@ -94,6 +94,8 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         cell.tempText.text = String(weatherMain.temp)
         cell.pressureText.text = String(weatherMain.pressure)
         cell.fellsText.text = String(weatherMain.feels)
+        cell.imageLabel.text = weatherMain.imageLabel
+        cell.setImage(weatherMain.imageWeather!)
         return cell
     }
     
@@ -108,7 +110,7 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             }
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
-             
+            
         }
     }
 

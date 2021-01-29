@@ -42,6 +42,7 @@ public class CurrencyUserData: NSManagedObject {
                 view.currentValue.setTitle(currency.currentValue, for: .normal)
                 view.curse = currency.curse
                 view.labelName.text = currency.labelName
+                view.currentValue.tag = Int(currency.tag)
                 arrView.append(view)
             }
         }

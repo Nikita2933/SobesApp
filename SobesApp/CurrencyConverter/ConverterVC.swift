@@ -16,7 +16,7 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
     let viewCellThree = CustomViewCurrency()
     let viewCellFour = CustomViewCurrency()
     var arrView: [CustomViewCurrency] = []
-    var tagButton = 1
+    var tagButton = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,17 +28,15 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
         for view in arrView {
             view.currentValue.addTarget(self, action: #selector(testTableButton(_:)), for: .allTouchEvents)
             view.classField.addTarget(self, action: #selector(calculateValue(_:)), for: .editingChanged)
-            view.currentValue.tag = tagButton
             stackView.addArrangedSubview(view)
-            tagButton += 1
+            print(view.currentValue.tag)
         }
     }
     
     func viewsSetting() {
          let test = CurrencyUserData.getArrData()
         if !test.isEmpty {
-            arrView = test
-            print(arrView)
+            arrView = test.sorted(by: {$0.currentValue.tag < $1.currentValue.tag })
         } else {
             arrView.append(viewCellOne)
             arrView.append(viewCellTwo)
@@ -48,8 +46,14 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
             viewCellTwo.setParametr(charCode: "BYN")
             viewCellThree.setParametr(charCode: "USD")
             viewCellFour.setParametr(charCode: "EUR")
+            for view in arrView {
+                view.currentValue.tag = tagButton
+                tagButton += 1
+                
+            }
         }
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //MARK: Обновлять курсы валют при запуске
@@ -99,6 +103,7 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: UIApplication.keyboardWillHideNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(exitSave), name: UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(exitSave), name: UIApplication.willTerminateNotification, object: nil)
     }
     
     @objc func keyboardShow(notification: Notification) {

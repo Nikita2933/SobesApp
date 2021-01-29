@@ -18,13 +18,7 @@ class CurrencyTableViewPopover: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if currency == [] {
-            Network.shared.getCurrency {
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
-        }
+        
     }
     
     // MARK: - Table view data source

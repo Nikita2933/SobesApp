@@ -7,8 +7,13 @@ struct Main: Codable {
     var pressure: Int = 0
 }
 
+struct Weather: Codable {
+    var main: String = ""
+    var icon: String = ""
+}
 struct WeatherData: Codable {
     var main: Main = Main()
+    let weather: [Weather]
     var name: String = ""
 }
 
@@ -17,5 +22,5 @@ enum units: String {
     case met = "metric"
     case imp = "imperial"
 }
- 
+
 

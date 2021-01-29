@@ -26,7 +26,7 @@ class CustomViewCurrency: UIView, UITextFieldDelegate {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-
+    
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
@@ -36,7 +36,7 @@ class CustomViewCurrency: UIView, UITextFieldDelegate {
         self.labelName.text = labelName
         self.curse = curse
         self.currentValue.setTitle(currentValue, for: .normal)
-
+        
     }
     
     func setParametr(charCode: String) { //MARK: убрать в CoreData
@@ -49,7 +49,7 @@ class CustomViewCurrency: UIView, UITextFieldDelegate {
         }
     }
     
-
+    
     
     private func commonInitializer() {
         Bundle.main.loadNibNamed("CustomViewCurrency", owner:self, options: nil)

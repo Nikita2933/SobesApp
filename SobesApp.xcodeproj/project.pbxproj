@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		1132CB6B25C47D5200485B9E /* CurrencyUserData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1132CB6925C47D5200485B9E /* CurrencyUserData+CoreDataProperties.swift */; };
+		1132CB7B25C4B53300485B9E /* WeatherCoreData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1132CB7925C4B53300485B9E /* WeatherCoreData+CoreDataProperties.swift */; };
 		11426AF125ACB85B00C3FFD6 /* CustomViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11426AF025ACB85B00C3FFD6 /* CustomViewCell.xib */; };
 		11426AF625ACBC8E00C3FFD6 /* CustomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11426AF525ACBC8E00C3FFD6 /* CustomViewCell.swift */; };
 		1148A03725ADA16B0065676D /* WeatherCoreData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1148A03525ADA16B0065676D /* WeatherCoreData+CoreDataClass.swift */; };
-		1148A03825ADA16B0065676D /* WeatherCoreData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1148A03625ADA16B0065676D /* WeatherCoreData+CoreDataProperties.swift */; };
 		1148A03F25ADC2BF0065676D /* SobesApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1148A03D25ADC2BF0065676D /* SobesApp.xcdatamodeld */; };
 		1148A04225ADE53B0065676D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1148A04125ADE53B0065676D /* CoreDataManager.swift */; };
 		1148F28125B3499100C3E8D6 /* ConverterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1148F28025B3499100C3E8D6 /* ConverterVC.swift */; };
@@ -36,10 +36,10 @@
 
 /* Begin PBXFileReference section */
 		1132CB6925C47D5200485B9E /* CurrencyUserData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CurrencyUserData+CoreDataProperties.swift"; path = "../../../CurrencyUserData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1132CB7925C4B53300485B9E /* WeatherCoreData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherCoreData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		11426AF025ACB85B00C3FFD6 /* CustomViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomViewCell.xib; sourceTree = "<group>"; };
 		11426AF525ACBC8E00C3FFD6 /* CustomViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewCell.swift; sourceTree = "<group>"; };
 		1148A03525ADA16B0065676D /* WeatherCoreData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherCoreData+CoreDataClass.swift"; sourceTree = "<group>"; };
-		1148A03625ADA16B0065676D /* WeatherCoreData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherCoreData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1148A03E25ADC2BF0065676D /* SobesApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SobesApp.xcdatamodel; sourceTree = "<group>"; };
 		1148A04125ADE53B0065676D /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		1148F28025B3499100C3E8D6 /* ConverterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterVC.swift; sourceTree = "<group>"; };
@@ -82,7 +82,6 @@
 				11D7EF9025AB2B7D0057695D /* Network.swift */,
 				11D7EF9425AB7DC00057695D /* WeatherModel.swift */,
 				1148F28425B34B5C00C3E8D6 /* CurrencyConverterModel.swift */,
-				1148F28C25B36FE500C3E8D6 /* View */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -92,7 +91,7 @@
 			children = (
 				1148A04125ADE53B0065676D /* CoreDataManager.swift */,
 				1148A03525ADA16B0065676D /* WeatherCoreData+CoreDataClass.swift */,
-				1148A03625ADA16B0065676D /* WeatherCoreData+CoreDataProperties.swift */,
+				1132CB7925C4B53300485B9E /* WeatherCoreData+CoreDataProperties.swift */,
 				117178C825B5D55200F52F6F /* CurrencyTest+CoreDataClass.swift */,
 				117178C925B5D55200F52F6F /* CurrencyTest+CoreDataProperties.swift */,
 				1132CB6925C47D5200485B9E /* CurrencyUserData+CoreDataProperties.swift */,
@@ -152,11 +151,12 @@
 				11426AF325ACB86200C3FFD6 /* Model */,
 				11D7EF6B25AAEB560057695D /* AppDelegate.swift */,
 				11D7EF6D25AAEB560057695D /* SceneDelegate.swift */,
+				1148F28C25B36FE500C3E8D6 /* View */,
 				1143888325BAA99200F6AA43 /* WeatherController */,
 				11C35F2825B76C1100A21C46 /* CurrencyConverter */,
 				11D7EF7125AAEB560057695D /* Main.storyboard */,
-				11D7EF7725AAEB580057695D /* Assets.xcassets */,
 				11D7EF7925AAEB580057695D /* LaunchScreen.storyboard */,
+				11D7EF7725AAEB580057695D /* Assets.xcassets */,
 				11D7EF7C25AAEB580057695D /* Info.plist */,
 				1148A03D25ADC2BF0065676D /* SobesApp.xcdatamodeld */,
 			);
@@ -247,7 +247,7 @@
 				1132CB6B25C47D5200485B9E /* CurrencyUserData+CoreDataProperties.swift in Sources */,
 				119CC91725BEB0ED00A7E523 /* CustomViewCurrency.swift in Sources */,
 				117178CA25B5D55200F52F6F /* CurrencyTest+CoreDataClass.swift in Sources */,
-				1148A03825ADA16B0065676D /* WeatherCoreData+CoreDataProperties.swift in Sources */,
+				1132CB7B25C4B53300485B9E /* WeatherCoreData+CoreDataProperties.swift in Sources */,
 				11D7EF9125AB2B7D0057695D /* Network.swift in Sources */,
 				11426AF625ACBC8E00C3FFD6 /* CustomViewCell.swift in Sources */,
 				116A706D25AE42480003BFF5 /* SearchResultController.swift in Sources */,

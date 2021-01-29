@@ -18,6 +18,8 @@ public class WeatherCoreData: NSManagedObject{
         entity.feels = save.main.feels_like
         entity.pressure = Int64(save.main.pressure)
         entity.temp = save.main.temp
+        entity.imageWeather = save.weather.first!.icon
+        entity.imageLabel = save.weather.first!.main
         return entity
     }
 
