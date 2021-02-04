@@ -16,6 +16,8 @@ class CustomViewCell: UITableViewCell {
     @IBOutlet weak var imageWeather: UIImageView!
     @IBOutlet weak var imageLabel: UILabel!
     
+    var lat: Double?
+    var lon: Double?
     
     override func awakeFromNib() {
         super.awakeFromNib()

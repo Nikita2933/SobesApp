@@ -61,7 +61,7 @@ class Network {
                     value.append((decodCurrency?.Valute[key])!)
                 }
                 if !value.isEmpty {
-                    CurrencyTest.addNew(saved: value)
+                    CurrencyCoreData.addNew(saved: value)
                 }
             }
         }.resume()

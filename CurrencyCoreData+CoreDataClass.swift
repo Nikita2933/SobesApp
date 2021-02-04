@@ -1,22 +1,22 @@
 //
-//  CurrencyTest+CoreDataClass.swift
+//  CurrencyCoreData+CoreDataClass.swift
 //  SobesApp
 //
-//  Created by Никита on 18.01.2021.
+//  Created by Никита on 04.02.2021.
 //
 //
 
 import Foundation
 import CoreData
 
-@objc(CurrencyTest)
-public class CurrencyTest: NSManagedObject {
-    
+@objc(CurrencyCoreData)
+public class CurrencyCoreData: NSManagedObject {
+
     class func addNew (saved: [Valute]){
         let context =  CoreDataManager.shared.persistentContainer.viewContext
-        let entity = CurrencyTest(context: CoreDataManager.shared.persistentContainer.viewContext)
+        let entity = CurrencyCoreData(context: CoreDataManager.shared.persistentContainer.viewContext)
         for save in saved {
-            let currency = NSEntityDescription.insertNewObject(forEntityName: "CurrencyTest", into: context)
+            let currency = NSEntityDescription.insertNewObject(forEntityName: "CurrencyCoreData", into: context)
             currency.setValue(save.Name, forKey: "name")
             currency.setValue(save.CharCode, forKey: "charCode")
             currency.setValue(save.ID, forKey: "id")
@@ -40,7 +40,7 @@ public class CurrencyTest: NSManagedObject {
     
     class func deleteAllData() {
         let context =  CoreDataManager.shared.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CurrencyTest")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CurrencyCoreData")
         fetchRequest.returnsObjectsAsFaults = false
         do {
             let results = try context.fetch(fetchRequest)
@@ -53,5 +53,5 @@ public class CurrencyTest: NSManagedObject {
             print(error)
         }
     }
-
+    
 }

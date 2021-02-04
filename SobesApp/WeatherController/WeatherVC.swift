@@ -13,7 +13,6 @@ protocol WeatherVCDelegate: class {
 }
 
 class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchControllerDelegate, WeatherVCDelegate  {
-    
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -22,15 +21,8 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        resultsController = storyboard!.instantiateViewController(withIdentifier: "SearchResultController") as? SearchResultController
-        searchController = UISearchController(searchResultsController: resultsController)
-        resultsController?.weatherVCDelegate = self
-        tableView.register(CustomViewCell.self, forCellReuseIdentifier: "Cell")
-        let xib = UINib(nibName: "CustomViewCell", bundle: nil)
-        tableView.register(xib, forCellReuseIdentifier: "Cell")
-        navigationItem.title = "Weather app"
-        tableView.rowHeight = 80
         searchSetting()
+        tableViewSetting()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -39,14 +31,15 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         }
     }
     
-    @IBAction func OneTabAny(_ sender: UITapGestureRecognizer) {
-        tableView.resignFirstResponder()
-    }
     //MARK: - SearchBar
     private func searchSetting(){
+        resultsController = storyboard!.instantiateViewController(withIdentifier: "SearchResultController") as? SearchResultController
+        searchController = UISearchController(searchResultsController: resultsController)
+        resultsController?.weatherVCDelegate = self
         searchController.searchResultsUpdater = resultsController
         searchController.delegate = self
         searchController.searchBar.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        
         let searchBar = searchController.searchBar
         let atributePlaceholder = NSAttributedString(string: "Press new City", attributes: [NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)])
         searchBar.searchTextField.attributedPlaceholder = atributePlaceholder
@@ -55,14 +48,20 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         definesPresentationContext = true
         navigationItem.searchController = searchController
     }
+    private func tableViewSetting(){
+        tableView.register(CustomViewCell.self, forCellReuseIdentifier: "Cell")
+        let xib = UINib(nibName: "CustomViewCell", bundle: nil)
+        tableView.register(xib, forCellReuseIdentifier: "Cell")
+        navigationItem.title = "Weather app"
+        tableView.rowHeight = 80
+    }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         TabSearchBar(s: searchBar.text!)
         dismiss(animated: true, completion: nil)
             searchBar.text = ""
     }
-
-
+    
     //Mark: - WeatherVCDelegate
     func TabSearchBar(s: String) {
         let request: NSFetchRequest<WeatherCoreData> = WeatherCoreData.fetchRequest()
@@ -82,7 +81,7 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         searchController.searchBar.text = ""
     }
     
-    // MARK: - Table view data source
+    // MARK: - table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         weather.count
         
@@ -90,6 +89,7 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomViewCell
         let weatherMain = weather[indexPath.row]
+        
         cell.cityNameText.text = weatherMain.cityName
         cell.tempText.text = String(weatherMain.temp)
         cell.pressureText.text = String(weatherMain.pressure)
@@ -113,7 +113,17 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             
         }
     }
-
+    
+    //MARK: - tableView delegate
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let row = weather[indexPath.row]
+        weak var detailController: WeatherDetail!
+        detailController = storyboard!.instantiateViewController(withIdentifier: "weatherDetail") as? WeatherDetail
+        detailController.label = String(row.lat)
+        show(detailController, sender: nil)
+    }
+    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         WeatherCoreData.reloadData {
             self.tableView.reloadData()

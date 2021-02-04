@@ -24,6 +24,7 @@ class SearchResultController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.2145177126, green: 0.21455428, blue: 0.2145097256, alpha: 1)
     }
+    
     // MARK: table View
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         weatherVCDelegate?.TabSearchBar(s: suggestions[indexPath.row])
@@ -41,8 +42,9 @@ class SearchResultController: UIViewController, UITableViewDataSource, UITableVi
         return cell
     }
     
+    //MARK: searchBarResultUpdate Dedata
     func updateSearchResults(for searchController: UISearchController) {
-        if searchController.searchBar.text != nil  {
+        if searchController.searchBar.text != ""  {
             let text = searchController.searchBar.text!
             timer.invalidate()
             timer = Timer.scheduledTimer(withTimeInterval: 0.7, repeats: false, block: { [self] (timer) in

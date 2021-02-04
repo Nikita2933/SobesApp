@@ -1,8 +1,8 @@
 //
-//  CurrencyTest+CoreDataProperties.swift
+//  CurrencyCoreData+CoreDataProperties.swift
 //  SobesApp
 //
-//  Created by Никита on 18.01.2021.
+//  Created by Никита on 04.02.2021.
 //
 //
 
@@ -10,10 +10,10 @@ import Foundation
 import CoreData
 
 
-extension CurrencyTest {
+extension CurrencyCoreData {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<CurrencyTest> {
-        return NSFetchRequest<CurrencyTest>(entityName: "CurrencyTest")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<CurrencyCoreData> {
+        return NSFetchRequest<CurrencyCoreData>(entityName: "CurrencyCoreData")
     }
 
     @NSManaged public var charCode: String?
@@ -26,6 +26,6 @@ extension CurrencyTest {
 
 }
 
-extension CurrencyTest : Identifiable {
+extension CurrencyCoreData : Identifiable {
 
 }

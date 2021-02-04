@@ -29,7 +29,6 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
             view.currentValue.addTarget(self, action: #selector(testTableButton(_:)), for: .allTouchEvents)
             view.classField.addTarget(self, action: #selector(calculateValue(_:)), for: .editingChanged)
             stackView.addArrangedSubview(view)
-            print(view.currentValue.tag)
         }
     }
     
@@ -49,7 +48,6 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
             for view in arrView {
                 view.currentValue.tag = tagButton
                 tagButton += 1
-                
             }
         }
     }

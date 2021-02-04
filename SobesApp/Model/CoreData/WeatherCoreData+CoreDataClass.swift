@@ -20,6 +20,9 @@ public class WeatherCoreData: NSManagedObject{
         entity.temp = save.main.temp
         entity.imageWeather = save.weather.first!.icon
         entity.imageLabel = save.weather.first!.main
+        
+        entity.lat = save.coord.lat!
+        entity.lon = save.coord.lon!
         return entity
     }
 
