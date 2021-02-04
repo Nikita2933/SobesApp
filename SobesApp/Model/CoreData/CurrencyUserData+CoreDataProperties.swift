@@ -2,7 +2,7 @@
 //  CurrencyUserData+CoreDataProperties.swift
 //  SobesApp
 //
-//  Created by Никита on 29.01.2021.
+//  Created by Никита on 04.02.2021.
 //
 //
 
@@ -16,11 +16,12 @@ extension CurrencyUserData {
         return NSFetchRequest<CurrencyUserData>(entityName: "CurrencyUserData")
     }
 
-    @NSManaged public var labelName: String?
-    @NSManaged public var currentValue: String?
     @NSManaged public var classField: String?
-    @NSManaged public var curse: Double
     @NSManaged public var count: Int64
+    @NSManaged public var currentValue: String?
+    @NSManaged public var curse: Double
+    @NSManaged public var labelName: String?
+    @NSManaged public var tag: Int16
 
 }
 
