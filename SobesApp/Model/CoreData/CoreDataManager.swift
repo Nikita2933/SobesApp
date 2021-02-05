@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-var weather: [WeatherCoreData] {
+var weatherData: [WeatherCoreData] {
     let request: NSFetchRequest<WeatherCoreData> = WeatherCoreData.fetchRequest()
     let weather = try? CoreDataManager.shared.persistentContainer.viewContext.fetch(request)
     

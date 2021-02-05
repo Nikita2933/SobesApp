@@ -13,9 +13,9 @@ protocol WeatherVCDelegate: class {
 }
 
 class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchControllerDelegate, WeatherVCDelegate  {
-
+    
     @IBOutlet weak var tableView: UITableView!
-
+    
     var searchController: UISearchController!
     weak var resultsController: SearchResultController?
     
@@ -26,9 +26,9 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        WeatherCoreData.reloadData {
-            self.tableView.reloadData()
-        }
+        //        WeatherCoreData.reloadData {
+        //            self.tableView.reloadData()
+        //        }
     }
     
     //MARK: - SearchBar
@@ -59,21 +59,21 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         TabSearchBar(s: searchBar.text!)
         dismiss(animated: true, completion: nil)
-            searchBar.text = ""
+        searchBar.text = ""
     }
     
     //Mark: - WeatherVCDelegate
     func TabSearchBar(s: String) {
         let request: NSFetchRequest<WeatherCoreData> = WeatherCoreData.fetchRequest()
         guard let weatherBool = try? CoreDataManager.shared.persistentContainer.viewContext.fetch(request) else {return}
-            if weatherBool.contains(where: {$0.cityName == s}) {
-                let message = "This city has been added, choose new city"
-                let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: nil))
-                present(alert, animated: true)
-            } else {
-                Network.shared.getWeather(city: s, units: .met) { (WeatherData) in
-                    DispatchQueue.main.async {
+        if weatherBool.contains(where: {$0.cityName == s}) {
+            let message = "This city has been added, choose new city"
+            let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: nil))
+            present(alert, animated: true)
+        } else {
+            Network.shared.getWeather(city: s, units: .met) { (WeatherData) in
+                DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
             }
@@ -83,12 +83,12 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     
     // MARK: - table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        weather.count
+        weatherData.count
         
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomViewCell
-        let weatherMain = weather[indexPath.row]
+        let weatherMain = weatherData[indexPath.row]
         
         cell.cityNameText.text = weatherMain.cityName
         cell.tempText.text = String(weatherMain.temp)
@@ -103,7 +103,7 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         if editingStyle == .delete {
             let context = CoreDataManager.shared.persistentContainer.viewContext
             do {
-                context.delete(weather[indexPath.row])
+                context.delete(weatherData[indexPath.row])
                 try context.save()
             } catch let error as NSError {
                 print(error)
@@ -117,10 +117,12 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     //MARK: - tableView delegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let row = weather[indexPath.row]
+        let row = weatherData[indexPath.row]
         weak var detailController: WeatherDetail!
         detailController = storyboard!.instantiateViewController(withIdentifier: "weatherDetail") as? WeatherDetail
-        detailController.label = String(row.lat)
+        detailController.lat = row.lat
+        detailController.lon = row.lon
+        detailController.cityName = row.cityName!
         show(detailController, sender: nil)
     }
     

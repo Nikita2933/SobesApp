@@ -4,6 +4,8 @@
 <dict>
 	<key>IIDadataAPIToken</key>
 	<string>01f1dcb1b1e2f6742a866895c55f10035e78130a</string>
+	<key>WeatherAPIKey</key>
+	<string>be152b4fa203269e3d03e5b8f69a4422</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

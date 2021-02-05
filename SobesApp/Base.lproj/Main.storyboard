@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -226,42 +225,27 @@
             <point key="canvasLocation" x="1340.5797101449277" y="-677.00892857142856"/>
         </scene>
         <!--Weather Detail-->
-        <scene sceneID="ZIg-05-BMs">
+        <scene sceneID="tDY-cp-rZO">
             <objects>
-                <viewController storyboardIdentifier="weatherDetail" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Af6-h3-LJt" customClass="WeatherDetail" customModule="SobesApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="D3F-qO-QfS">
+                <tableViewController storyboardIdentifier="weatherDetail" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AkW-aa-CIo" customClass="WeatherDetail" customModule="SobesApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="SjR-VD-AGo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Something" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUC-2u-yUD">
-                                <rect key="frame" x="166" y="438" width="83" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="lHJ-n2-M9I"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="wUC-2u-yUD" firstAttribute="centerY" secondItem="lHJ-n2-M9I" secondAttribute="centerY" id="8jY-1A-D8a"/>
-                            <constraint firstItem="wUC-2u-yUD" firstAttribute="centerX" secondItem="lHJ-n2-M9I" secondAttribute="centerX" id="wXg-oP-4X7"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="test" destination="wUC-2u-yUD" id="gYU-CG-TJc"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="c9N-Jt-jeX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" red="0.21451771259999999" green="0.21455428000000001" blue="0.21450972560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <connections>
+                            <outlet property="dataSource" destination="AkW-aa-CIo" id="Rlf-jb-F5r"/>
+                            <outlet property="delegate" destination="AkW-aa-CIo" id="HAi-Pi-K33"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NQi-4x-M7D" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2119" y="-677"/>
+            <point key="canvasLocation" x="2313.04347826087" y="-677.00892857142856"/>
         </scene>
     </scenes>
     <resources>
         <image name="icloud.circle.fill" catalog="system" width="128" height="121"/>
         <image name="minus.circle" catalog="system" width="128" height="121"/>
         <image name="square.split.1x2.fill" catalog="system" width="128" height="114"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>
