@@ -28,8 +28,8 @@
         <attribute name="temp" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="CurrencyCoreData" positionX="160" positionY="192" width="128" height="148"/>
+        <element name="CurrencyCoreData" positionX="-0.92578125" positionY="-91.18359375" width="128" height="148"/>
         <element name="CurrencyUserData" positionX="-387" positionY="-72" width="128" height="133"/>
-        <element name="WeatherCoreData" positionX="-203.8359375" positionY="-224.33984375" width="128" height="163"/>
+        <element name="WeatherCoreData" positionX="-197.8203125" positionY="-98.921875" width="128" height="163"/>
     </elements>
 </model>

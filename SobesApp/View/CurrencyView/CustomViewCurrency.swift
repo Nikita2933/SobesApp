@@ -21,6 +21,7 @@ class CustomViewCurrency: UIView, UITextFieldDelegate {
         commonInitializer()
         classField.text = "0.0"
         classField.delegate = self
+        
     }
     
     required init?(coder: NSCoder) {
@@ -30,6 +31,13 @@ class CustomViewCurrency: UIView, UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let aSet = NSCharacterSet(charactersIn:"0123456789").inverted
+        let compSepByCharInSet = string.components(separatedBy: aSet)
+        let numberFiltered = compSepByCharInSet.joined(separator: "")
+        return string == numberFiltered
     }
     
     func addParametr(labelName: String, curse: Double, currentValue: String ) { //

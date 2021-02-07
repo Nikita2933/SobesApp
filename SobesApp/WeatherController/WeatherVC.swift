@@ -26,9 +26,6 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //        WeatherCoreData.reloadData {
-        //            self.tableView.reloadData()
-        //        }
     }
     
     //MARK: - SearchBar
@@ -65,8 +62,9 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     //Mark: - WeatherVCDelegate
     func TabSearchBar(s: String) {
         let request: NSFetchRequest<WeatherCoreData> = WeatherCoreData.fetchRequest()
-        guard let weatherBool = try? CoreDataManager.shared.persistentContainer.viewContext.fetch(request) else {return}
-        if weatherBool.contains(where: {$0.cityName == s}) {
+        guard let weatherCoreDataList = try? CoreDataManager.shared.persistentContainer.viewContext.fetch(request) else {return}
+        
+        if weatherCoreDataList.contains(where: {$0.cityName == s}) {
             let message = "This city has been added, choose new city"
             let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: nil))
@@ -111,7 +109,7 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             
-        }
+        }		
     }
     
     //MARK: - tableView delegate
@@ -123,6 +121,7 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         detailController.lat = row.lat
         detailController.lon = row.lon
         detailController.cityName = row.cityName!
+        
         show(detailController, sender: nil)
     }
     

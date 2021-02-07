@@ -4,6 +4,7 @@ import Foundation
 class Network {
     
     static let shared: Network = Network()
+    var apiKey = ""
     
     private func getApiKeyFromPlist() throws -> String {
         var dictionary: NSDictionary?
@@ -18,9 +19,16 @@ class Network {
         return key
     }
     
+    init() {
+        if let key = try? getApiKeyFromPlist() {
+            apiKey = key
+        }
+    }
+    
+    
     func getWeather(city: String, units: units, result: @escaping ((WeatherData?) -> () )){
         
-        let apiKey = try? getApiKeyFromPlist()
+        
         
         var urlComponent = URLComponents()
         urlComponent.scheme = "https"
@@ -33,7 +41,7 @@ class Network {
         
         URLSession.shared.dataTask(with: urlComponent.url!) { (data, response, error) in
             guard error == nil else {
-                print(error.debugDescription)
+                print(error as Any)
                 return
             }
             let decoder = JSONDecoder()
@@ -46,8 +54,9 @@ class Network {
             if decodWeather != nil {
                 WeatherCoreData.addNew(save: decodWeather!)
                 CoreDataManager.shared.saveContext()
+                result(decodWeather)
             }
-            result(decodWeather)
+            
         }.resume()
     }
     
@@ -83,11 +92,10 @@ class Network {
         }.resume()
     }
     
-    func getCurrencyDetail(lon: Double, lat: Double, result: @escaping ((WeatherDetailStruct) -> () )) {
-        
-       let apiKey = try? getApiKeyFromPlist()
-        
+    func getWeatherDetail(lon: Double, lat: Double, result: @escaping ((WeatherDetailStruct) -> () )) {
+
         var urlComponent = URLComponents()
+        
         urlComponent.scheme = "https"
         urlComponent.host = "api.openweathermap.org"
         urlComponent.path = "/data/2.5/onecall"
@@ -104,11 +112,11 @@ class Network {
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             var decodWeather: WeatherDetailStruct?
-                do {
-                    decodWeather = try decoder.decode(WeatherDetailStruct.self, from: data!)
-                } catch  {
-                    print(error)
-                }
+            do {
+                decodWeather = try decoder.decode(WeatherDetailStruct.self, from: data!)
+            } catch  {
+                print(error)
+            }
             if decodWeather != nil {
                 result(decodWeather!)
                 //CoreDataManager.shared.saveContext()

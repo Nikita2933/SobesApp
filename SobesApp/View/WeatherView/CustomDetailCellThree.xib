@@ -58,6 +58,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" red="0.21451771259999999" green="0.21455428000000001" blue="0.21450972560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
                 <outlet property="tempDay" destination="PBM-Ul-bOt" id="jip-Gi-Ekg"/>
                 <outlet property="tempNight" destination="c4R-0q-pnJ" id="78o-ck-Xm4"/>

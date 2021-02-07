@@ -20,6 +20,8 @@
 		1184ADD525CC791F00A193B0 /* WeatherDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184ADD425CC791F00A193B0 /* WeatherDetail.swift */; };
 		119CC91725BEB0ED00A7E523 /* CustomViewCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119CC91625BEB0ED00A7E523 /* CustomViewCurrency.swift */; };
 		119CC91A25BEB10D00A7E523 /* CustomViewCurrency.xib in Resources */ = {isa = PBXBuildFile; fileRef = 119CC91925BEB10D00A7E523 /* CustomViewCurrency.xib */; };
+		11A1895625D073B400E84495 /* CustomCurrentWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A1895425D073B400E84495 /* CustomCurrentWeatherCell.swift */; };
+		11A1895725D073B400E84495 /* CustomCurrentWeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11A1895525D073B400E84495 /* CustomCurrentWeatherCell.xib */; };
 		11C35F2625B76C0600A21C46 /* CurrencyTableViewPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C35F2525B76C0600A21C46 /* CurrencyTableViewPopover.swift */; };
 		11D55BA325CBE212001C8301 /* CurrencyCoreData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D55B9D25CBE212001C8301 /* CurrencyCoreData+CoreDataClass.swift */; };
 		11D55BA425CBE212001C8301 /* CurrencyCoreData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D55B9E25CBE212001C8301 /* CurrencyCoreData+CoreDataProperties.swift */; };
@@ -57,6 +59,8 @@
 		1184ADD425CC791F00A193B0 /* WeatherDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetail.swift; sourceTree = "<group>"; };
 		119CC91625BEB0ED00A7E523 /* CustomViewCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewCurrency.swift; sourceTree = "<group>"; };
 		119CC91925BEB10D00A7E523 /* CustomViewCurrency.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomViewCurrency.xib; sourceTree = "<group>"; };
+		11A1895425D073B400E84495 /* CustomCurrentWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCurrentWeatherCell.swift; sourceTree = "<group>"; };
+		11A1895525D073B400E84495 /* CustomCurrentWeatherCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCurrentWeatherCell.xib; sourceTree = "<group>"; };
 		11C35F2525B76C0600A21C46 /* CurrencyTableViewPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTableViewPopover.swift; sourceTree = "<group>"; };
 		11D55B9D25CBE212001C8301 /* CurrencyCoreData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrencyCoreData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		11D55B9E25CBE212001C8301 /* CurrencyCoreData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrencyCoreData+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -192,6 +196,8 @@
 				11DA4B0C25CD552A00DFDC73 /* CustomDetailCellTwo.xib */,
 				1182E79225CD89B90062BEC2 /* CustomDetailCellThree.swift */,
 				1182E79325CD89B90062BEC2 /* CustomDetailCellThree.xib */,
+				11A1895425D073B400E84495 /* CustomCurrentWeatherCell.swift */,
+				11A1895525D073B400E84495 /* CustomCurrentWeatherCell.xib */,
 				11DA4B1325CD584400DFDC73 /* CustomDetailCollectionCell.swift */,
 				11DA4B1425CD584400DFDC73 /* CustomDetailCollectionCell.xib */,
 				11426AF525ACBC8E00C3FFD6 /* CustomViewCell.swift */,
@@ -275,6 +281,7 @@
 				119CC91A25BEB10D00A7E523 /* CustomViewCurrency.xib in Resources */,
 				11DA4B1625CD584400DFDC73 /* CustomDetailCollectionCell.xib in Resources */,
 				11D7EF7B25AAEB580057695D /* LaunchScreen.storyboard in Resources */,
+				11A1895725D073B400E84495 /* CustomCurrentWeatherCell.xib in Resources */,
 				11DA4B0525CD4A7800DFDC73 /* CustomDetailCellOne.xib in Resources */,
 				11DA4B0E25CD552A00DFDC73 /* CustomDetailCellTwo.xib in Resources */,
 				11426AF125ACB85B00C3FFD6 /* CustomViewCell.xib in Resources */,
@@ -296,6 +303,7 @@
 				11C35F2625B76C0600A21C46 /* CurrencyTableViewPopover.swift in Sources */,
 				1182E79425CD89B90062BEC2 /* CustomDetailCellThree.swift in Sources */,
 				11D55BA525CBE212001C8301 /* CurrencyUserData+CoreDataClass.swift in Sources */,
+				11A1895625D073B400E84495 /* CustomCurrentWeatherCell.swift in Sources */,
 				119CC91725BEB0ED00A7E523 /* CustomViewCurrency.swift in Sources */,
 				11D7EF9125AB2B7D0057695D /* Network.swift in Sources */,
 				11426AF625ACBC8E00C3FFD6 /* CustomViewCell.swift in Sources */,

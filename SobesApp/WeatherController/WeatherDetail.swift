@@ -19,9 +19,11 @@ class WeatherDetail: UITableViewController {
     
     var hourly: [Hourly] = []
     var daily: [Daily] = []
+    var currentWeather: [Current] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.register(CustomDetailCellOne.self, forCellReuseIdentifier: "cellOne")
         let xibOne = UINib(nibName: "CustomDetailCellOne", bundle: nil)
         tableView.register(xibOne, forCellReuseIdentifier: "cellOne")
@@ -37,13 +39,14 @@ class WeatherDetail: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         super.viewWillAppear(animated)
-        Network.shared.getCurrencyDetail(lon: lon, lat: lat) { [self] (weatherData) in
-            temp = String(weatherData.current!.temp!)
-            descriptionWeather = weatherData.current!.weather![0].main!.description
-            minMax = "max: " + String(weatherData.daily![0].temp!.max!) + "° min: " + String((weatherData.daily![0].temp?.min)!) + "°"
-            self.hourly = weatherData.hourly!
-            self.daily = weatherData.daily!
+        Network.shared.getWeatherDetail(lon: lon, lat: lat) { [self] (weatherData) in
+            temp = String(weatherData.current.temp)
+            descriptionWeather = weatherData.current.weather[0].main
+            minMax = "max: " + String(weatherData.daily[0].temp.max) + "° min: " + String(weatherData.daily[0].temp.min) + "°" //MARK:  че это за хрень?
+            hourly = weatherData.hourly
+            daily = weatherData.daily
             daily.removeFirst()
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -94,19 +97,26 @@ class WeatherDetail: UITableViewController {
             cell.hourly = hourly
             cell.awakeFromNib()
             return cell
-        } else {
+        } 
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "EEEE"
-            let currentDateString: String = dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(daily[indexPath.row].dt!)))
+            dateFormatter.dateFormat = "EEEE" // - weekDay
+            let interval = TimeInterval(daily[indexPath.row].dt)
+            let weekDay = Date(timeIntervalSince1970: interval)
+            let currentDateString: String = dateFormatter.string(from: weekDay)
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellThree", for: indexPath) as! CustomDetailCellThree
+            let row = daily[indexPath.row]
+            let tempMin = String(row.temp.day) + "°"
+            let tempMax = String(row.temp.night) + "°"
+            let icon = UIImage(named: row.weather[0].icon)
             
-            cell.tempDay.text = String(daily[indexPath.row].temp!.day!) + "°"
-            cell.tempNight.text = String(daily[indexPath.row].temp!.night!) + "°"
-            cell.weatherImage.image = UIImage(named: daily[indexPath.row].weather![0].icon!)
+            cell.tempDay.text = tempMin
+            cell.tempNight.text = tempMax
+            cell.weatherImage.image = icon
             cell.weekDayLabel.text = currentDateString
             return cell
-        }
+        
+        
     }
     
 }

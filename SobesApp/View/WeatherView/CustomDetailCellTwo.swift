@@ -20,7 +20,7 @@ class CustomDetailCellTwo: UITableViewCell, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellCollection", for: indexPath) as! CustomDetailCollectionCell
         let formatter = DateFormatter()
         formatter.dateFormat = "HH"// 24 hour
-        let hourString = formatter.string(from: Date(timeIntervalSince1970: TimeInterval(hourly[indexPath.row].dt!)) )
+        let hourString = formatter.string(from: Date(timeIntervalSince1970: TimeInterval(hourly[indexPath.row].dt)) )
         
         if indexPath.row == 0 {
             cell.timeLabel.text = "Now"
@@ -28,8 +28,8 @@ class CustomDetailCellTwo: UITableViewCell, UICollectionViewDataSource {
             cell.timeLabel.text = hourString
         }
         
-        cell.temp.text = String(Int(hourly[indexPath.row].temp!)) + "°"
-        cell.imageLabel.image = UIImage(named: hourly[indexPath.row].weather![0].icon!)
+        cell.temp.text = String(Int(hourly[indexPath.row].temp)) + "°"
+        cell.imageLabel.image = UIImage(named: hourly[indexPath.row].weather[0].icon)
         
         return cell
     }
