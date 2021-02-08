@@ -10,11 +10,11 @@ import UIKit
 class CustomViewCell: UITableViewCell {
     
     @IBOutlet weak var tempText: UILabel!
-    @IBOutlet weak var fellsText: UILabel!
-    @IBOutlet weak var pressureText: UILabel!
     @IBOutlet weak var cityNameText: UILabel!
     @IBOutlet weak var imageWeather: UIImageView!
-    @IBOutlet weak var imageLabel: UILabel!
+    @IBOutlet weak var weatherDescriptionLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    
     
     var lat: Double?
     var lon: Double?

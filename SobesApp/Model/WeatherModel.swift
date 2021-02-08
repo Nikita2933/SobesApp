@@ -6,6 +6,8 @@ struct WeatherData: Codable {
     let weather: [Weather]
     var name: String = ""
     let coord: Coord
+    let dt: Int
+    let timezone: Int
 }
 
 struct Main: Codable {

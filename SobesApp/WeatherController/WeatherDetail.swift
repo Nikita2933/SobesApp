@@ -15,11 +15,11 @@ class WeatherDetail: UITableViewController {
     var cityName: String = ""
     var temp: String = ""
     var descriptionWeather: String = ""
-    var minMax: String = ""
-    
+    var min: String = ""
+    var max: String = ""
     var hourly: [Hourly] = []
     var daily: [Daily] = []
-    var currentWeather: [Current] = []
+    var currentWeather: Current?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +35,10 @@ class WeatherDetail: UITableViewController {
         tableView.register(CustomDetailCellThree.self, forCellReuseIdentifier: "cellThree")
         let xibThree = UINib(nibName: "CustomDetailCellThree", bundle: nil)
         tableView.register(xibThree, forCellReuseIdentifier: "cellThree")
+            
+        tableView.register(CustomCurrentWeatherCell.self, forCellReuseIdentifier: "cellFour")
+        let xibFour = UINib(nibName: "CustomCurrentWeatherCell", bundle: nil)
+        tableView.register(xibFour, forCellReuseIdentifier: "cellFour")
         
     }
     
@@ -44,9 +48,11 @@ class WeatherDetail: UITableViewController {
         Network.shared.getWeatherDetail(lon: lon, lat: lat) { [self] (weatherData) in
             temp = String(weatherData.current.temp)
             descriptionWeather = weatherData.current.weather[0].main
-            minMax = "max: " + String(weatherData.daily[0].temp.max) + "° min: " + String(weatherData.daily[0].temp.min) + "°" //MARK:  че это за хрень?
+            min = String(weatherData.daily[0].temp.min) + "°" //MARK:  че это за хрень?
+            max = String(weatherData.daily[0].temp.max) + "°"
             hourly = weatherData.hourly
             daily = weatherData.daily
+            currentWeather = weatherData.current
             daily.removeFirst()
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -57,7 +63,7 @@ class WeatherDetail: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 3
+        return 4
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -66,6 +72,7 @@ class WeatherDetail: UITableViewController {
         case 0: return 1
         case 1: return 1
         case 2: return daily.count
+        case 3: return 1
         default:
             return 0
         }
@@ -79,6 +86,8 @@ class WeatherDetail: UITableViewController {
             return 90
         case 2:
             return 40
+        case 3:
+            return 280
         default:
             return UITableView.automaticDimension
         }
@@ -89,15 +98,21 @@ class WeatherDetail: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellOne", for: indexPath) as! CustomDetailCellOne
             cell.cityNameLabel.text = cityName
             cell.tempLabel.text = temp + "°"
-            cell.tempMaxMinLabel.text = minMax
+            cell.maxLabel.text = max
+            cell.minLabel.text = min
+            //cell.tempMaxMinLabel.text = minMax
             cell.weatherDescriptionLabel.text = descriptionWeather
+            
             return cell
+            
         } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellTwo", for: indexPath) as! CustomDetailCellTwo
             cell.hourly = hourly
             cell.awakeFromNib()
+            
             return cell
-        } 
+            
+        } else if indexPath.section == 2 {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "EEEE" // - weekDay
             let interval = TimeInterval(daily[indexPath.row].dt)
@@ -106,17 +121,42 @@ class WeatherDetail: UITableViewController {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellThree", for: indexPath) as! CustomDetailCellThree
             let row = daily[indexPath.row]
-            let tempMin = String(row.temp.day) + "°"
-            let tempMax = String(row.temp.night) + "°"
+            let tempDay = String(row.temp.day) + "°"
+            let tempNight = String(row.temp.night) + "°"
             let icon = UIImage(named: row.weather[0].icon)
             
-            cell.tempDay.text = tempMin
-            cell.tempNight.text = tempMax
+            cell.tempDay.text = tempDay
+            cell.tempNight.text = tempNight
             cell.weatherImage.image = icon
             cell.weekDayLabel.text = currentDateString
+            
             return cell
-        
-        
+            
+        } else if indexPath.section == 3, let current = currentWeather {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellFour", for: indexPath) as! CustomCurrentWeatherCell
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "HH:MM" // - weekDay
+            let sunrise = Date(timeIntervalSince1970: TimeInterval(current.sunrise))
+            let sunset = Date(timeIntervalSince1970: TimeInterval(current.sunset))
+            let currentSunrice: String = dateFormatter.string(from: sunrise)
+            let currentSunset: String = dateFormatter.string(from: sunset)
+            
+            cell.sunriseLabel.text = currentSunrice
+            cell.sunsetLabel.text = currentSunset
+            cell.feelsLikeLabel.text = String(current.feelsLike)
+            cell.pressureLabel.text = String(current.pressure)
+            cell.dewPointLabel.text = String(current.dewPoint)
+            cell.visibilityLabel.text = String(current.visibility)
+            cell.uvIndexLabel.text = String(current.visibility)
+            cell.windSpeedLabel.text = String(current.windSpeed)
+            cell.humidityLabel.text = String(current.humidity)
+            
+            return cell
+            
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "elseCell", for: indexPath)
+            cell.textLabel?.text = "--"
+            return cell
+        }
     }
-    
 }

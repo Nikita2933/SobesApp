@@ -15,11 +15,10 @@ public class WeatherCoreData: NSManagedObject {
     class func addNew (save: WeatherData) -> WeatherCoreData {
         let entity = WeatherCoreData(context: CoreDataManager.shared.persistentContainer.viewContext)
         entity.cityName = save.name
-        entity.feels = save.main.feels_like
-        entity.pressure = Int64(save.main.pressure)
         entity.temp = save.main.temp
         entity.imageWeather = save.weather.first!.icon
         entity.imageLabel = save.weather.first!.main
+        entity.time = Int64(save.timezone)
         
         entity.lat = save.coord.lat!
         entity.lon = save.coord.lon!

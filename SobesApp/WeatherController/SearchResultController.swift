@@ -47,17 +47,15 @@ class SearchResultController: UIViewController, UITableViewDataSource, UITableVi
         if searchController.searchBar.text != ""  {
             let text = searchController.searchBar.text!
             timer.invalidate()
-            let test = "{\"country\":\"*\"}"
+            let constraints = "{\"country\":\"*\"}"
             timer = Timer.scheduledTimer(withTimeInterval: 0.7, repeats: false, block: { [self] (timer) in
                 try? dadata = DadataSuggestions()
-                dadata?.suggestAddress(text, queryType: AddressQueryType.address, resultsCount: 10, language: "ru", constraints: [test] , regionPriority: nil, upperScaleLimit: "city", lowerScaleLimit: "city", trimRegionResult: false, completion: {[weak self] (response) in
+                dadata?.suggestAddress(text, queryType: AddressQueryType.address, resultsCount: 10, language: "ru", constraints: [constraints] , regionPriority: nil, upperScaleLimit: "city", lowerScaleLimit: "city", trimRegionResult: false, completion: {[weak self] (response) in
                     DispatchQueue.main.async {
                         switch response{
                         case .success(let dadataData):
-                            print(response)
                             if let dsr = dadataData.suggestions?.compactMap({ $0.data?.city }) {
                                 self?.suggestions = dsr
-                                print(dsr)
                             }
                         case .failure(let error):
                             print(error)

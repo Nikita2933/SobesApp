@@ -46,9 +46,9 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         navigationItem.searchController = searchController
     }
     private func tableViewSetting(){
-        tableView.register(CustomViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(CustomViewCell.self, forCellReuseIdentifier: "customCell")
         let xib = UINib(nibName: "CustomViewCell", bundle: nil)
-        tableView.register(xib, forCellReuseIdentifier: "Cell")
+        tableView.register(xib, forCellReuseIdentifier: "customCell")
         navigationItem.title = "Weather app"
         tableView.rowHeight = 80
     }
@@ -59,7 +59,7 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         searchBar.text = ""
     }
     
-    //Mark: - WeatherVCDelegate
+    //MARK: - WeatherVCDelegate
     func TabSearchBar(s: String) {
         let request: NSFetchRequest<WeatherCoreData> = WeatherCoreData.fetchRequest()
         guard let weatherCoreDataList = try? CoreDataManager.shared.persistentContainer.viewContext.fetch(request) else {return}
@@ -85,15 +85,23 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! CustomViewCell
         let weatherMain = weatherData[indexPath.row]
         
+        
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm" // - hour/minute
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: Int(weatherMain.time))
+//        let time = Date(timeIntervalSince1970: TimeInterval(date + Double(weatherMain.time)))
+        let currentTime: String = dateFormatter.string(from: date)
+        print(currentTime)
+        
         cell.cityNameText.text = weatherMain.cityName
-        cell.tempText.text = String(weatherMain.temp)
-        cell.pressureText.text = String(weatherMain.pressure)
-        cell.fellsText.text = String(weatherMain.feels)
-        cell.imageLabel.text = weatherMain.imageLabel
+        cell.tempText.text = String(Int(weatherMain.temp)) + "°"
         cell.setImage(weatherMain.imageWeather!)
+        cell.weatherDescriptionLabel.text = weatherMain.imageLabel
+        cell.timeLabel.text = currentTime
         return cell
     }
     
@@ -112,7 +120,7 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         }		
     }
     
-    //MARK: - tableView delegate
+    //MARK: - table view delegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = weatherData[indexPath.row]
@@ -127,7 +135,10 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         WeatherCoreData.reloadData {
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+            CoreDataManager.shared.saveContext()
         }
     }
 }
