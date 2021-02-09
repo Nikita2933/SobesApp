@@ -13,7 +13,8 @@ var weatherData: [WeatherCoreData] {
     let weather = try? CoreDataManager.shared.persistentContainer.viewContext.fetch(request)
     
     if weather != nil {
-        return weather!
+        let sortWeather = weather!.sorted(by: {$0.date > $1.date})
+        return sortWeather
     }
     return []
 }

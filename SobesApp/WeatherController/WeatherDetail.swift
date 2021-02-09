@@ -143,13 +143,13 @@ class WeatherDetail: UITableViewController {
             
             cell.sunriseLabel.text = currentSunrice
             cell.sunsetLabel.text = currentSunset
-            cell.feelsLikeLabel.text = String(current.feelsLike)
-            cell.pressureLabel.text = String(current.pressure)
-            cell.dewPointLabel.text = String(current.dewPoint)
-            cell.visibilityLabel.text = String(current.visibility)
-            cell.uvIndexLabel.text = String(current.visibility)
-            cell.windSpeedLabel.text = String(current.windSpeed)
-            cell.humidityLabel.text = String(current.humidity)
+            cell.feelsLikeLabel.text = String(current.feelsLike) + "°"
+            cell.pressureLabel.text = String(current.pressure) + " hPa"
+            cell.dewPointLabel.text = String(current.dewPoint) + "°"
+            cell.visibilityLabel.text = String(current.visibility) + " m"
+            cell.uvIndexLabel.text = String(current.uvi)
+            cell.windSpeedLabel.text = String(current.windSpeed) + " m/h"
+            cell.humidityLabel.text = String(current.humidity) + "%"
             
             return cell
             

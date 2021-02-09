@@ -2,7 +2,7 @@
 //  WeatherCoreData+CoreDataProperties.swift
 //  SobesApp
 //
-//  Created by Никита on 08.02.2021.
+//  Created by Никита on 09.02.2021.
 //
 //
 
@@ -23,6 +23,7 @@ extension WeatherCoreData {
     @NSManaged public var lon: Double
     @NSManaged public var temp: Double
     @NSManaged public var time: Int64
+    @NSManaged public var date: Date
 
 }
 

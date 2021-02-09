@@ -67,7 +67,7 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
     
     @IBAction func removeView(_ sender: UIButton) {
         for view in arrView.sorted(by: {$0.currentValue.tag > $1.currentValue.tag }) {
-            if view.isHidden == false && view.currentValue.tag > 2 {
+            if view.isHidden == false && view.currentValue.tag >= 2 {
                 UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 2, initialSpringVelocity: 0, options: .layoutSubviews) {
                     view.isHidden = true
                     view.alpha = 0

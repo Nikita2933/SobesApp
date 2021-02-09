@@ -26,10 +26,8 @@ class Network {
     }
     
     
-    func getWeather(city: String, units: units, result: @escaping ((WeatherData?) -> () )){
-        
-        
-        
+    func getWeather(city: String, units: units, result: @escaping (() -> () )){
+
         var urlComponent = URLComponents()
         urlComponent.scheme = "https"
         urlComponent.host = "api.openweathermap.org"
@@ -54,7 +52,7 @@ class Network {
             if decodWeather != nil {
                 WeatherCoreData.addNew(save: decodWeather!)
                 CoreDataManager.shared.saveContext()
-                result(decodWeather)
+                result()
             }
             
         }.resume()

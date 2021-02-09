@@ -22,20 +22,24 @@ public class WeatherCoreData: NSManagedObject {
         
         entity.lat = save.coord.lat!
         entity.lon = save.coord.lon!
+        
+        entity.date = Date()
         return entity
     }
     
-    class func reloadData(result: () -> ()) {
+    class func reloadData(  result: @escaping () -> ()) {
         let context = CoreDataManager.shared.persistentContainer.viewContext
         let request: NSFetchRequest<WeatherCoreData> = WeatherCoreData.fetchRequest()
         let curWeather = try? context.fetch(request)
         if curWeather != nil {
             for oneWeather in curWeather! {
                 context.delete(oneWeather)
-                Network.shared.getWeather(city: oneWeather.cityName!, units: .met) { (_) in
+                Network.shared.getWeather(city: oneWeather.cityName!, units: .met) {
+                    result()
                 }
             }
         }
+        
     }
     
 }

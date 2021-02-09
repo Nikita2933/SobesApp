@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 
 protocol WeatherVCDelegate: class {
-    func TabSearchBar(s: String)
+    func tabSearchBar(s: String)
 }
 
 class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchControllerDelegate, WeatherVCDelegate  {
@@ -17,15 +17,27 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     @IBOutlet weak var tableView: UITableView!
     
     var searchController: UISearchController!
+    let refreshControl = UIRefreshControl()
     weak var resultsController: SearchResultController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         searchSetting()
         tableViewSetting()
+        refreshControl.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
+        tableView.addSubview(refreshControl)
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    }
+    
+    @objc func refreshTableView() {
+        WeatherCoreData.reloadData {
+            DispatchQueue.main.async { [self] in
+                tableView.reloadData()
+                refreshControl.endRefreshing()
+            }
+        }
     }
     
     //MARK: - SearchBar
@@ -54,13 +66,13 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        TabSearchBar(s: searchBar.text!)
+        tabSearchBar(s: searchBar.text!)
         dismiss(animated: true, completion: nil)
         searchBar.text = ""
     }
     
     //MARK: - WeatherVCDelegate
-    func TabSearchBar(s: String) {
+    func tabSearchBar(s: String) {
         let request: NSFetchRequest<WeatherCoreData> = WeatherCoreData.fetchRequest()
         guard let weatherCoreDataList = try? CoreDataManager.shared.persistentContainer.viewContext.fetch(request) else {return}
         
@@ -70,7 +82,7 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             alert.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: nil))
             present(alert, animated: true)
         } else {
-            Network.shared.getWeather(city: s, units: .met) { (WeatherData) in
+            Network.shared.getWeather(city: s, units: .met) {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -88,14 +100,11 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! CustomViewCell
         let weatherMain = weatherData[indexPath.row]
         
-        
         let date = Date()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm" // - hour/minute
+        dateFormatter.dateFormat = "HH:mm"
         dateFormatter.timeZone = TimeZone(secondsFromGMT: Int(weatherMain.time))
-//        let time = Date(timeIntervalSince1970: TimeInterval(date + Double(weatherMain.time)))
         let currentTime: String = dateFormatter.string(from: date)
-        print(currentTime)
         
         cell.cityNameText.text = weatherMain.cityName
         cell.tempText.text = String(Int(weatherMain.temp)) + "°"
@@ -121,7 +130,6 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     }
     
     //MARK: - table view delegate
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = weatherData[indexPath.row]
         weak var detailController: WeatherDetail!
@@ -133,12 +141,4 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         show(detailController, sender: nil)
     }
     
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        WeatherCoreData.reloadData {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-            CoreDataManager.shared.saveContext()
-        }
-    }
 }
