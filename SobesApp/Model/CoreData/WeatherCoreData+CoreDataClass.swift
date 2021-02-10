@@ -27,19 +27,25 @@ public class WeatherCoreData: NSManagedObject {
         return entity
     }
     
-    class func reloadData(  result: @escaping () -> ()) {
+    class func reloadData( result: @escaping () -> ()) {
         let context = CoreDataManager.shared.persistentContainer.viewContext
         let request: NSFetchRequest<WeatherCoreData> = WeatherCoreData.fetchRequest()
-        let curWeather = try? context.fetch(request)
-        if curWeather != nil {
-            for oneWeather in curWeather! {
-                context.delete(oneWeather)
-                Network.shared.getWeather(city: oneWeather.cityName!, units: .met) {
-                    result()
+        for weathers in weatherData {
+            if weathers.cityName != "" {
+                request.predicate = NSPredicate(format: "cityName = %@", weathers.cityName!)
+                let curWeather = try? context.fetch(request)
+                if curWeather != nil {
+                    for weather in curWeather! {
+                        Network.shared.getWeather(city: weather.cityName!, units: .met) { (secondWeather) in
+                            weather.imageLabel = secondWeather.weather.first!.main
+                            weather.temp = secondWeather.main.temp
+                            weather.imageWeather = secondWeather.weather.first!.icon
+                            CoreDataManager.shared.saveContext()
+                            result()
+                        }
+                    }
                 }
             }
         }
-        
     }
-    
 }

@@ -4,7 +4,7 @@ import Foundation
 class Network {
     
     static let shared: Network = Network()
-    var apiKey = ""
+    var apiKey: String?
     
     private func getApiKeyFromPlist() throws -> String {
         var dictionary: NSDictionary?
@@ -25,9 +25,8 @@ class Network {
         }
     }
     
-    
-    func getWeather(city: String, units: units, result: @escaping (() -> () )){
-
+    func getWeather(city: String, units: units, result: @escaping ((WeatherData) -> () )){
+        
         var urlComponent = URLComponents()
         urlComponent.scheme = "https"
         urlComponent.host = "api.openweathermap.org"
@@ -50,16 +49,13 @@ class Network {
                 print(error)
             }
             if decodWeather != nil {
-                WeatherCoreData.addNew(save: decodWeather!)
-                CoreDataManager.shared.saveContext()
-                result()
+                result(decodWeather!)
             }
-            
         }.resume()
     }
     
     
-    func getCurrency(reload:() -> ()){
+    func getCurrency(reload: @escaping () -> ()){
         
         var request = URLRequest(url: URL(string: "https://www.cbr-xml-daily.ru/daily_json.js")!,timeoutInterval: Double.infinity)
         
@@ -85,6 +81,7 @@ class Network {
                 }
                 if !value.isEmpty {
                     CurrencyCoreData.addNew(saved: value)
+                    reload()
                 }
             }
         }.resume()
@@ -117,7 +114,7 @@ class Network {
             }
             if decodWeather != nil {
                 result(decodWeather!)
-                //CoreDataManager.shared.saveContext()
+                //MARK: надо бы сохранять в кор дату
             }
             
         }.resume()

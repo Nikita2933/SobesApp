@@ -32,8 +32,8 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     }
     
     @objc func refreshTableView() {
-        WeatherCoreData.reloadData {
-            DispatchQueue.main.async { [self] in
+        WeatherCoreData.reloadData { [self] in
+            DispatchQueue.main.async {
                 tableView.reloadData()
                 refreshControl.endRefreshing()
             }
@@ -82,7 +82,9 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             alert.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: nil))
             present(alert, animated: true)
         } else {
-            Network.shared.getWeather(city: s, units: .met) {
+            Network.shared.getWeather(city: s, units: .met) {weather in
+                WeatherCoreData.addNew(save: weather)
+                CoreDataManager.shared.saveContext()
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }

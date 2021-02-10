@@ -29,7 +29,6 @@ var currency: [CurrencyCoreData] {
     return []
 }
 
-
 class CoreDataManager {
     
     static let shared: CoreDataManager = CoreDataManager()
