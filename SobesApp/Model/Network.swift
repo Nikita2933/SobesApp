@@ -87,7 +87,7 @@ class Network {
         }.resume()
     }
     
-    func getWeatherDetail(lon: Double, lat: Double, result: @escaping ((WeatherDetailStruct) -> () )) {
+    func getWeatherDetail(lon: Double, lat: Double, result: @escaping ((WeatherDetailClass) -> () )) {
 
         var urlComponent = URLComponents()
         
@@ -106,14 +106,15 @@ class Network {
             }
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
-            var decodWeather: WeatherDetailStruct?
+            var decodWeather: WeatherDetailClass?
             do {
-                decodWeather = try decoder.decode(WeatherDetailStruct.self, from: data!)
+                decodWeather = try decoder.decode(WeatherDetailClass.self, from: data!)
             } catch  {
                 print(error)
             }
             if decodWeather != nil {
                 result(decodWeather!)
+                
                 //MARK: надо бы сохранять в кор дату
             }
             

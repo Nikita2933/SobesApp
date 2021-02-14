@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class WeatherDetail: UITableViewController {
     
@@ -40,23 +41,39 @@ class WeatherDetail: UITableViewController {
         let xibFour = UINib(nibName: "CustomCurrentWeatherCell", bundle: nil)
         tableView.register(xibFour, forCellReuseIdentifier: "cellFour")
         
+        NotificationCenter.default.addObserver(self, selector: #selector(exitSave), name: UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(exitSave), name: UIApplication.willTerminateNotification, object: nil)
+        
     }
     
+    
+    
+    @objc func exitSave() {
+        
+        
+    }
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         Network.shared.getWeatherDetail(lon: lon, lat: lat) { [self] (weatherData) in
             temp = String(weatherData.current.temp)
             descriptionWeather = weatherData.current.weather[0].main
-            min = String(weatherData.daily[0].temp.min) + "°" //MARK:  че это за хрень?
+            min = String(weatherData.daily[0].temp.min) + "°"
             max = String(weatherData.daily[0].temp.max) + "°"
             hourly = weatherData.hourly
             daily = weatherData.daily
             currentWeather = weatherData.current
             daily.removeFirst()
+            WeatherDetailCoreData.addNew(saved: weatherData)
+            CoreDataManager.shared.saveContext()
+            
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                let request: NSFetchRequest<WeatherDetailCoreData> = WeatherDetailCoreData.fetchRequest()
+                let weather = try? CoreDataManager.shared.persistentContainer.viewContext.fetch(request)
+                print()
             }
+            
         }
     }
     // MARK: - Table view data source

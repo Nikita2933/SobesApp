@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CurrencyCoreData" representedClassName="CurrencyCoreData" syncable="YES">
         <attribute name="charCode" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="String"/>
@@ -17,6 +17,45 @@
         <attribute name="labelName" optional="YES" attributeType="String"/>
         <attribute name="tag" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
+    <entity name="CurrentCD" representedClassName="CurrentCD" syncable="YES">
+        <attribute name="clouds" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="dewPoint" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="dt" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="feelsLike" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="humidity" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="pressure" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="sunrise" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="sunset" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="temp" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="uvi" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="visibility" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="windDeg" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="windSpeed" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="weather" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Weathers"/>
+    </entity>
+    <entity name="DailyCD" representedClassName="DailyCD" syncable="YES">
+        <attribute name="dt" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="temp" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TempCD"/>
+    </entity>
+    <entity name="HourlyCD" representedClassName="HourlyCD" syncable="YES">
+        <attribute name="clouds" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="dewPoint" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="dt" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="feelsLike" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="humidity" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="pressure" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="temp" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="uvi" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="visibility" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="windDeg" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="windSpeed" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="weather" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Weathers"/>
+    </entity>
+    <entity name="TempCD" representedClassName="TempCD" syncable="YES">
+        <attribute name="day" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="night" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="weather" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Weathers"/>
+    </entity>
     <entity name="WeatherCoreData" representedClassName="WeatherCoreData" syncable="YES">
         <attribute name="cityName" optional="YES" attributeType="String"/>
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
@@ -26,10 +65,28 @@
         <attribute name="lon" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="temp" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="time" optional="YES" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="weatherDetail" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="WeatherDetailCoreData"/>
+    </entity>
+    <entity name="WeatherDetailCoreData" representedClassName="WeatherDetailCoreData" syncable="YES">
+        <attribute name="timeZoneOffSet" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="current" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CurrentCD"/>
+        <relationship name="daily" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HourlyCD"/>
+        <relationship name="hourly" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HourlyCD"/>
+    </entity>
+    <entity name="Weathers" representedClassName="Weathers" syncable="YES">
+        <attribute name="descriptions" optional="YES" attributeType="String"/>
+        <attribute name="icon" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
     <elements>
         <element name="CurrencyCoreData" positionX="-0.92578125" positionY="-91.18359375" width="128" height="148"/>
-        <element name="CurrencyUserData" positionX="-387" positionY="-72" width="128" height="133"/>
-        <element name="WeatherCoreData" positionX="-197.8203125" positionY="-98.921875" width="128" height="163"/>
+        <element name="CurrencyUserData" positionX="3.09375" positionY="105.4609375" width="128" height="133"/>
+        <element name="CurrentCD" positionX="-308.84765625" positionY="122.21875" width="128" height="253"/>
+        <element name="DailyCD" positionX="-603" positionY="63" width="128" height="73"/>
+        <element name="HourlyCD" positionX="-810.19140625" positionY="6.734375" width="128" height="223"/>
+        <element name="TempCD" positionX="-594" positionY="72" width="128" height="88"/>
+        <element name="WeatherCoreData" positionX="-318.69140625" positionY="-91.3125" width="128" height="178"/>
+        <element name="WeatherDetailCoreData" positionX="-563.62890625" positionY="-81.140625" width="128" height="103"/>
+        <element name="Weathers" positionX="-614.13671875" positionY="322.734375" width="128" height="88"/>
     </elements>
 </model>

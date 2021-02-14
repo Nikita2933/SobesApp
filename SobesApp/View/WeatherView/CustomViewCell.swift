@@ -32,5 +32,5 @@ class CustomViewCell: UITableViewCell {
     func setImage(_ image : String)  {
         imageWeather.image = UIImage(named: image)
     }
-    
+
 }
