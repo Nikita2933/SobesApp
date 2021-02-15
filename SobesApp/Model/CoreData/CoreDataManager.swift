@@ -10,11 +10,11 @@ import CoreData
 
 var weatherData: [WeatherCoreData] {
     let request: NSFetchRequest<WeatherCoreData> = WeatherCoreData.fetchRequest()
+    let sectionSortDescriptor = NSSortDescriptor(key: "date", ascending: true)
+    request.sortDescriptors = [sectionSortDescriptor]
     let weather = try? CoreDataManager.shared.persistentContainer.viewContext.fetch(request)
-    
     if weather != nil {
-        let sortWeather = weather!.sorted(by: {$0.date > $1.date})
-        return sortWeather
+        return weather!
     }
     return []
 }
@@ -73,6 +73,4 @@ class CoreDataManager {
             }
         }
     }
-    
-    
 }

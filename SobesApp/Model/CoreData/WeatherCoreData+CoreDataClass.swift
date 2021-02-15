@@ -27,6 +27,18 @@ public class WeatherCoreData: NSManagedObject {
         return entity
     }
     
+    class func addNewDetailWeather (detailWeather: WeatherDetailCoreData, weather: WeatherCoreData){
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+        let request: NSFetchRequest<WeatherCoreData> = WeatherCoreData.fetchRequest()
+        request.predicate = NSPredicate(format: "cityName = %@", weather.cityName!)
+        let currentWeather = try? context.fetch(request)
+        
+        currentWeather![0].weatherDetail = detailWeather
+//        let entity = WeatherCoreData(context: context)
+//
+//        entity.weatherDetail = detailWeather
+    }
+    
     class func reloadData( result: @escaping () -> ()) {
         let context = CoreDataManager.shared.persistentContainer.viewContext
         let request: NSFetchRequest<WeatherCoreData> = WeatherCoreData.fetchRequest()

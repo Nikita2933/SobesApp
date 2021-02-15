@@ -14,7 +14,7 @@ class WeatherDetailClass: NSObject, Codable {
     let timezoneOffset: Int
     let current: Current
     let hourly: [Hourly]
-    let daily: [Daily]
+    var daily: [Daily]
     let alerts: [Alert]?
     
     enum CodingKeys: String, CodingKey {
@@ -149,19 +149,19 @@ public class Current: NSObject, Codable {
 class WeatherModel: NSObject, Codable {
     let id: Int
     let main, icon: String
-    let weatherDescription: String?
+    let descriptions: String
     
     enum CodingKeys: String, CodingKey {
         case id
         case main
-        case weatherDescription
+        case descriptions = "description"
         case icon
     }
 
-    init(id: Int, main: String, weatherDescription: String?, icon: String) {
+    init(id: Int, main: String, descriptions: String, icon: String) {
         self.id = id
         self.main = main
-        self.weatherDescription = weatherDescription
+        self.descriptions = descriptions
         self.icon = icon
     }
 }

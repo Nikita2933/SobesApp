@@ -2,7 +2,7 @@
 //  WeatherDetailCoreData+CoreDataProperties.swift
 //  SobesApp
 //
-//  Created by Никита on 14.02.2021.
+//  Created by Никита on 15.02.2021.
 //
 //
 
@@ -27,10 +27,10 @@ extension WeatherDetailCoreData {
 extension WeatherDetailCoreData {
 
     @objc(addDailyObject:)
-    @NSManaged public func addToDaily(_ value: HourlyCD)
+    @NSManaged public func addToDaily(_ value: DailyCD)
 
     @objc(removeDailyObject:)
-    @NSManaged public func removeFromDaily(_ value: HourlyCD)
+    @NSManaged public func removeFromDaily(_ value: DailyCD)
 
     @objc(addDaily:)
     @NSManaged public func addToDaily(_ values: NSSet)

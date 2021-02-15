@@ -8,7 +8,7 @@
 import UIKit
 
 class CustomDetailCellTwo: UITableViewCell, UICollectionViewDataSource {
-    var hourly: [Hourly] = []
+    var hourly: [HourlyCD] = []
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -29,7 +29,7 @@ class CustomDetailCellTwo: UITableViewCell, UICollectionViewDataSource {
         }
         
         cell.temp.text = String(Int(hourly[indexPath.row].temp)) + "°"
-        cell.imageLabel.image = UIImage(named: hourly[indexPath.row].weather[0].icon)
+        cell.imageLabel.image = UIImage(named: hourly[indexPath.row].weather!.icon!)
         
         return cell
     }

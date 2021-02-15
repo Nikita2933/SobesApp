@@ -14,7 +14,7 @@ public class CurrencyCoreData: NSManagedObject {
 
     class func addNew (saved: [Valute]){
             let context =  CoreDataManager.shared.persistentContainer.viewContext
-            let entity = CurrencyCoreData(context: CoreDataManager.shared.persistentContainer.viewContext)
+            let entity = CurrencyCoreData(context: context)
             for save in saved {
                 let currency = NSEntityDescription.insertNewObject(forEntityName: "CurrencyCoreData", into: context)
                 currency.setValue(save.Name, forKey: "name")
@@ -37,7 +37,8 @@ public class CurrencyCoreData: NSManagedObject {
                 print(error)
             }
         }
-        
+    
+    
         class func deleteAllData() {
             let context =  CoreDataManager.shared.persistentContainer.viewContext
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CurrencyCoreData")

@@ -134,13 +134,29 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     //MARK: - table view delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = weatherData[indexPath.row]
-        weak var detailController: WeatherDetail!
-        detailController = storyboard!.instantiateViewController(withIdentifier: "weatherDetail") as? WeatherDetail
-        detailController.lat = row.lat
-        detailController.lon = row.lon
-        detailController.cityName = row.cityName!
         
-        show(detailController, sender: nil)
+        var detailController: WeatherDetail!
+        detailController = storyboard!.instantiateViewController(withIdentifier: "weatherDetail") as? WeatherDetail
+        
+        if let weatherDetailRow = row.weatherDetail {
+            detailController.cityName = row.cityName!
+            detailController.weatherDetailWeather = weatherDetailRow
+            self.show(detailController, sender: nil)
+            
+        } else {
+            Network.shared.getWeatherDetail(lon: row.lon, lat: row.lat) { (resultWeather) in
+                
+                let weather = WeatherDetailCoreData.addNew(saved: resultWeather)
+                WeatherCoreData.addNewDetailWeather(detailWeather: weather, weather: row)
+                CoreDataManager.shared.saveContext()
+                
+                detailController.cityName = row.cityName!
+                detailController.weatherDetailWeather = row.weatherDetail
+                
+                DispatchQueue.main.async {
+                    self.show(detailController, sender: nil)
+                }
+            }
+        }
     }
-    
 }
