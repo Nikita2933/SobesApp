@@ -83,10 +83,14 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             present(alert, animated: true)
         } else {
             Network.shared.getWeather(city: s, units: .met) {weather in
-                WeatherCoreData.addNew(save: weather)
-                CoreDataManager.shared.saveContext()
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
+                let thisWeather = WeatherCoreData.addNew(save: weather)
+                Network.shared.getWeatherDetail(lon: thisWeather.lon, lat: thisWeather.lat) { (weatherDetail) in
+                    let weather = WeatherDetailCoreData.addNew(saved: weatherDetail)
+                    WeatherCoreData.addNewDetailWeather(detailWeather: weather, cityName: thisWeather.cityName!)
+                    CoreDataManager.shared.saveContext()
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
                 }
             }
         }
@@ -147,16 +151,17 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             Network.shared.getWeatherDetail(lon: row.lon, lat: row.lat) { (resultWeather) in
                 
                 let weather = WeatherDetailCoreData.addNew(saved: resultWeather)
-                WeatherCoreData.addNewDetailWeather(detailWeather: weather, weather: row)
+                WeatherCoreData.addNewDetailWeather(detailWeather: weather, cityName: row.cityName!)
                 CoreDataManager.shared.saveContext()
                 
                 detailController.cityName = row.cityName!
                 detailController.weatherDetailWeather = row.weatherDetail
                 
                 DispatchQueue.main.async {
-                    self.show(detailController, sender: nil)
+                    
                 }
             }
+            self.show(detailController, sender: nil)
         }
     }
 }

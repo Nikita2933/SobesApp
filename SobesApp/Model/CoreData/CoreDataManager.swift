@@ -21,10 +21,12 @@ var weatherData: [WeatherCoreData] {
 
 var currency: [CurrencyCoreData] {
     let request: NSFetchRequest<CurrencyCoreData> = CurrencyCoreData.fetchRequest()
+    let sectionSortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+    request.sortDescriptors = [sectionSortDescriptor]
     let currency = try? CoreDataManager.shared.persistentContainer.viewContext.fetch(request)
     
     if currency != nil {
-        return currency!.sorted {$0.name! < $1.name! }
+       return currency!
     } 
     return []
 }

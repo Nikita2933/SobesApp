@@ -40,6 +40,8 @@ public class WeatherDetailCoreData: NSManagedObject {
         entityCurrentCD.weather = entityWeatherCD
         
         entity.current = entityCurrentCD
+        entity.lon = saved.lon
+        entity.lat = saved.lat
         
         let hourly = saved.hourly //arr
         for hour in hourly {

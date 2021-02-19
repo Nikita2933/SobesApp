@@ -16,13 +16,14 @@ extension CurrencyCoreData {
         return NSFetchRequest<CurrencyCoreData>(entityName: "CurrencyCoreData")
     }
 
-    @NSManaged public var charCode: String?
-    @NSManaged public var id: String?
-    @NSManaged public var name: String?
+    @NSManaged public var charCode: String
+    @NSManaged public var id: String
+    @NSManaged public var name: String
     @NSManaged public var nominal: Int64
-    @NSManaged public var numCode: String?
+    @NSManaged public var numCode: String
     @NSManaged public var previous: Double
     @NSManaged public var value: Double
+    @NSManaged public var previosTime: String
 
 }
 

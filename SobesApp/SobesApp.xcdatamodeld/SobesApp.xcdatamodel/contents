@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CurrencyCoreData" representedClassName="CurrencyCoreData" syncable="YES">
-        <attribute name="charCode" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="String"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="nominal" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="numCode" optional="YES" attributeType="String"/>
-        <attribute name="previous" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="value" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="charCode" attributeType="String"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="nominal" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="numCode" attributeType="String"/>
+        <attribute name="previosTime" optional="YES" attributeType="String"/>
+        <attribute name="previous" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="value" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
     <entity name="CurrencyUserData" representedClassName="CurrencyUserData" syncable="YES">
         <attribute name="classField" optional="YES" attributeType="String"/>
@@ -71,6 +72,8 @@
         <relationship name="weatherDetail" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="WeatherDetailCoreData" inverseName="weatherCoreData" inverseEntity="WeatherDetailCoreData"/>
     </entity>
     <entity name="WeatherDetailCoreData" representedClassName="WeatherDetailCoreData" syncable="YES">
+        <attribute name="lat" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="lon" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="timeZoneOffSet" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="current" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CurrentCD"/>
         <relationship name="daily" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DailyCD"/>
@@ -86,14 +89,14 @@
         <relationship name="temp" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TempCD" inverseName="weather" inverseEntity="TempCD"/>
     </entity>
     <elements>
-        <element name="CurrencyCoreData" positionX="-0.92578125" positionY="-91.18359375" width="128" height="148"/>
+        <element name="CurrencyCoreData" positionX="-0.92578125" positionY="-91.18359375" width="128" height="163"/>
         <element name="CurrencyUserData" positionX="3.09375" positionY="105.4609375" width="128" height="133"/>
         <element name="CurrentCD" positionX="-308.84765625" positionY="122.21875" width="128" height="253"/>
         <element name="DailyCD" positionX="-654.44921875" positionY="88.828125" width="128" height="73"/>
         <element name="HourlyCD" positionX="-810.19140625" positionY="6.734375" width="128" height="223"/>
         <element name="TempCD" positionX="-547.48828125" positionY="182.30859375" width="128" height="133"/>
         <element name="WeatherCoreData" positionX="-318.69140625" positionY="-91.3125" width="128" height="178"/>
-        <element name="WeatherDetailCoreData" positionX="-563.62890625" positionY="-81.140625" width="128" height="118"/>
+        <element name="WeatherDetailCoreData" positionX="-563.62890625" positionY="-81.140625" width="128" height="148"/>
         <element name="Weathers" positionX="-614.13671875" positionY="322.734375" width="128" height="133"/>
     </elements>
 </model>

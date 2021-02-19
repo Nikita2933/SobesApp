@@ -18,7 +18,6 @@ class CurrencyTableViewPopover: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     // MARK: - Table view data source
@@ -36,13 +35,13 @@ class CurrencyTableViewPopover: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = currency[indexPath.row].charCode! + ":  " + currency[indexPath.row].name!
+        cell.textLabel?.text = currency[indexPath.row].charCode + ":  " + currency[indexPath.row].name
         
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let data = currency[indexPath.row]
-        self.delegate?.popoverContent(charCode: data.charCode!, value: data.value, name: data.name!, tag: tag)
+        self.delegate?.popoverContent(charCode: data.charCode, value: data.value, name: data.name, tag: tag)
         dismiss(animated: true, completion: nil)
     }
     /*

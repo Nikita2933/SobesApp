@@ -8,7 +8,7 @@
 import Foundation
     
 
-class WeatherDetailClass: NSObject, Codable {
+class WeatherDetailClass: Codable {
     let lat, lon: Double
     let timezone: String
     let timezoneOffset: Int
@@ -41,7 +41,7 @@ class WeatherDetailClass: NSObject, Codable {
 }
 
 // MARK: - Alert
-class Alert: NSObject, Codable {
+class Alert: Codable {
     let senderName, event: String?
     let start, end: Int?
     let alertDescription: String?
@@ -62,88 +62,16 @@ class Alert: NSObject, Codable {
 }
 
 // MARK: - Current
-public class Current: NSObject, Codable {
-    var dt, sunrise, sunset: Int
-    var temp, feelsLike: Double
-    var pressure, humidity: Int
-    var dewPoint, uvi: Double
-    var clouds, visibility: Int
-    var windSpeed, windDeg: Double
-    var weather: [WeatherModel]
-    
-    enum CodingKeys: String, CodingKey {
-        case dt
-        case sunrise
-        case sunset
-        case temp
-        case feelsLike
-        case pressure
-        case humidity
-        case dewPoint
-        case uvi
-        case clouds
-        case visibility
-        case windSpeed
-        case windDeg
-        case weather
-    }
-
-    init(dt: Int, sunrise: Int, sunset: Int, temp: Double, feelsLike: Double, pressure: Int, humidity: Int, dewPoint: Double, uvi: Double, clouds: Int, visibility: Int, windSpeed: Double, windDeg: Double, weather: [WeatherModel]) {
-        self.dt = dt
-        self.sunrise = sunrise
-        self.sunset = sunset
-        self.temp = temp
-        self.feelsLike = feelsLike
-        self.pressure = pressure
-        self.humidity = humidity
-        self.dewPoint = dewPoint
-        self.uvi = uvi
-        self.clouds = clouds
-        self.visibility = visibility
-        self.windSpeed = windSpeed
-        self.windDeg = windDeg
-        self.weather = weather
-    }
-    
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        dt =        try container.decode(Int.self, forKey: .dt)
-        sunrise =   try container.decode(Int.self, forKey: .sunrise)
-        sunset =    try container.decode(Int.self, forKey: .sunset)
-        temp =      try container.decode(Double.self, forKey: .temp)
-        feelsLike = try container.decode(Double.self, forKey: .feelsLike)
-        pressure =  try container.decode(Int.self, forKey: .pressure)
-        humidity =  try container.decode(Int.self, forKey: .humidity)
-        dewPoint =  try container.decode(Double.self, forKey: .dewPoint)
-        uvi =       try container.decode(Double.self, forKey: .uvi)
-        clouds =    try container.decode(Int.self, forKey: .clouds)
-        visibility = try container.decode(Int.self, forKey: .visibility)
-        windSpeed = try container.decode(Double.self, forKey: .windSpeed)
-        windDeg =   try container.decode(Double.self, forKey: .windDeg)
-        weather =   try container.decode([WeatherModel].self, forKey: .weather)
-        
-    }
-    
-//    public func encode(to encoder: Encoder) throws {
-//        var container = encoder.container(keyedBy: CodingKeys.self)
-//
-//        try container.encode(dt, forKey: .dt)
-//        try container.encode(sunrise, forKey: .sunrise)
-//        try container.encode(sunset, forKey: .sunset)
-//        try container.encode(temp, forKey: .temp)
-//        try container.encode(feelsLike, forKey: .feelsLike)
-//        try container.encode(pressure, forKey: .pressure)
-//        try container.encode(humidity, forKey: .humidity)
-//        try container.encode(dewPoint, forKey: .dewPoint)
-//        try container.encode(uvi, forKey: .uvi)
-//        try container.encode(clouds, forKey: .clouds)
-//        try container.encode(visibility, forKey: .visibility)
-//        try container.encode(windSpeed, forKey: .windSpeed)
-//        try container.encode(windDeg, forKey: .windDeg)
-//        try container.encode(weather, forKey: .weather)
-//    }
-    
+struct Current: Codable {
+    let dt, sunrise, sunset: Int
+    let temp, feelsLike: Double
+    let pressure, humidity: Int
+    let dewPoint, uvi: Double
+    let clouds, visibility: Int
+    let windSpeed, windDeg: Double
+    let weather: [WeatherModel]
 }
+
 
 // MARK: - Weather
 class WeatherModel: NSObject, Codable {
@@ -167,7 +95,7 @@ class WeatherModel: NSObject, Codable {
 }
 
 // MARK: - Daily
-class Daily: NSObject, Codable {
+class Daily: Codable {
     let dt, sunrise, sunset: Int
     let temp: Temp
     let feelsLike: FeelsLike
@@ -217,7 +145,7 @@ class Daily: NSObject, Codable {
 }
 
 // MARK: - FeelsLike
-class FeelsLike: NSObject, Codable {
+class FeelsLike: Codable {
     let day, night, eve, morn: Double
 
     init(day: Double, night: Double, eve: Double, morn: Double) {
@@ -244,7 +172,7 @@ class Temp: NSObject, Codable {
 }
 
 // MARK: - Hourly
-class Hourly: NSObject, Codable {
+class Hourly: Codable {
     let dt: Int
     let temp, feelsLike: Double
     let pressure, humidity: Int
@@ -292,7 +220,7 @@ class Hourly: NSObject, Codable {
 }
 
 // MARK: - Snow
-class Snow: NSObject, Codable {
+class Snow: Codable {
     let the1H: Double?
 
     enum CodingKeys: String, CodingKey {

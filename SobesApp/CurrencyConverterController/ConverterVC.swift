@@ -10,6 +10,9 @@ import UIKit
 class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationControllerDelegate, PopoverContentControllerDelegate{
 
     @IBOutlet weak var stackView: UIStackView!
+    
+    @IBOutlet weak var UpdateLabel: UILabel!
+    
     var staticSize: CGFloat!
     let viewCellOne = CustomViewCurrency()
     let viewCellTwo = CustomViewCurrency()
@@ -25,6 +28,7 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
         viewCellThree.isHidden = true
         viewCellFour.isHidden = true
         viewsSetting()
+        
         for view in arrView {
             view.currentValue.addTarget(self, action: #selector(testTableButton(_:)), for: .allTouchEvents)
             view.classField.addTarget(self, action: #selector(calculateValue(_:)), for: .editingChanged)
@@ -35,7 +39,7 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
     func viewsSetting() {
          let test = CurrencyUserData.getArrData()
         if !test.isEmpty {
-            arrView = test.sorted(by: {$0.currentValue.tag < $1.currentValue.tag })
+            arrView = test
         } else {
             arrView.append(viewCellOne)
             arrView.append(viewCellTwo)
@@ -52,8 +56,15 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+//        let dateFor = Date()
+//        dateFor.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        //CurrencyCoreData.deleteAllData()
+        if currency == [] {
+            Network.shared.getCurrency {
+            }
+        }
         //MARK: Обновлять курсы валют при запуске
     }
     
@@ -139,6 +150,7 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
                                                y: sender.bounds.midY,
                                                width: 0, height: 0)
         tableCurrency.preferredContentSize = CGSize(width: 280, height: 400)
+        tableCurrency.tableView.reloadData()
         self.present(tableCurrency, animated: true, completion: nil)
     }
     

@@ -34,10 +34,20 @@ class WeatherDetail: UITableViewController {
             
         tableView.register(CustomCurrentWeatherCell.self, forCellReuseIdentifier: "cellFour")
         let xibFour = UINib(nibName: "CustomCurrentWeatherCell", bundle: nil)
-        tableView.register(xibFour, forCellReuseIdentifier: "cellFour")
+        tableView.register(xibFour, forCellReuseIdentifier: "cellFour")        
+        
+        settingData()
         
         NotificationCenter.default.addObserver(self, selector: #selector(exitSave), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(exitSave), name: UIApplication.willTerminateNotification, object: nil)
+    }
+    
+    @objc func exitSave() {
+        WeatherCoreData.addNewDetailWeather(detailWeather: weatherDetailWeather, cityName: cityName)
+        CoreDataManager.shared.saveContext()
+    }
+    
+    func settingData() {
         let sectionSortDescriptor = NSSortDescriptor(key: "dt", ascending: true)
         let inputHourly = weatherDetailWeather.hourly?.sortedArray(using: [sectionSortDescriptor])  as! [HourlyCD]
         let inputDaily = weatherDetailWeather.daily?.sortedArray(using: [sectionSortDescriptor])  as! [DailyCD]
@@ -47,23 +57,27 @@ class WeatherDetail: UITableViewController {
         currentWeather = inputCurrentWeather
     }
     
-    
-    
-    @objc func exitSave() {
-        //MARK: доделать
-        
-    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//
-//        DispatchQueue.main.async {
-//            self.tableView.reloadData()
-//        }
-
+        let timeCurrentWeatherDetail = Date(timeIntervalSince1970: TimeInterval(currentWeather.dt))
+        let timeNow = Date()
+        let differenceInSeconds = Int(timeNow.timeIntervalSince(timeCurrentWeatherDetail))
+        print(differenceInSeconds)
+        if differenceInSeconds > 60 { //updateInterval (seconds)
+            Network.shared.getWeatherDetail(lon: weatherDetailWeather.lon, lat: weatherDetailWeather.lat) { [self] (weatherDetail) in
+                let weather = WeatherDetailCoreData.addNew(saved: weatherDetail)
+                weatherDetailWeather = weather
+                settingData()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
     
-    func setDataDetailView(){
-
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        exitSave()
     }
     // MARK: - Table view data source
     

@@ -4,7 +4,7 @@
 
 struct Currency: Codable {
     let Valute: [String: Valute]
-
+    let PreviousDate: String
 }
 
 struct Valute: Codable {

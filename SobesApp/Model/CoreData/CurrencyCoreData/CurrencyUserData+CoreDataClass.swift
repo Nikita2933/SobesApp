@@ -32,6 +32,8 @@ public class CurrencyUserData: NSManagedObject {
         
         class func getArrData () -> [CustomViewCurrency] {
             let request: NSFetchRequest<CurrencyUserData> = CurrencyUserData.fetchRequest()
+            let sectionSortDescriptor = NSSortDescriptor(key: "tag", ascending: true)
+            request.sortDescriptors = [sectionSortDescriptor]
             let currencyData = try? CoreDataManager.shared.persistentContainer.viewContext.fetch(request)
             var arrView: [CustomViewCurrency] = []
             
@@ -46,7 +48,7 @@ public class CurrencyUserData: NSManagedObject {
                     arrView.append(view)
                 }
             }
-            return arrView.sorted(by: {$0.currentValue.tag < $1.currentValue.tag })
+            return arrView
         }
         
         class func deleteData() {

@@ -74,13 +74,13 @@ class Network {
                 print(error)
             }
             if decodCurrency != nil {
-                var value: [Valute] = []
+                var valute: [Valute] = []
                 let keys = decodCurrency!.Valute.keys.sorted()
                 for key in keys {
-                    value.append((decodCurrency?.Valute[key])!)
+                    valute.append((decodCurrency?.Valute[key])!)
                 }
-                if !value.isEmpty {
-                    CurrencyCoreData.addNew(saved: value)
+                if !valute.isEmpty {
+                    CurrencyCoreData.addNew(saved: valute, time: decodCurrency!.PreviousDate)
                     reload()
                 }
             }
