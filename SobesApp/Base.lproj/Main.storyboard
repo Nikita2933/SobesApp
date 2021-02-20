@@ -146,8 +146,8 @@
                         <color key="badgeColor" red="0.43854743239999999" green="0.71212548019999999" blue="0.74512189630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBarItem>
                     <connections>
-                        <outlet property="UpdateLabel" destination="Tu5-aq-N5j" id="JoP-qb-p8c"/>
                         <outlet property="stackView" destination="eVJ-FE-eZK" id="qKY-VK-ubj"/>
+                        <outlet property="updateLabel" destination="Tu5-aq-N5j" id="JoP-qb-p8c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FDt-kG-Jy9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

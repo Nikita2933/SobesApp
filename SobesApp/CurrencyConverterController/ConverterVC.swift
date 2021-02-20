@@ -11,7 +11,7 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
 
     @IBOutlet weak var stackView: UIStackView!
     
-    @IBOutlet weak var UpdateLabel: UILabel!
+    @IBOutlet weak var updateLabel: UILabel!
     
     var staticSize: CGFloat!
     let viewCellOne = CustomViewCurrency()
@@ -30,7 +30,7 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
         viewsSetting()
         
         for view in arrView {
-            view.currentValue.addTarget(self, action: #selector(testTableButton(_:)), for: .allTouchEvents)
+            view.currentValue.addTarget(self, action: #selector(popoverShowFunc(_:)), for: .allTouchEvents)
             view.classField.addTarget(self, action: #selector(calculateValue(_:)), for: .editingChanged)
             stackView.addArrangedSubview(view)
         }
@@ -62,7 +62,9 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
 //        dateFor.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         //CurrencyCoreData.deleteAllData()
         if currency == [] {
+            CurrencyCoreData.deleteAllData()
             Network.shared.getCurrency {
+                
             }
         }
         //MARK: Обновлять курсы валют при запуске
@@ -138,7 +140,7 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
     }
     
     //MARK: Currency TableView Popover
-    @IBAction func testTableButton(_ sender: UIButton) {
+    @IBAction func popoverShowFunc(_ sender: UIButton) {
         guard let tableCurrency = storyboard?.instantiateViewController(identifier: "tableCurrency") as? CurrencyTableViewPopover else { return }
         tableCurrency.modalPresentationStyle = .popover
         let popoverController = tableCurrency.popoverPresentationController

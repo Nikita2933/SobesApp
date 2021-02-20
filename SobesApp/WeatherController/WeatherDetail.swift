@@ -62,15 +62,17 @@ class WeatherDetail: UITableViewController {
         let timeCurrentWeatherDetail = Date(timeIntervalSince1970: TimeInterval(currentWeather.dt))
         let timeNow = Date()
         let differenceInSeconds = Int(timeNow.timeIntervalSince(timeCurrentWeatherDetail))
-        print(differenceInSeconds)
         if differenceInSeconds > 60 { //updateInterval (seconds)
             Network.shared.getWeatherDetail(lon: weatherDetailWeather.lon, lat: weatherDetailWeather.lat) { [self] (weatherDetail) in
                 let weather = WeatherDetailCoreData.addNew(saved: weatherDetail)
                 weatherDetailWeather = weather
                 settingData()
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
+                WeatherCoreData.reloadData {
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
                 }
+                
             }
         }
     }

@@ -27,8 +27,21 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         refreshControl.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
         tableView.addSubview(refreshControl)
     }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let dt = weatherData.first?.weatherDetail?.current?.dt {
+            let timeCurrentWeatherDetail = Date(timeIntervalSince1970: TimeInterval(dt))
+            let timeNow = Date()
+            let differenceInSeconds = Int(timeNow.timeIntervalSince(timeCurrentWeatherDetail))
+            if differenceInSeconds > 60 {
+                WeatherCoreData.reloadData { [self] in
+                    DispatchQueue.main.async {
+                        tableView.reloadData()
+                    }
+                }
+            }
+        }
     }
     
     @objc func refreshTableView() {
