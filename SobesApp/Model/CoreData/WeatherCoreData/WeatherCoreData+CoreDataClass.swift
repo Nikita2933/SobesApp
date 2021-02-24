@@ -27,7 +27,7 @@ public class WeatherCoreData: NSManagedObject {
         return entity
     }
     
-    class func addNewDetailWeather (detailWeather: WeatherDetailCoreData, cityName: String){
+    class func addNewDetailWeather(detailWeather: WeatherDetailCoreData, cityName: String){
         let context = CoreDataManager.shared.persistentContainer.viewContext
         let request: NSFetchRequest<WeatherCoreData> = WeatherCoreData.fetchRequest()
         request.predicate = NSPredicate(format: "cityName = %@", cityName)
@@ -39,7 +39,6 @@ public class WeatherCoreData: NSManagedObject {
     class func reloadData( result: @escaping () -> ()) {
         let context = CoreDataManager.shared.persistentContainer.viewContext
         let request: NSFetchRequest<WeatherCoreData> = WeatherCoreData.fetchRequest()
-        if weatherData.isEmpty { result() }
         for weathers in weatherData {
             if weathers.cityName != "" {
                 request.predicate = NSPredicate(format: "cityName = %@", weathers.cityName!)

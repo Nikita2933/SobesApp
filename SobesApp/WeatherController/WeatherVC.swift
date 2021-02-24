@@ -26,6 +26,9 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
         tableViewSetting()
         refreshControl.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
         tableView.addSubview(refreshControl)
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: " Back", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem?.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -98,10 +101,10 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             Network.shared.getWeather(city: s, units: .met) {weather in
                 let thisWeather = WeatherCoreData.addNew(save: weather)
                 Network.shared.getWeatherDetail(lon: thisWeather.lon, lat: thisWeather.lat) { (weatherDetail) in
-                    let weather = WeatherDetailCoreData.addNew(saved: weatherDetail)
-                    WeatherCoreData.addNewDetailWeather(detailWeather: weather, cityName: thisWeather.cityName!)
-                    CoreDataManager.shared.saveContext()
                     DispatchQueue.main.async {
+                        let weather = WeatherDetailCoreData.addNew(saved: weatherDetail)
+                        WeatherCoreData.addNewDetailWeather(detailWeather: weather, cityName: thisWeather.cityName!)
+                        CoreDataManager.shared.saveContext()
                         self.tableView.reloadData()
                     }
                 }
@@ -170,10 +173,8 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
                 detailController.cityName = row.cityName!
                 detailController.weatherDetailWeather = row.weatherDetail
                 
-                DispatchQueue.main.async {
-                    
-                }
             }
+//            navigationItem.backBarButtonItem = UIBarButtonItem(title: " Back", style: .plain, target: nil, action: nil)
             self.show(detailController, sender: nil)
         }
     }

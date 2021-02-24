@@ -43,8 +43,11 @@ class WeatherDetail: UITableViewController {
     }
     
     @objc func exitSave() {
-        WeatherCoreData.addNewDetailWeather(detailWeather: weatherDetailWeather, cityName: cityName)
-        CoreDataManager.shared.saveContext()
+        DispatchQueue.main.async { [self] in
+            WeatherCoreData.addNewDetailWeather(detailWeather: weatherDetailWeather, cityName: cityName)
+            CoreDataManager.shared.saveContext()
+        }
+        
     }
     
     func settingData() {
