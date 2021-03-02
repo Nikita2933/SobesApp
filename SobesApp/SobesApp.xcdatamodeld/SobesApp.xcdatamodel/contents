@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D75" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CurrencyCoreData" representedClassName="CurrencyCoreData" syncable="YES">
         <attribute name="charCode" attributeType="String"/>
         <attribute name="id" attributeType="String"/>
@@ -9,6 +9,11 @@
         <attribute name="previosTime" optional="YES" attributeType="String"/>
         <attribute name="previous" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="value" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="firstData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CurrencyFirstData" inverseName="arrValue" inverseEntity="CurrencyFirstData"/>
+    </entity>
+    <entity name="CurrencyFirstData" representedClassName="CurrencyFirstData" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="String"/>
+        <relationship name="arrValue" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CurrencyCoreData" inverseName="firstData" inverseEntity="CurrencyCoreData"/>
     </entity>
     <entity name="CurrencyUserData" representedClassName="CurrencyUserData" syncable="YES">
         <attribute name="classField" optional="YES" attributeType="String"/>
@@ -89,7 +94,7 @@
         <relationship name="temp" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TempCD" inverseName="weather" inverseEntity="TempCD"/>
     </entity>
     <elements>
-        <element name="CurrencyCoreData" positionX="-0.92578125" positionY="-91.18359375" width="128" height="163"/>
+        <element name="CurrencyCoreData" positionX="-0.92578125" positionY="-91.18359375" width="128" height="164"/>
         <element name="CurrencyUserData" positionX="3.09375" positionY="105.4609375" width="128" height="133"/>
         <element name="CurrentCD" positionX="-308.84765625" positionY="122.21875" width="128" height="253"/>
         <element name="DailyCD" positionX="-654.44921875" positionY="88.828125" width="128" height="73"/>
@@ -98,5 +103,6 @@
         <element name="WeatherCoreData" positionX="-318.69140625" positionY="-91.3125" width="128" height="178"/>
         <element name="WeatherDetailCoreData" positionX="-563.62890625" positionY="-81.140625" width="128" height="148"/>
         <element name="Weathers" positionX="-614.13671875" positionY="322.734375" width="128" height="133"/>
+        <element name="CurrencyFirstData" positionX="-603" positionY="72" width="128" height="59"/>
     </elements>
 </model>

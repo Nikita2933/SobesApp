@@ -2,7 +2,7 @@
 //  CurrencyCoreData+CoreDataProperties.swift
 //  SobesApp
 //
-//  Created by Никита on 04.02.2021.
+//  Created by Никита on 02.03.2021.
 //
 //
 
@@ -21,9 +21,10 @@ extension CurrencyCoreData {
     @NSManaged public var name: String
     @NSManaged public var nominal: Int64
     @NSManaged public var numCode: String
+    @NSManaged public var previosTime: String
     @NSManaged public var previous: Double
     @NSManaged public var value: Double
-    @NSManaged public var previosTime: String
+    @NSManaged public var firstData: CurrencyFirstData?
 
 }
 

@@ -12,7 +12,7 @@ import CoreData
 @objc(CurrencyCoreData)
 public class CurrencyCoreData: NSManagedObject {
     
-    class func addNew (saved: [Valute], time: String){
+    class func addNew (saved: [Valute]) -> CurrencyCoreData {
         let context =  CoreDataManager.shared.persistentContainer.viewContext
         let entity = CurrencyCoreData(context: context)
         for save in saved {
@@ -25,7 +25,6 @@ public class CurrencyCoreData: NSManagedObject {
             currency.setValue(save.Previous, forKey: "previous")
             currency.setValue(save.Value, forKey: "value")
         }
-        entity.previosTime = time
         entity.name = "Российский Рубль"
         entity.charCode = "RUB"
         entity.id = "00"
@@ -37,10 +36,11 @@ public class CurrencyCoreData: NSManagedObject {
         } catch let error as NSError {
             print(error)
         }
+        return entity
     }
     
     
-    class func deleteAllData() {
+    class func deleteAllData() { //MARK Update вместо delete
         let context =  CoreDataManager.shared.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CurrencyCoreData")
         fetchRequest.returnsObjectsAsFaults = false

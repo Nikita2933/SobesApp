@@ -112,7 +112,7 @@
                                 <color key="highlightedColor" red="0.21451771259999999" green="0.21455428000000001" blue="0.21450972560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tu5-aq-N5j">
-                                <rect key="frame" x="80" y="63" width="36" height="17"/>
+                                <rect key="frame" x="80" y="63" width="103" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -134,7 +134,7 @@
                             <constraint firstItem="dqX-aq-T74" firstAttribute="leading" secondItem="32a-Q7-nGm" secondAttribute="trailing" constant="241.5" id="hzK-ko-f7t"/>
                             <constraint firstItem="eVJ-FE-eZK" firstAttribute="leading" secondItem="ePl-wk-EYO" secondAttribute="leading" id="ic3-ZE-cG5"/>
                             <constraint firstItem="ePl-wk-EYO" firstAttribute="trailing" secondItem="eVJ-FE-eZK" secondAttribute="trailing" id="irZ-Hn-rCp"/>
-                            <constraint firstItem="dqX-aq-T74" firstAttribute="leading" secondItem="Tu5-aq-N5j" secondAttribute="trailing" constant="197.5" id="qaI-lQ-b9x"/>
+                            <constraint firstItem="dqX-aq-T74" firstAttribute="leading" secondItem="Tu5-aq-N5j" secondAttribute="trailing" constant="130.5" id="qaI-lQ-b9x"/>
                             <constraint firstItem="32a-Q7-nGm" firstAttribute="leading" secondItem="ePl-wk-EYO" secondAttribute="leading" constant="20" id="yLk-8K-E6o"/>
                             <constraint firstItem="Tu5-aq-N5j" firstAttribute="centerY" secondItem="32a-Q7-nGm" secondAttribute="centerY" id="ycD-NG-6l8"/>
                         </constraints>

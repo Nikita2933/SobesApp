@@ -16,6 +16,7 @@ class CustomViewCurrency: UIView, UITextFieldDelegate {
     var curse = Double()
     var count = Int()
     
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInitializer()
@@ -47,7 +48,7 @@ class CustomViewCurrency: UIView, UITextFieldDelegate {
         
     }
     
-    func setParametr(charCode: String) { //MARK: убрать в CoreData
+    func setParametr(charCode: String) { 
         DispatchQueue.main.async {
             if let result = currency.filter({$0.charCode == charCode}).first {
                 self.labelName.text = result.name

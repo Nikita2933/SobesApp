@@ -37,9 +37,12 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
     }
     
     func viewsSetting() {
-         let test = CurrencyUserData.getArrData()
-        if !test.isEmpty {
-            arrView = test
+        let arrViewCD = CurrencyUserData.getArrData()
+        let currencyCD = CurrencyFirstData.getCurrency()
+        if !arrViewCD.isEmpty{
+            arrView = arrViewCD
+ 
+            updateLabel.text = currencyCD?.date
         } else {
             arrView.append(viewCellOne)
             arrView.append(viewCellTwo)
@@ -61,12 +64,6 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
 //        let dateFor = Date()
 //        dateFor.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         //CurrencyCoreData.deleteAllData()
-        if currency == [] {
-            CurrencyCoreData.deleteAllData()
-            Network.shared.getCurrency {
-                
-            }
-        }
         //MARK: Обновлять курсы валют при запуске
     }
     
@@ -190,7 +187,6 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
             if fieldClass != views {
                 let viewsInt = Double(views.classField.text!) ?? 0.0
                 fieldClass.classField.text = String(format: "%.2f", viewsInt * (views.curse / fieldClass.curse))
-                
             }
         }
     }
