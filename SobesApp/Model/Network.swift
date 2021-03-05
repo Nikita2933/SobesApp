@@ -55,7 +55,7 @@ class Network {
     }
     
     
-    func getCurrency(reload: @escaping () -> ()){
+    func getCurrency(result: @escaping (Currency) -> ()){
         
         var request = URLRequest(url: URL(string: "https://www.cbr-xml-daily.ru/daily_json.js")!,timeoutInterval: Double.infinity)
         
@@ -74,9 +74,7 @@ class Network {
                 print(error)
             }
             if decodCurrency != nil {
-                CurrencyFirstData.refreshCurrency(save: decodCurrency!) {
-                    reload()
-                }
+                result(decodCurrency!)
             }
         }.resume()
     }
@@ -108,8 +106,6 @@ class Network {
             }
             if decodWeather != nil {
                 result(decodWeather!)
-                
-                //MARK: надо бы сохранять в кор дату
             }
             
         }.resume()

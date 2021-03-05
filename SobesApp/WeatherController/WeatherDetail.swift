@@ -70,7 +70,7 @@ class WeatherDetail: UITableViewController {
                 let weather = WeatherDetailCoreData.addNew(saved: weatherDetail)
                 weatherDetailWeather = weather
                 settingData()
-                WeatherCoreData.reloadData {
+                WeatherCoreData.updateData {
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                     }

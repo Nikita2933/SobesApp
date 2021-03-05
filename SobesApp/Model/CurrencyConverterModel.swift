@@ -14,4 +14,14 @@ struct Valute: Codable {
     let Value, Previous: Double
 }
 
-
+func valuteArrConvert(sort: Currency) -> [Valute] {
+    var valute: [Valute] = []
+    let keys = sort.Valute.keys.sorted()
+    for key in keys {
+        if let val = sort.Valute[key] {
+            valute.append(val)
+        }
+        
+    }
+    return valute
+}

@@ -12,18 +12,22 @@ import CoreData
 @objc(CurrencyCoreData)
 public class CurrencyCoreData: NSManagedObject {
     
-    class func addNew (saved: [Valute]) -> CurrencyCoreData {
+    class func addNew (saved: Currency) -> CurrencyCoreData {
+        
         let context =  CoreDataManager.shared.persistentContainer.viewContext
         let entity = CurrencyCoreData(context: context)
-        for save in saved {
+        
+        let valute = valuteArrConvert(sort: saved)
+        
+        for value in valute {
             let currency = NSEntityDescription.insertNewObject(forEntityName: "CurrencyCoreData", into: context)
-            currency.setValue(save.Name, forKey: "name")
-            currency.setValue(save.CharCode, forKey: "charCode")
-            currency.setValue(save.ID, forKey: "id")
-            currency.setValue(save.Nominal, forKey: "nominal")
-            currency.setValue(save.NumCode, forKey: "numCode")
-            currency.setValue(save.Previous, forKey: "previous")
-            currency.setValue(save.Value, forKey: "value")
+            currency.setValue(value.Name, forKey: "name")
+            currency.setValue(value.CharCode, forKey: "charCode")
+            currency.setValue(value.ID, forKey: "id")
+            currency.setValue(value.Nominal, forKey: "nominal")
+            currency.setValue(value.NumCode, forKey: "numCode")
+            currency.setValue(value.Previous, forKey: "previous")
+            currency.setValue(value.Value, forKey: "value")
         }
         entity.name = "Российский Рубль"
         entity.charCode = "RUB"
@@ -38,7 +42,6 @@ public class CurrencyCoreData: NSManagedObject {
         }
         return entity
     }
-    
     
     class func deleteAllData() { //MARK Update вместо delete
         let context =  CoreDataManager.shared.persistentContainer.viewContext

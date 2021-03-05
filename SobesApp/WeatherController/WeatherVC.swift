@@ -38,7 +38,7 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             let timeNow = Date()
             let differenceInSeconds = Int(timeNow.timeIntervalSince(timeCurrentWeatherDetail))
             if differenceInSeconds > 60 {
-                WeatherCoreData.reloadData { [self] in
+                WeatherCoreData.updateData { [self] in
                     DispatchQueue.main.async {
                         tableView.reloadData()
                     }
@@ -48,7 +48,7 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     }
     
     @objc func refreshTableView() {
-        WeatherCoreData.reloadData { [self] in
+        WeatherCoreData.updateData { [self] in
             DispatchQueue.main.async {
                 tableView.reloadData()
                 refreshControl.endRefreshing()

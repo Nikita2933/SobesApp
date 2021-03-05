@@ -16,7 +16,7 @@ extension CurrencyFirstData {
         return NSFetchRequest<CurrencyFirstData>(entityName: "CurrencyFirstData")
     }
 
-    @NSManaged public var date: String?
+    @NSManaged public var date: String
     @NSManaged public var arrValue: NSSet?
 
 }

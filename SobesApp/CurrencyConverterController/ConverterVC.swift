@@ -35,36 +35,50 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
             stackView.addArrangedSubview(view)
         }
     }
+    @IBAction func testReload(_ sender: UIButton) {
+        CurrencyFirstData.newCurrency {
+            DispatchQueue.main.async {
+                let currencyCD = CurrencyFirstData.getCurrency()
+                self.updateLabel.text = currencyCD?.date
+                self.view.reloadInputViews()
+            }
+        }
+    }
     
     func viewsSetting() {
         let arrViewCD = CurrencyUserData.getArrData()
         let currencyCD = CurrencyFirstData.getCurrency()
         if !arrViewCD.isEmpty{
             arrView = arrViewCD
- 
             updateLabel.text = currencyCD?.date
         } else {
+            //Mark функция для сравнения дат
+            CurrencyFirstData.newCurrency { [self] in
+                viewCellOne.setParametr(charCode: "RUB")
+                viewCellTwo.setParametr(charCode: "BYN")
+                viewCellThree.setParametr(charCode: "USD")
+                viewCellFour.setParametr(charCode: "EUR")
+            }
             arrView.append(viewCellOne)
             arrView.append(viewCellTwo)
             arrView.append(viewCellThree)
             arrView.append(viewCellFour)
-            viewCellOne.setParametr(charCode: "RUB")
-            viewCellTwo.setParametr(charCode: "BYN")
-            viewCellThree.setParametr(charCode: "USD")
-            viewCellFour.setParametr(charCode: "EUR")
+            
+            let df = DateFormatter()
+            df.dateFormat = "MM-dd HH:mm"
+            let time = df.string(from: Date())
+            updateLabel.text  = time
+            
             for view in arrView {
                 view.currentValue.tag = tagButton
                 tagButton += 1
             }
+            
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        let dateFor = Date()
-//        dateFor.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        //CurrencyCoreData.deleteAllData()
-        //MARK: Обновлять курсы валют при запуске
     }
     
     //MARK: tapGesture

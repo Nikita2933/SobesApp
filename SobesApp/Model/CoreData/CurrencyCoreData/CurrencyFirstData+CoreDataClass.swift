@@ -12,25 +12,22 @@ import CoreData
 @objc(CurrencyFirstData)
 public class CurrencyFirstData: NSManagedObject {
     
-    class func refreshCurrency(save: Currency, reload: () -> ()) {
-        
+    class func newCurrency(reload: @escaping ()-> ()) {
+        CurrencyCoreData.deleteAllData()
+        deleteAllCurrency()
         let context =  CoreDataManager.shared.persistentContainer.viewContext
         let currencyFirst = CurrencyFirstData(context: context)
-        CurrencyCoreData.deleteAllData()
         
-        var valute: [Valute] = []
-        let keys = save.Valute.keys.sorted()
-        for key in keys {
-            if let val = save.Valute[key] {
-                valute.append(val)
-            }
+        let df = DateFormatter()
+        df.dateFormat = "MM-dd HH:mm"
+        let time = df.string(from: Date())
+        
+        Network.shared.getCurrency { (newCurrency) in
+            let currencyArr = CurrencyCoreData.addNew(saved: newCurrency)
+            currencyFirst.addToArrValue(currencyArr)
+            currencyFirst.date = time
+            reload()
         }
-        
-        currencyFirst.date = save.Date
-        
-        let currencyArr = CurrencyCoreData.addNew(saved: valute)
-        currencyFirst.addToArrValue(currencyArr)
-        reload()
     }
 
     class func getCurrency () -> CurrencyFirstData? {
@@ -43,4 +40,21 @@ public class CurrencyFirstData: NSManagedObject {
             return nil
         }
     }
+    
+    class func deleteAllCurrency() {
+        let context =  CoreDataManager.shared.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CurrencyFirstData")
+        fetchRequest.returnsObjectsAsFaults = false
+        do {
+            let currentCDArr = try context.fetch(fetchRequest)
+            for current in currentCDArr
+            {
+                let managedObjectData:NSManagedObject = current as! NSManagedObject
+                context.delete(managedObjectData)
+            }
+        } catch let error as NSError {
+            print(error)
+        }
+    }
 }
+
