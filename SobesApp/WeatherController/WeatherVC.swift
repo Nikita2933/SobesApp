@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 
 protocol WeatherVCDelegate: class {
-    func tabSearchBar(s: String)
+    func tabSearchBar(cityName: String)
 }
 
 class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchControllerDelegate, WeatherVCDelegate  {
@@ -38,20 +38,26 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             let timeNow = Date()
             let differenceInSeconds = Int(timeNow.timeIntervalSince(timeCurrentWeatherDetail))
             if differenceInSeconds > 60 {
-                WeatherCoreData.updateData { [self] in
-                    DispatchQueue.main.async {
-                        tableView.reloadData()
-                    }
-                }
+                refreshTableView()
             }
         }
     }
     
     @objc func refreshTableView() {
-        WeatherCoreData.updateData { [self] in
-            DispatchQueue.main.async {
-                tableView.reloadData()
-                refreshControl.endRefreshing()
+        WeatherCoreData.updateData {result in
+            switch result {
+            case .success(()):
+                DispatchQueue.main.async { [self] in
+                    self.tableView.reloadData()
+                    refreshControl.endRefreshing()
+                }
+            case .failure(let error):
+                DispatchQueue.main.async { [self] in
+                    let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "sure", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    refreshControl.endRefreshing()
+                }
             }
         }
     }
@@ -82,30 +88,52 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        tabSearchBar(s: searchBar.text!)
+        tabSearchBar(cityName: searchBar.text!)
         dismiss(animated: true, completion: nil)
         searchBar.text = ""
     }
     
     //MARK: - WeatherVCDelegate
-    func tabSearchBar(s: String) {
+    func tabSearchBar(cityName: String) {
         let request: NSFetchRequest<WeatherCoreData> = WeatherCoreData.fetchRequest()
         guard let weatherCoreDataList = try? CoreDataManager.shared.persistentContainer.viewContext.fetch(request) else {return}
         
-        if weatherCoreDataList.contains(where: {$0.cityName == s}) {
+        if weatherCoreDataList.contains(where: {$0.cityName == cityName}) {
             let message = "This city has been added, choose new city"
             let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: nil))
             present(alert, animated: true)
         } else {
-            Network.shared.getWeather(city: s, units: .met) {weather in
-                let thisWeather = WeatherCoreData.addNew(save: weather)
-                Network.shared.getWeatherDetail(lon: thisWeather.lon, lat: thisWeather.lat) { (weatherDetail) in
+            Network.shared.getWeather(city: cityName, units: .met) {result in
+                switch result {
+                
+                case .success(let weather):
+                    let thisWeather = WeatherCoreData.addNew(save: weather)
+                    Network.shared.getWeatherDetail(lon: thisWeather.lon, lat: thisWeather.lat) { (result) in
+                        switch result {
+                        
+                        case .success(let weatherDetail):
+                            DispatchQueue.main.async {
+                                let weather = WeatherDetailCoreData.addNew(saved: weatherDetail)
+                                WeatherCoreData.addNewDetailWeather(detailWeather: weather, cityName: thisWeather.cityName!)
+                                CoreDataManager.shared.saveContext()
+                                self.tableView.reloadData()
+                            }
+                            
+                        case .failure(let error):
+                            DispatchQueue.main.async {
+                                let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
+                                alert.addAction(UIAlertAction(title: "sure", style: .cancel, handler: nil))
+                                self.present(alert, animated: true, completion: nil)
+                            }
+                        }
+                    }
+                    
+                case .failure(let error):
                     DispatchQueue.main.async {
-                        let weather = WeatherDetailCoreData.addNew(saved: weatherDetail)
-                        WeatherCoreData.addNewDetailWeather(detailWeather: weather, cityName: thisWeather.cityName!)
-                        CoreDataManager.shared.saveContext()
-                        self.tableView.reloadData()
+                        let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "sure", style: .cancel, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
                     }
                 }
             }
@@ -139,6 +167,7 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let context = CoreDataManager.shared.persistentContainer.viewContext
+            
             do {
                 context.delete(weatherData[indexPath.row])
                 try context.save()
@@ -164,15 +193,25 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, U
             self.show(detailController, sender: nil)
             
         } else {
-            Network.shared.getWeatherDetail(lon: row.lon, lat: row.lat) { (resultWeather) in
-                
-                let weather = WeatherDetailCoreData.addNew(saved: resultWeather)
-                WeatherCoreData.addNewDetailWeather(detailWeather: weather, cityName: row.cityName!)
-                CoreDataManager.shared.saveContext()
-                
-                detailController.cityName = row.cityName!
-                detailController.weatherDetailWeather = row.weatherDetail
-                
+            Network.shared.getWeatherDetail(lon: row.lon, lat: row.lat) { (result) in
+                switch result {
+                case .success(let weatherDetail):
+                    let weather = WeatherDetailCoreData.addNew(saved: weatherDetail)
+                    WeatherCoreData.addNewDetailWeather(detailWeather: weather, cityName: row.cityName!)
+                    CoreDataManager.shared.saveContext()
+                    
+                    detailController.cityName = row.cityName!
+                    detailController.weatherDetailWeather = row.weatherDetail
+                    
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "sure", style: .cancel, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                    break
+                }
+
             }
 //            navigationItem.backBarButtonItem = UIBarButtonItem(title: " Back", style: .plain, target: nil, action: nil)
             self.show(detailController, sender: nil)

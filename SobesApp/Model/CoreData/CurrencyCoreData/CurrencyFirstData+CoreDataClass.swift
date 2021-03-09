@@ -12,7 +12,7 @@ import CoreData
 @objc(CurrencyFirstData)
 public class CurrencyFirstData: NSManagedObject {
     
-    class func newCurrency(reload: @escaping ()-> ()) {
+    class func newCurrency(save: Currency) -> CurrencyFirstData {
         CurrencyCoreData.deleteAllData()
         deleteAllCurrency()
         let context =  CoreDataManager.shared.persistentContainer.viewContext
@@ -21,13 +21,12 @@ public class CurrencyFirstData: NSManagedObject {
         let df = DateFormatter()
         df.dateFormat = "MM-dd HH:mm"
         let time = df.string(from: Date())
+        currencyFirst.date = time
         
-        Network.shared.getCurrency { (newCurrency) in
-            let currencyArr = CurrencyCoreData.addNew(saved: newCurrency)
-            currencyFirst.addToArrValue(currencyArr)
-            currencyFirst.date = time
-            reload()
-        }
+        let currencyArr = CurrencyCoreData.addNew(saved: save)
+        currencyFirst.addToArrValue(currencyArr)
+        
+        return currencyFirst
     }
 
     class func getCurrency () -> CurrencyFirstData? {

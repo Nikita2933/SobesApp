@@ -66,16 +66,34 @@ class WeatherDetail: UITableViewController {
         let timeNow = Date()
         let differenceInSeconds = Int(timeNow.timeIntervalSince(timeCurrentWeatherDetail))
         if differenceInSeconds > 60 { //updateInterval (seconds)
-            Network.shared.getWeatherDetail(lon: weatherDetailWeather.lon, lat: weatherDetailWeather.lat) { [self] (weatherDetail) in
-                let weather = WeatherDetailCoreData.addNew(saved: weatherDetail)
-                weatherDetailWeather = weather
-                settingData()
-                WeatherCoreData.updateData {
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                }
+            Network.shared.getWeatherDetail(lon: weatherDetailWeather.lon, lat: weatherDetailWeather.lat) { [self] (result) in
+                switch result {
                 
+                case .success(let newWeatherDetail):
+                    let weather = WeatherDetailCoreData.addNew(saved: newWeatherDetail)
+                    weatherDetailWeather = weather
+                    settingData()
+                    WeatherCoreData.updateData {result in
+                        switch result {
+                        case .success(()):
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                            }
+                        case .failure(let error):
+                            let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "sure", style: .cancel, handler: nil))
+                            present(alert, animated: true, completion: nil)
+                        }
+                        
+                    }
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "sure", style: .cancel, handler: nil))
+                        present(alert, animated: true, completion: nil)
+                    }
+                    break
+                }
             }
         }
     }

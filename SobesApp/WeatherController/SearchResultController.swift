@@ -27,7 +27,7 @@ class SearchResultController: UIViewController, UITableViewDataSource, UITableVi
     
     // MARK: table View
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        weatherVCDelegate?.tabSearchBar(s: suggestions[indexPath.row])
+        weatherVCDelegate?.tabSearchBar(cityName: suggestions[indexPath.row])
         dismiss(animated: true, completion: nil)
     }
     

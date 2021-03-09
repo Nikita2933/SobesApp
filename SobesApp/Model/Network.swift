@@ -3,7 +3,15 @@ import Foundation
 
 class Network {
     
+    enum APIServiceError: Error {
+        case badGateway
+        case decodeError
+        case invalidResponse
+        case noData
+    }
+    
     static let shared: Network = Network()
+    
     var apiKey: String?
     
     private func getApiKeyFromPlist() throws -> String {
@@ -25,7 +33,7 @@ class Network {
         }
     }
     
-    func getWeather(city: String, units: units, result: @escaping ((WeatherData) -> () )){
+    func getWeather(city: String, units: units, result: @escaping (Result<WeatherData, APIServiceError>) -> () ){
         
         var urlComponent = URLComponents()
         urlComponent.scheme = "https"
@@ -37,49 +45,70 @@ class Network {
                                    URLQueryItem(name: "lang", value: "ru")]
         
         URLSession.shared.dataTask(with: urlComponent.url!) { (data, response, error) in
-            guard error == nil else {
-                print(error as Any)
+            if error != nil {
+                result(.failure(.badGateway))
                 return
             }
-            let decoder = JSONDecoder()
-            var decodWeather: WeatherData?
+            
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, 200..<299 ~= statusCode else {
+                result(.failure(.invalidResponse))
+                return
+            }
+            
+            guard let data = data else {
+                result(.failure(.noData))
+                return
+            }
             do {
-                decodWeather = try decoder.decode(WeatherData.self, from: data!)
+                let decodWeather = try JSONDecoder().decode(WeatherData.self, from: data)
+                result(.success(decodWeather))
             } catch  {
                 print(error)
+                result(.failure(.decodeError))
             }
-            if decodWeather != nil {
-                result(decodWeather!)
-            }
+
         }.resume()
     }
     
     
-    func getCurrency(result: @escaping (Currency) -> ()){
+    func getCurrency(result: @escaping (Result<Currency, APIServiceError>)->() ) {
         
         var request = URLRequest(url: URL(string: "https://www.cbr-xml-daily.ru/daily_json.js")!,timeoutInterval: Double.infinity)
         
         request.httpMethod = "GET"
         
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data else {
-                print(String(describing: error))
+        let urlConfig = URLSessionConfiguration.default
+        urlConfig.requestCachePolicy = .reloadIgnoringLocalCacheData
+        urlConfig.urlCache = nil
+        
+        let session = URLSession(configuration: urlConfig)
+        
+        session.dataTask(with: request) { data, response, error in
+            if error != nil {
+                result(.failure(.badGateway))
                 return
             }
-            let decoder = JSONDecoder()
-            var decodCurrency: Currency?
-            do {
-                decodCurrency = try decoder.decode(Currency.self, from: data)
-            } catch  {
-                print(error)
+            
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, 200..<299 ~= statusCode else {
+                result(.failure(.invalidResponse))
+                return
             }
-            if decodCurrency != nil {
-                result(decodCurrency!)
+            
+            guard let data = data else {
+                result(.failure(.noData))
+                return
+            }
+
+            do {
+                let decodCurrency = try JSONDecoder().decode(Currency.self, from: data)
+                result(.success(decodCurrency))
+            } catch  {
+                result(.failure(.decodeError))
             }
         }.resume()
     }
     
-    func getWeatherDetail(lon: Double, lat: Double, result: @escaping ((WeatherDetailClass) -> () )) {
+    func getWeatherDetail(lon: Double, lat: Double, result: @escaping (Result<WeatherDetailClass, APIServiceError>) -> () ) {
 
         var urlComponent = URLComponents()
         
@@ -92,20 +121,28 @@ class Network {
                                    URLQueryItem(name: "units", value: "metric")]
         
         URLSession.shared.dataTask(with: urlComponent.url!) { (data, response, error) in
-            guard error == nil else {
-                print(error.debugDescription)
+            if error != nil  {
+                result(.failure(.badGateway))
                 return
             }
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            var decodWeather: WeatherDetailClass?
-            do {
-                decodWeather = try decoder.decode(WeatherDetailClass.self, from: data!)
-            } catch  {
-                print(error)
+            
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, 200..<299 ~= statusCode else {
+                result(.failure(.invalidResponse))
+                return
             }
-            if decodWeather != nil {
-                result(decodWeather!)
+            
+            guard let data = data else {
+                result(.failure(.noData))
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let decodWeather = try decoder.decode(WeatherDetailClass.self, from: data)
+                result(.success(decodWeather))
+            } catch  {
+                result(.failure(.decodeError))
             }
             
         }.resume()

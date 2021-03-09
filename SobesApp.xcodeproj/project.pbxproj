@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		113364B925F7D3B60016AC7F /* CurrencyFirstData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113364B825F7D3B60016AC7F /* CurrencyFirstData+CoreDataProperties.swift */; };
 		11426AF125ACB85B00C3FFD6 /* CustomViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11426AF025ACB85B00C3FFD6 /* CustomViewCell.xib */; };
 		11426AF625ACBC8E00C3FFD6 /* CustomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11426AF525ACBC8E00C3FFD6 /* CustomViewCell.swift */; };
 		1143F22125DA99D900311767 /* WeatherCoreData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143F22025DA99D900311767 /* WeatherCoreData+CoreDataProperties.swift */; };
@@ -24,7 +25,6 @@
 		11A1895725D073B400E84495 /* CustomCurrentWeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11A1895525D073B400E84495 /* CustomCurrentWeatherCell.xib */; };
 		11C35F2625B76C0600A21C46 /* CurrencyTableViewPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C35F2525B76C0600A21C46 /* CurrencyTableViewPopover.swift */; };
 		11CA0DA625ED90B400AEECCC /* CurrencyFirstData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CA0DA325ED90B400AEECCC /* CurrencyFirstData+CoreDataClass.swift */; };
-		11CA0DA725ED90B400AEECCC /* CurrencyFirstData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CA0DA425ED90B400AEECCC /* CurrencyFirstData+CoreDataProperties.swift */; };
 		11D1057F25D98BA4003BD01C /* SobesApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 11D1057D25D98BA4003BD01C /* SobesApp.xcdatamodeld */; };
 		11D55BA325CBE212001C8301 /* CurrencyCoreData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D55B9D25CBE212001C8301 /* CurrencyCoreData+CoreDataClass.swift */; };
 		11D55BA425CBE212001C8301 /* CurrencyCoreData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D55B9E25CBE212001C8301 /* CurrencyCoreData+CoreDataProperties.swift */; };
@@ -51,6 +51,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		113364B825F7D3B60016AC7F /* CurrencyFirstData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrencyFirstData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		11426AF025ACB85B00C3FFD6 /* CustomViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomViewCell.xib; sourceTree = "<group>"; };
 		11426AF525ACBC8E00C3FFD6 /* CustomViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewCell.swift; sourceTree = "<group>"; };
 		1143F22025DA99D900311767 /* WeatherCoreData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherCoreData+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -67,7 +68,6 @@
 		11A1895525D073B400E84495 /* CustomCurrentWeatherCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCurrentWeatherCell.xib; sourceTree = "<group>"; };
 		11C35F2525B76C0600A21C46 /* CurrencyTableViewPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTableViewPopover.swift; sourceTree = "<group>"; };
 		11CA0DA325ED90B400AEECCC /* CurrencyFirstData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrencyFirstData+CoreDataClass.swift"; sourceTree = "<group>"; };
-		11CA0DA425ED90B400AEECCC /* CurrencyFirstData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrencyFirstData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		11D1057E25D98BA4003BD01C /* SobesApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SobesApp.xcdatamodel; sourceTree = "<group>"; };
 		11D55B9D25CBE212001C8301 /* CurrencyCoreData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrencyCoreData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		11D55B9E25CBE212001C8301 /* CurrencyCoreData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrencyCoreData+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				11CA0DA325ED90B400AEECCC /* CurrencyFirstData+CoreDataClass.swift */,
-				11CA0DA425ED90B400AEECCC /* CurrencyFirstData+CoreDataProperties.swift */,
+				113364B825F7D3B60016AC7F /* CurrencyFirstData+CoreDataProperties.swift */,
 				11D55B9D25CBE212001C8301 /* CurrencyCoreData+CoreDataClass.swift */,
 				11D55B9E25CBE212001C8301 /* CurrencyCoreData+CoreDataProperties.swift */,
 				11D55B9F25CBE212001C8301 /* CurrencyUserData+CoreDataClass.swift */,
@@ -348,7 +348,7 @@
 				11E88DBF25DFD066009E8E1B /* WeatherDetailCoreData+CoreDataProperties.swift in Sources */,
 				11D55BAC25CBF47F001C8301 /* WeatherDetailModel.swift in Sources */,
 				1184ADD525CC791F00A193B0 /* WeatherDetail.swift in Sources */,
-				11CA0DA725ED90B400AEECCC /* CurrencyFirstData+CoreDataProperties.swift in Sources */,
+				113364B925F7D3B60016AC7F /* CurrencyFirstData+CoreDataProperties.swift in Sources */,
 				11DA4B1525CD584400DFDC73 /* CustomDetailCollectionCell.swift in Sources */,
 				11D55BA625CBE212001C8301 /* CurrencyUserData+CoreDataProperties.swift in Sources */,
 				11D7EF9525AB7DC00057695D /* WeatherModel.swift in Sources */,

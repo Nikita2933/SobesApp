@@ -36,7 +36,7 @@ public class WeatherCoreData: NSManagedObject {
         currentWeather!.first!.weatherDetail = detailWeather
     }
     
-    class func updateData( result: @escaping () -> ()) {
+    class func updateData( result: @escaping (Result<(), Error>) -> ()) {
         let context = CoreDataManager.shared.persistentContainer.viewContext
         let request: NSFetchRequest<WeatherCoreData> = WeatherCoreData.fetchRequest()
         for weathers in weatherData {
@@ -44,12 +44,17 @@ public class WeatherCoreData: NSManagedObject {
             let curWeather = try? context.fetch(request)
             if curWeather != nil {
                 for weather in curWeather! {
-                    Network.shared.getWeather(city: weather.cityName!, units: .met) { (secondWeather) in
-                        weather.imageLabel = secondWeather.weather.first!.main
-                        weather.temp = secondWeather.main.temp
-                        weather.imageWeather = secondWeather.weather.first!.icon
-                        CoreDataManager.shared.saveContext()
-                        result()
+                    Network.shared.getWeather(city: weather.cityName!, units: .met) { (results) in
+                        switch results {
+                        case .success(let secondWeather):
+                            weather.imageLabel = secondWeather.weather.first!.main
+                            weather.temp = secondWeather.main.temp
+                            weather.imageWeather = secondWeather.weather.first!.icon
+                            CoreDataManager.shared.saveContext()
+                            result(.success(()))
+                        case .failure(let error):
+                            result(.failure(error))
+                        }
                     }
                 }
             }

@@ -8,7 +8,7 @@
 import UIKit
 
 class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationControllerDelegate, PopoverContentControllerDelegate{
-
+    
     @IBOutlet weak var stackView: UIStackView!
     
     @IBOutlet weak var updateLabel: UILabel!
@@ -36,11 +36,22 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
         }
     }
     @IBAction func testReload(_ sender: UIButton) {
-        CurrencyFirstData.newCurrency {
-            DispatchQueue.main.async {
-                let currencyCD = CurrencyFirstData.getCurrency()
-                self.updateLabel.text = currencyCD?.date
-                self.view.reloadInputViews()
+        Network.shared.getCurrency { [self] (result) in
+            switch result {
+            case .success(let newCurrent):
+                DispatchQueue.main.async {
+                    let test = CurrencyFirstData.newCurrency(save: newCurrent)
+                    updateLabel.text = test.date
+                    CoreDataManager.shared.saveContext()
+                }
+                break
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "sure", style: .cancel, handler: nil))
+                    present(alert, animated: true, completion: nil)
+                }
+                break
             }
         }
     }
@@ -52,12 +63,27 @@ class ConverterVC: UIViewController, UITableViewDelegate, UIPopoverPresentationC
             arrView = arrViewCD
             updateLabel.text = currencyCD?.date
         } else {
-            //Mark функция для сравнения дат
-            CurrencyFirstData.newCurrency { [self] in
-                viewCellOne.setParametr(charCode: "RUB")
-                viewCellTwo.setParametr(charCode: "BYN")
-                viewCellThree.setParametr(charCode: "USD")
-                viewCellFour.setParametr(charCode: "EUR")
+            Network.shared.getCurrency { [self] (result) in
+                switch result {
+                case .success(let newCurrent):
+                    DispatchQueue.main.async {
+                        let test = CurrencyFirstData.newCurrency(save: newCurrent)
+                        updateLabel.text = test.date
+                        CoreDataManager.shared.saveContext()
+                        viewCellOne.setParametr(charCode: "RUB")
+                        viewCellTwo.setParametr(charCode: "BYN")
+                        viewCellThree.setParametr(charCode: "USD")
+                        viewCellFour.setParametr(charCode: "EUR")
+                    }
+                    break
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        let alert = UIAlertController(title: "test", message: "\(error)", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "sure", style: .cancel, handler: nil))
+                        present(alert, animated: true, completion: nil)
+                    }
+                    break
+                }
             }
             arrView.append(viewCellOne)
             arrView.append(viewCellTwo)
