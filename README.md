@@ -10,8 +10,6 @@
 
 * `Конвертер валют` -  использует курсы валют [ЦБ РФ](https://www.cbr-xml-daily.ru/) стандартно доступно 2 поля, можно увеличить до 4.
 Все данные так же хранятся локально, при отсутствии интернета работает с последними полученными курсами.
-
-![module2_mov](Currency_gif.mov) ![module2_1](Currency_3.jpg) 
-![module2_2](Currency_1.jpg) ![module2_3](Currency_2.jpg)
+![module2\1](Сurrency_3.jpg) ![module2\2](Currency_1.jpg) ![module2\3](Currency_2.jpg) ![module2\mov](Currency_gif.mov)
 
 
