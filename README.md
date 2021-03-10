@@ -6,10 +6,10 @@
 * `Погода`  - использует 2 Api сервиса, собственно погода [openweathermap](https://openweathermap.org/) и [dadata](https://dadata.ru/) для поиска города/cтраны в SearchBar.
 Все данные хранятся локально, соответственно работает и без интернета.
 
-![module1_1](Weather_3.jpg) ![module1_2](Weather_1.jpg) ![module1_3](Weather_2.jpg)
+![module1_1](Weather_3.jpg) ![module1_2](Weather_1.jpg) ![module1_3](Weather_2.jpg) ![Module1_4](Weather_4.gif)
 
 * `Конвертер валют` -  использует курсы валют [ЦБ РФ](https://www.cbr-xml-daily.ru/) стандартно доступно 2 поля, можно увеличить до 4.
 Все данные так же хранятся локально, при отсутствии интернета работает с последними полученными курсами.
-![module2\1](Сurrency_3.jpg) ![module2\2](Currency_1.jpg) ![module2\3](Currency_2.jpg) ![module2\mov](Currency_gif.mov)
+![module2\1](Сurrency_3.jpg) ![module2\2](Currency_1.jpg) ![module2\3](Currency_2.jpg) ![module2\mov](Currency_4.gif)
 
 
