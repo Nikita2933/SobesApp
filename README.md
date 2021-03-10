@@ -7,12 +7,12 @@
 Все данные хранятся локально, соответственно работает и без интернета.
 
 ![module1\1](Weather_3.jpg) ![module1\2](Weather_1.jpg)
-![module1\3](Weather_2.jpg) ![Module1\4](Weather_4.gif)
+![module1\3](Weather_2.jpg) ![Module1\4](Currency_4.gif)
 
 * `Конвертер валют` -  использует курсы валют [ЦБ РФ](https://www.cbr-xml-daily.ru/) стандартно доступно 2 поля, можно увеличить до 4.
 Все данные так же хранятся локально, при отсутствии интернета работает с последними полученными курсами.
 
 ![module2\1](Сurrency_3.jpg) ![module2\2](Currency_1.jpg)
-![module2\3](Currency_2.jpg) ![module2\mov](Currency_4.gif)
+![module2\3](Currency_2.jpg) ![module2\mov](Weather_4.gif)
 
 
